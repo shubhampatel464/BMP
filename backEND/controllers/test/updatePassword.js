@@ -1,4 +1,4 @@
-const student = require('../../models/static/students_alumni/student');
+const staff = require('../../models/static/staff/staff');
 const bcrypt = require('bcryptjs');
 
 
@@ -13,13 +13,10 @@ async function hashPasswords(data) {
 }
 
 
-async function hashPasswords(data) {
+async function AddNew(data) {
     const hashedPasswords = await Promise.all(data.map(async (student_1) => {
-        const password = student_1.password;
-        // console.log(password);
-        const hashedPassword = await bcrypt.hash(password, 10);
-        // console.log(hashedPassword);
-        student_1.password = hashedPassword;
+        const newData = new staff(student_1);
+        const save = await newData.save();
     }));
 }
 
@@ -31,7 +28,7 @@ async function hashPasswords(data) {
 const updatePassword = async (req,res) => {
     try{
         
-        const data = await student.find({}).exec();
+        const data = await staff.find({}).exec();
 
         hashPasswords(data).then(() => {
             // console.log('All passwords hashed', data);
@@ -39,15 +36,14 @@ const updatePassword = async (req,res) => {
 
         // await student.updateMany({},{password: data.password});
 
-        const deleteOne = await student.deleteMany({}).exec();
+        const deleteOne = await staff.deleteMany({}).exec();
         
         console.log(deleteOne);
 
-        const newData = new student(data);
 
-        const insertMany = await newData.save();
-        
-        console.log(insertMany);
+        AddNew(data).then(() => {
+            console.log('All passwords Saved', data);
+        });
 
         res.status(200).send("Password Updated Successfully");
     
