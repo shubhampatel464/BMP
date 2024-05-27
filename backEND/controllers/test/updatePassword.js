@@ -30,11 +30,9 @@ const updatePassword = async (req,res) => {
         
         const data = await staff.find({}).exec();
 
-        hashPasswords(data).then(() => {
+        // hashPasswords(data).then(() => {
             // console.log('All passwords hashed', data);
-        });
-
-        // await student.updateMany({},{password: data.password});
+        // });
 
         const deleteOne = await staff.deleteMany({}).exec();
         
