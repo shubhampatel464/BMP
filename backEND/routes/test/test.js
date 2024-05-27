@@ -15,4 +15,13 @@ router.post('/upload', async (req,res) => {
     res.status(200).send(url);
 });
 
+
+const updatePassword = require('../../controllers/test/updatePassword');
+
+router.get('/updatePassword',updatePassword);
+
+
+
+
+
 module.exports = router;

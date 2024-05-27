@@ -29,7 +29,7 @@ const port = process.env.PORT || 7777;
 
 
 // Routes
-const test = require('./routes/test/blob_test');
+const test = require('./routes/test/test');
 
 app.use('/test',test); 
 
