@@ -39,11 +39,13 @@ const port = process.env.PORT || 7777;
 
 
 // Routes
-const test = require('./routes/test/test');
-const student = require('./routes/student/student');
 
-app.use('/test',test); 
-app.use('/student',student);
+
+app.use('/test',require('./routes/test/test')); 
+app.use('/student',require('./routes/student/student'));
+app.use('/security',require('./routes/security/security'));
+
+
 
 
 
