@@ -5,6 +5,7 @@ import LoginImg from './../Assets/LoginImg.png'
 import Logo from './../Assets/Logo.png'
 import {StickyFooterMobile} from '../Components/StickyFooterMobile'
 import { Navbar } from '../Components/Navbar'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
     const {
@@ -13,10 +14,14 @@ const LoginForm = () => {
         formState: { errors },
     } = useForm()
 
+    const navigate = useNavigate()
+
     // This will contain all form data once submit button is clicked.
     const onSubmit = (data) => {
         console.log(data)
         // {Email: 'John@example.com', Password: 'secret'}
+
+        navigate("/dashboard")
     }
 
     register('Email', { required: { value: true, message: 'Email is required' } })
