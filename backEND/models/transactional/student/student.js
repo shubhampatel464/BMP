@@ -2,12 +2,14 @@ const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
     name: {
-        type: String,
-        required: true
+        type: String
     },
     student_id: {
         type: Number,
-        unique: true,
+        unique: true
+    },
+    uuid: {
+        type: String,
         required: true
     },
     photo_exit:{
@@ -16,4 +18,21 @@ const studentSchema = new mongoose.Schema({
     photo_entry:{
         type: String
     },
+    entry_time:{
+        type: String
+    },
+    exit_time:{
+        type: String
+    },
+    isLongLeave:{
+        type: Boolean,
+        default: false
+    },
+    reason:{
+        type: String
+    }
 });
+
+const student = mongoose.model('student_transactional', studentSchema);
+
+module.exports = student;
