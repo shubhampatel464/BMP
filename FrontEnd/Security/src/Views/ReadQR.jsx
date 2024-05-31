@@ -20,8 +20,10 @@ const QrReader = () => {
     const [scannedResult, setScannedResult] = useState("");
 
     // Success
-    const onScanSuccess = (result) => {
+    const onScanSuccess = async (result) => {
         console.log(result);
+        
+        const response = await 
 
         navigate("/face-detection");
     };
