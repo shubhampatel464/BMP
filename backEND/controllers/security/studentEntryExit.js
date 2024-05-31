@@ -1,5 +1,5 @@
 const student_transactional = require('../../models/transactional/student/student');
-const student_logs = require('../../models/static/');
+const student_logs = require('../../models/logs/student/student');
 const student = require('../../models/static/students_alumni/student');
 
 const docsUpload = require('../../blob/azureBlob');
