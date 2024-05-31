@@ -7,6 +7,7 @@ import "./QrStyles.css";
 // Qr Scanner
 import QrScanner from "qr-scanner";
 import QrFrame from "./../Assets/qr-frame.svg";
+import { getRequest } from "../Services/Api";
 
 const QrReader = () => {
     // QR States
@@ -23,7 +24,9 @@ const QrReader = () => {
     const onScanSuccess = async (result) => {
         console.log(result);
         
-        const response = await 
+        const response = await getRequest(`security/getData?uuid=${result}`);
+        if (response.status === 200) {
+        }
 
         navigate("/face-detection");
     };

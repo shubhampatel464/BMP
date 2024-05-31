@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
-import { commonrequest } from "./common_request";
-import { BACKEND_URL } from "./helper";
+import { commonrequest } from "./CommonRequest";
+import { BACKEND_URL } from "./Helpers";
 
 const user = JSON.parse(Cookies.get('user') || null);
 
