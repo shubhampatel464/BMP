@@ -38,7 +38,7 @@ const WebcamDemo = ({ setFaceDetected, SetFaceCount, setImgSrc }) => {
         () => {
             const imageSrc = webcamRef.current.getScreenshot();
             setImgSrc(imageSrc)
-            console.log(imageSrc);
+            // console.log(imageSrc);
         },
         [webcamRef, setImgSrc]
     );

@@ -25,6 +25,7 @@ const QrReader = () => {
         // console.log(result);
 
         const response = await getRequest(`security/getData?uuid=${result?.data}`);
+        console.log(response)
         if (response.status === 200) {
             const sending = {
                 uuid : result?.data,

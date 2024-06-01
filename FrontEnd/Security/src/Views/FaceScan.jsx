@@ -69,11 +69,23 @@ const FaceScan = () => {
             formData.append('reason', reason);
 
             // console.log(formData.get('file'));
+            let type;
+            if(uuid.endsWith('student')) type = "student"
+            // else if(uuid.endsWith('staff')) type = "staff"
+            else type = "staff"
+            // else {
+            //     alert('Something Went Wrong. Please try again.');
+            //     navigate('/qr-reader')
+            // }
+            
+            console.log(`security/${type}EntryExit`)
 
             try {
-                const response = await postRequest('security/studentEntryExit', formData, {
+                const response = await postRequest(`security/${type}EntryExit`, formData, {
                     'Content-Type': 'multipart/form-data'
                 }, {})
+
+                console.log(response)
 
                 if (response.status == 200) {
 

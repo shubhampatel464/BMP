@@ -50,7 +50,9 @@ const staffEntryExit = async (req, res) => {
             // save to logs
             const data = await staff_transactional.findOne({ uuid: uuid });
 
-
+            const resData = {
+                entry: false
+            };
 
             const logs = new staff_logs({
                 uuid: uuid,
@@ -67,7 +69,7 @@ const staffEntryExit = async (req, res) => {
             // delete from transactional
             const deleteData = await staff_transactional.deleteOne({ uuid: uuid });
 
-            res.status(200).send();
+            res.status(200).send(resData);
 
         }
         else {
@@ -99,8 +101,11 @@ const staffEntryExit = async (req, res) => {
 
             const updateData = await staff_attendence.updateOne({ uuid: uuid },{$set : updateFields});
             
+            const resData = {
+                entry: true
+            };
             // response to client
-            res.status(200).send();
+            res.status(200).send(resData);
 
         }
 

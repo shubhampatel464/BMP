@@ -32,13 +32,13 @@ const getData = async (req, res) => {
             const data2 = await staff_transactional.findOne({uuid: uuid});
             const data = await staff.findOne({uuid: uuid});
             if(data){
-                const res = {
+                const resData = {
                     entry : true
                 }
                 if(data2){
-                    res.entry = false;
+                    resData.entry = false;
                 }
-                res.status(200).send(res);
+                res.status(200).send(resData);
             }
             else{
                 res.status(404).send();

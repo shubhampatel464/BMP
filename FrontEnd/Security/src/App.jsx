@@ -6,7 +6,7 @@ import Dashboard from './Views/Dashboard';
 import FaceScan from './Views/FaceScan';
 import QrScan from './Views/QrScan';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import GridExample from './Views/ParentVisit/List';
 
 // react router 
 
@@ -20,6 +20,7 @@ function App() {
                 <Route path='/qr-code' element={<QrCode />} />
                 <Route path='/qr-reader' element={<QrScan />} />
                 <Route path='/face-detection' element={<FaceScan />} />
+                <Route path='/parent-list' element={<GridExample />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
         </div>
