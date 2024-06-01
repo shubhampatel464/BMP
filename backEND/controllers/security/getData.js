@@ -16,14 +16,13 @@ const getData = async (req, res) => {
             const data2 = await student_transactional.findOne({uuid: uuid});
             const data = await student.findOne({uuid: uuid});
             if(data){
-                const res = {
+                const resData = {
                     entry : false
                 }
                 if(data2){
-                    res.entry = true;
+                    resData.entry = true;
                 }
-                res.status(200).send(res);
-
+                res.status(200).send(resData);
             }
             else{
                 res.status(404).send();

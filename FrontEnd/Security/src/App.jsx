@@ -2,9 +2,10 @@ import './App.css'
 import LoginForm from './Views/Login'
 import QrCode from './Views/QrCode'
 import { Route, Routes } from 'react-router-dom';
-import QrReader from './Views/ReadQR'
-import WebcamDemo from './Views/FaceDetection';
 import Dashboard from './Views/Dashboard';
+import FaceScan from './Views/FaceScan';
+import QrScan from './Views/QrScan';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 // react router 
@@ -17,8 +18,8 @@ function App() {
                 <Route path="/login" element={<LoginForm />} />
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/qr-code' element={<QrCode />} />
-                <Route path='/qr-reader' element={<QrReader />} />
-                <Route path='/face-detection' element={<WebcamDemo />} />
+                <Route path='/qr-reader' element={<QrScan />} />
+                <Route path='/face-detection' element={<FaceScan />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
         </div>
