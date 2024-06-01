@@ -58,7 +58,7 @@ const staffEntryExit = async (req, res) => {
                 mobile: data.mobile,
                 photo_exit: data.photo_exit,
                 photo_entry: data.photo_entry,
-                entry_time: date.entry_time,
+                entry_time: data.entry_time,
                 exit_time: istDateTime
             });
 
@@ -92,7 +92,7 @@ const staffEntryExit = async (req, res) => {
 
             // attendence update
             const todayDate = currentDate.Date;
-            const updateData = await staff_attendence.updateOneOne({ uuid: uuid }, { todayDate: 1 });
+            const updateData = await staff_attendence.updateOne({ uuid: uuid }, { todayDate: 1 });
 
             res.status(200).send();
 

@@ -1,6 +1,7 @@
 const student = require('../../models/static/students_alumni/student');
 const student_transactional = require('../../models/transactional/student');
 const staff = require('../../models/static/staff/staff');
+const staff_transactional = require('../../models/transactional/staff');
 
 
 const getData = async (req, res) => {
@@ -28,9 +29,16 @@ const getData = async (req, res) => {
             }
         }
         else{
+            const data2 = await staff_transactional.findOne({uuid: uuid});
             const data = await staff.findOne({uuid: uuid});
             if(data){
-                res.status(200).send();
+                const res = {
+                    entry : true
+                }
+                if(data2){
+                    res.entry = false;
+                }
+                res.status(200).send(res);
             }
             else{
                 res.status(404).send();
