@@ -18,9 +18,7 @@ const studentEntryExit = async (req, res) => {
 
         if (match) {
 
-            
-
-
+        
             // save photo to blob 
             const photoUrl = await docsUpload(photo.tempFilePath, "student");
 
