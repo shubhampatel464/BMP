@@ -23,18 +23,17 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-
+// Connection
 require('./connection/connect');
 require('./connection/azureBlob');
 
 
-
+// Triggers
+require('./triggers/controller');
 
 
 // ENV Variables
 const port = process.env.PORT || 7777;
-
-
 
 
 
@@ -44,6 +43,8 @@ const port = process.env.PORT || 7777;
 app.use('/test',require('./routes/test/test')); 
 app.use('/student',require('./routes/student/student'));
 app.use('/security',require('./routes/security/security'));
+
+
 
 
 

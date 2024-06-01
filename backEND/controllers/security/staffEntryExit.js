@@ -91,9 +91,15 @@ const staffEntryExit = async (req, res) => {
             const saveData = await data.save();
 
             // attendence update
-            const todayDate = currentDate.Date;
-            const updateData = await staff_attendence.updateOne({ uuid: uuid }, { todayDate: 1 });
 
+            const todaysDate = currentDate.date;
+            
+            const updateFields = {};
+            updateFields[`attendence.${todaysDate}`] = 1;
+
+            const updateData = await staff_attendence.updateOne({ uuid: uuid },{$set : updateFields});
+            
+            // response to client
             res.status(200).send();
 
         }
