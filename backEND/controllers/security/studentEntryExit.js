@@ -1,5 +1,5 @@
-const student_transactional = require('../../models/transactional/student/student');
-const student_logs = require('../../models/logs/student/student');
+const student_transactional = require('../../models/transactional/student');
+const student_logs = require('../../models/logs/student');
 const student = require('../../models/static/students_alumni/student');
 
 const docsUpload = require('../../blob/azureBlob');
@@ -17,6 +17,9 @@ const studentEntryExit = async (req, res) => {
         const istDateTime = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
         if (match) {
+
+            
+
 
             // save photo to blob 
             const photoUrl = await docsUpload(photo.tempFilePath, "student");
@@ -38,7 +41,17 @@ const studentEntryExit = async (req, res) => {
 
             // delete from transactional
             const deleteData = await student_transactional.deleteOne({ uuid: uuid });
-            res.status(200).send();
+
+            const now = new Date();
+            const resData = {
+                entry: true
+            };
+            // Check if the current time is before 12:00 AM
+            if (!(now.getHours() < 24 && now.getHours() >= 0)) {
+                resData.late = true;
+            } 
+
+            res.status(200).send(resData);
             return;
 
         }
@@ -62,7 +75,10 @@ const studentEntryExit = async (req, res) => {
             });
 
             const saveData = await data.save();
-            res.status(200).send();
+            const resData = {
+                entry: false
+            };
+            res.status(200).send(resData);
             return;
 
         }
