@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const attendenceSchema = new mongoose.Schema({
-    mobile:{
-        type: Number
+    uuid:{
+        type: String
     },
     month:{
         type: Number
