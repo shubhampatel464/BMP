@@ -1,11 +1,14 @@
 import React from 'react'
 import { Navbar } from '../Components/Navbar'
 import { StickyFooterMobile } from '../Components/StickyFooterMobile'
+import Example from '../Components/FormModal'
+
 
 const Dashboard = () => {
     return (
         <>
             <Navbar />
+            {/* <Example /> */}
 
             {/* heading : "Security on left side at top" */}
             <div className='flex flex-col justify-between items-center h-screen w-screen py-6 '>

@@ -30,6 +30,15 @@ export const postRequestWithToken = async (endpoint, data, headers = {}, params 
 }
 
 export const getRequest = async (endpoint, params = {}) => {
+    try {
+        const response = await commonrequest("GET", `${BACKEND_URL}/${endpoint}`, {}, {}, params);
+        return response;
+    } catch (error) {
+        throw new Error(`Error in GET request to ${endpoint}`);
+    }
+}
+
+export const getRequestWithLogin = async (endpoint, params = {}) => {
     const token = user?.token;
     if (!token) {
         alert('Please login to access this page');

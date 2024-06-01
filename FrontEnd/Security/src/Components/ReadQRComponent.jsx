@@ -22,13 +22,21 @@ const QrReader = () => {
 
     // Success
     const onScanSuccess = async (result) => {
-        console.log(result);
-        
-        const response = await getRequest(`security/getData?uuid=${result}`);
-        if (response.status === 200) {
-        }
+        // console.log(result);
 
-        navigate("/face-detection");
+        const response = await getRequest(`security/getData?uuid=${result?.data}`);
+        if (response.status === 200) {
+            const sending = {
+                uuid : result?.data,
+            }
+            if(response.data.hasOwnProperty('entry')){ 
+                sending.entry = response?.data?.entry;
+            }
+            navigate("/face-detection", { state: sending});
+        }
+        else {
+            alert("Invalid QR Code");
+        }
     };
 
     // Fail
