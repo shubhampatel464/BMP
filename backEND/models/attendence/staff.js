@@ -11,104 +11,101 @@ const attendenceSchema = new mongoose.Schema({
         type: Number
     },
     attendence:{
-        type: [
-            {
+        type: {
                 1:{
-                    type : String,
+                    type : Number,
                 },
                 2:{
-                    type : String,
+                    type : Number,
                 },
                 3:{
-                    type : String,
+                    type : Number,
                 },
                 4:{
-                    type : String,
+                    type : Number,
                 },
                 5:{
-                    type : String,
+                    type : Number,
                 },
                 6:{
-                    type : String,
+                    type : Number,
                 },
                 7:{
-                    type : String,
+                    type : Number,
                 },
                 8:{
-                    type : String,
+                    type : Number,
                 },
                 9:{
-                    type : String,
+                    type : Number,
                 },
                 10:{
-                    type : String,
+                    type : Number,
                 },
                 11:{
-                    type : String,
+                    type : Number,
                 },
                 12:{
-                    type : String,
+                    type : Number,
                 },
                 13:{
-                    type : String,
+                    type : Number,
                 },
                 14:{
-                    type : String,
+                    type : Number,
                 },
                 15:{
-                    type : String,
+                    type : Number,
                 },
                 16:{
-                    type : String,
+                    type : Number,
                 },
                 17:{
-                    type : String,
+                    type : Number,
                 },
                 18:{
-                    type : String,
+                    type : Number,
                 },
                 19:{
-                    type : String,
+                    type : Number,
                 },
                 20:{
-                    type : String,
+                    type : Number,
                 },
                 21:{
-                    type : String,
+                    type : Number,
                 },
                 22:{
-                    type : String,
+                    type : Number,
                 },
                 23:{
-                    type : String,
+                    type : Number,
                 },
                 24:{
-                    type : String,
+                    type : Number,
                 },
                 25:{
-                    type : String,
+                    type : Number,
                 },
                 26:{
-                    type : String,
+                    type : Number,
                 },
                 27:{
-                    type : String,
+                    type : Number,
                 },
                 28:{
-                    type : String,
+                    type : Number,
                 },
                 29:{
-                    type : String,
+                    type : Number,
                 },
                 30:{
-                    type : String,
+                    type : Number,
                 },
                 31:{
-                    type : String,
+                    type : Number,
                 }
-
-            }
-        ]
+        }
     }
 });
 

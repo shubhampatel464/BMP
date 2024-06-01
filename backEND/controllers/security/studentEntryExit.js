@@ -17,8 +17,6 @@ const studentEntryExit = async (req, res) => {
         const istDateTime = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
         if (match) {
-
-        
             // save photo to blob 
             const photoUrl = await docsUpload(photo.tempFilePath, "student");
 
@@ -35,19 +33,22 @@ const studentEntryExit = async (req, res) => {
                 entry_time: istDateTime,
                 exit_time: data.exit_time
             });
+            
             const saveLogs = await logs.save();
 
             // delete from transactional
-            const deleteData = await student_transactional.deleteOne({ uuid: uuid });
-
             const now = new Date();
             const resData = {
+                late: false,
                 entry: true
             };
             // Check if the current time is before 12:00 AM
-            if (!(now.getHours() < 24 && now.getHours() >= 0)) {
+            if (!(now.getHours() < 24 && now.getHours() >= 0) && data.isLongLeave == false) {
                 resData.late = true;
             } 
+
+            const deleteData = await student_transactional.deleteOne({ uuid: uuid });
+
 
             res.status(200).send(resData);
             return;
