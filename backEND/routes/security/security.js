@@ -11,12 +11,18 @@ const getData = require('../../controllers/security/getData');
 
 const studentEntryExit = require('../../controllers/security/studentEntryExit');
 
+const staffEntryExit = require('../../controllers/security/staffEntryExit');
+
+
+
 
 router.post('/login', login);
 
 router.get('/getData', getData);
 
 router.post('/studentEntryExit', studentEntryExit);
+
+router.post('/staffEntryExit', staffEntryExit);
 
 
 
