@@ -27,6 +27,9 @@ app.use(cors(corsOptions));
 require('./connection/connect');
 require('./connection/azureBlob');
 
+// mailer
+require('./SMTP/utils/setup');
+
 
 // Triggers
 require('./triggers/controller');

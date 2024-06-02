@@ -97,7 +97,7 @@ const staffEntryExit = async (req, res) => {
             const todaysDate = currentDate.date;
             
             const updateFields = {};
-            updateFields[`attendence.${todaysDate}`] = 1;
+            updateFields[`attendence.day${todaysDate}`] = 1;
 
             const updateData = await staff_attendence.updateOne({ uuid: uuid },{$set : updateFields});
             
