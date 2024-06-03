@@ -17,12 +17,11 @@ const visitorSchema = new mongoose.Schema({
         required: true
     },
     entry_time: {
-        type: Date,
+        type: String,
         default: Date.now
     },
     exit_time: {
-        type: Date,
-        default: null
+        type: String,
     },
     photo:{
         type: String
