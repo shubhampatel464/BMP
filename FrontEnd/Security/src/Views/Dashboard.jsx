@@ -28,7 +28,7 @@ const Dashboard = () => {
                         </div>
 
                         <div className='flex flex-col gap-10 justify-between items-center h-full m-10'>
-                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl p-20 cursor-pointer	'>
+                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl p-20 cursor-pointer	' onClick={() => navigate('/visitors')} >
                                 <h1 className='text-xl font-bold'>General Visitors</h1>
                             </div>
                             <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl p-20 cursor-pointer	'>

@@ -7,47 +7,138 @@ import { useForm } from 'react-hook-form';
 import { InputField } from '../../Components/InputField';
 import { Button } from '../../Components/Button';
 import { useNavigate } from 'react-router-dom';
+import WebcamDemo from '../../Components/FaceDetection';
+import { postRequest } from '../../Services/Api';
+import { base64ToFile } from '../../Services/Helpers';
 
 const Visitors = () => {
 
 
     const {
         register,
+        reset,
         handleSubmit,
         formState: { errors },
     } = useForm()
 
-    const [isOtpSent, setIsOtpSent] = React.useState(true)
+    const [isOtpSent, setIsOtpSent] = React.useState(false)
+    const [isOtpVerified, setIsOtpVerified] = React.useState(false)
+    const [isVisitorAdded, setIsVisitorAdded] = React.useState(false)
+    const [isPhotoCaptured, setIsPhotoCaptured] = React.useState(false)
+    const [isDetailsFilled, setIsDetailsFilled] = React.useState(false)
+    const [faceDetected, setFaceDetected] = React.useState(false)
+    const [faceCount, setFaceCount] = React.useState(0)
+    const [imgSrc, setImgSrc] = React.useState(null);
 
+    const [visitorData, setVisitorData] = React.useState({
+        Name: '',
+        Reason: '',
+        Mobile: '',
+        OTP: '',
+        Photo: '',
+        Details: ''
+    })
 
     const navigate = useNavigate()
 
     // This will contain all form data once submit button is clicked.
-    const onSubmit = (data) => {
+    const onSubmit1 = (data, e) => {
+
+        if(data.Name == '' || data.Reason == ''){
+            alert('Please fill all fields')
+            return
+        }
+        else if(data.Name.length < 3){
+            alert('Name should be atleast 3 characters long')
+            return
+        }
+        else if(data.Reason.length < 3){
+            alert('Reason should be atleast 3 characters long')
+            return
+        }
+
         console.log(data)
-        alert("here")
-        // if (!isOtpSent) setIsOtpSent(true)
+        setVisitorData({ ...visitorData, Name: data.Name, Reason: data.Reason })
+        setIsDetailsFilled(true)
     }
 
-    register('Name', { required: { value: true, message: 'Name is required' } })
+    const onSubmit2 = (data, e) => {
 
-    // validate mobile number, it should contain 10 digits
-    register('Mobile', {
-        required: { value: true, message: 'Mobile is required' },
-        minLength: { value: 10, message: 'Mobile number should be 10 digits' },
-        maxLength: { value: 10, message: 'Mobile number should be 10 digits' }
-    })
+        if(data.Mobile == ''){
+            alert('Please fill all fields')
+            return
+        }
+        else if(data.Mobile.length != 10){
+            alert('Mobile number should be of 10 digits')
+            return
+        }
 
-    register('Purpose', {
-        required: { value: true, message: 'Purpose is required' },
-    })
+        console.log(data)
+        setVisitorData({ ...visitorData, Mobile: data.Mobile })
+        setIsVisitorAdded(true)
+        setIsOtpSent(true)
+    }
 
-    register('otp', {
-        required: { value: true, message: 'OTP is required' },
-        minLength: { value: 6, message: 'OTP should be 6 digits' },
-        maxLength: { value: 6, message: 'OTP should be 6 digits' },
-        // required: { value: isOtpSent, message: 'Please send OTP first' }
-    })
+    const onSubmit3 = (data, e) => {
+
+        if(data.OTP == ''){
+            alert('Please fill all fields')
+            return
+        }
+        else if(data.OTP.length != 6){
+            alert('OTP should be of 6 digits')
+            return
+        }
+
+        console.log(data)
+        setVisitorData({ ...visitorData, OTP: data.OTP })
+
+        // send data to backend
+        const sendVisitorData = async () => {
+            const formData = new FormData()
+
+             const file = base64ToFile(imgSrc, 'capture.png');
+
+            formData.append('name', visitorData.Name)
+            formData.append('mobile', visitorData.Mobile)
+            formData.append('purpose', visitorData.Reason)
+            formData.append('photo', file)
+
+            console.log(formData)
+
+            const response = await postRequest('security/visitorEntry', formData, {
+                'Content-Type': 'multipart/form-data'
+            }, {})
+            console.log(response)
+
+            if (response.status == 200) {
+                alert('Visitor Added Successfully')
+                completeReset()
+                navigate('/dashboard')
+            }
+            else {
+                alert('Error Occured')
+                completeReset()
+                navigate('/visitors')
+            }
+        }
+
+        sendVisitorData()
+
+        
+    }
+
+    const completeReset = () => {
+        reset()
+        setIsOtpSent(false)
+        setIsOtpVerified(false)
+        setIsVisitorAdded(false)
+        setIsPhotoCaptured(false)
+        setIsDetailsFilled(false)
+        setFaceDetected(false)
+        setFaceCount(0)
+        setImgSrc(null)
+    }
 
     return (
         <>
@@ -66,65 +157,117 @@ const Visitors = () => {
 
                     <TabPanel>
                         <div>
-                            {/* login form div */}
-                            <div className='flex justify-center items-center'>
+                            {/* form  containing multisteps, 
+                            in 1st step, get name, reason, 
+                            in 2nd step, campture photo,
+                            in 3rd step, get mobile number, 
+                            in 4th step, get otp,
+                            in 5th step, get visitor details */}
 
-                                {/* form with box shadow */}
-                                <form className='mt-5 md:bg-white p-10 w-[400px] md:rounded-2xl md:shadow-2xl space-y-5 ' autoComplete='off'
-                                    id='loginForm' onSubmit={handleSubmit(onSubmit)}>
+                            {/* 1st step */}
+                            {
+                                !isDetailsFilled &&
+
+                                <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
+                                    id='loginForm' onSubmit={handleSubmit(onSubmit1)}>
+
                                     <h1 className='text-2xl font-bold'>Add Visitor</h1>
+                                    <p className='text-gray-500'>Please fill the form to add visitor.</p>
 
-                                    {/* name, mobile, purpose, otp */}
+                                    {/* email and password input fields */}
                                     <InputField
                                         placeholder='John Doe'
                                         label='Name'
                                         type='text'
                                         register={register}
                                         error={errors.Name?.message}
-                                        disabled={!isOtpSent}
                                     />
-
                                     <InputField
-                                        placeholder='1234567890'
-                                        label='Mobile'
-                                        type='tel'
-                                        register={register}
-                                        error={errors.Mobile?.message}
-                                        disabled={!isOtpSent}
-                                    />
-
-
-
-                                    <InputField
-                                        placeholder='Meeting with Dean'
-                                        label='Purpose'
+                                        label='Reason'
                                         type='text'
                                         register={register}
-                                        error={errors.Purpose?.message}
-                                        disabled={!isOtpSent}
+                                        error={errors.Reason?.message}
                                     />
-
-                                    {
-                                        isOtpSent &&
-                                        <InputField
-                                            placeholder='123456'
-                                            label='OTP'
-                                            type='number'
-                                            register={register}
-                                            error={errors.otp?.message}
-                                        />
-                                        // <Button type='submit' >Send OTP</Button>
-                                    }
-
-                                    {/* full width submit button */}
-                                    <Button type='submit'>
-                                        {
-                                            isOtpSent ? 'Add Visitor' : 'Send OTP'
-                                        }
-                                    </Button>
+                                    <Button type='submit'>Next</Button>
+                                    <Button onClick={() => {
+                                        completeReset()
+                                        navigate('/dashboard')
+                                    }}>Cancel</Button>
                                 </form>
-                            </div>
+                            }
+
+                            {/* 2nd step :  */}
+                            {
+                                !isPhotoCaptured && isDetailsFilled && !faceDetected &&
+                                <div className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 '>
+                                    <h1 className='text-2xl font-bold'>Capture Photo</h1>
+                                    <p className='text-gray-500'>Please allow camera access to capture photo.</p>
+                                    <WebcamDemo setFaceDetected={setFaceDetected} SetFaceCount={setFaceCount} setImgSrc={setImgSrc} />
+                                </div>
+                            }
+
+                            {
+                                !isPhotoCaptured && isDetailsFilled && faceDetected &&
+                                <div className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 '>
+                                    <h1 className='text-2xl font-bold'>Capture Photo</h1>
+                                    <p className='text-gray-500'>Please allow camera access to capture photo.</p>
+                                    <img src={imgSrc} alt="face" />
+                                    <Button onClick={() => setIsPhotoCaptured(true)}>Capture</Button>
+                                    <Button onClick={() => setFaceDetected(false)}>Retake</Button>
+                                    <Button onClick={() => {
+                                        completeReset()
+                                        navigate('/dashboard')
+                                    }}>Cancel</Button>
+                                </div>
+                            }
+
+                            {/* 3rd step */}
+                            {
+                                !isVisitorAdded && isPhotoCaptured &&
+
+                                <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
+                                    id='loginForm' onSubmit={handleSubmit(onSubmit2)}>
+                                    <h1 className='text-2xl font-bold'>Add Visitor</h1>
+                                    <p className='text-gray-500'>Please fill the form to add visitor.</p>
+
+                                    <InputField
+                                        placeholder='9876543210'
+                                        label='Mobile'
+                                        type='text'
+                                        register={register}
+                                        error={errors.Mobile?.message}
+                                    />
+                                    <Button type='submit'>Next</Button>
+                                    <Button onClick={() => {
+                                        completeReset()
+                                        navigate('/dashboard')
+                                    }
+                                    }>Cancel</Button>
+                                </form>
+                            }
                         </div>
+
+                        {/* 4th step */}
+                        {
+                            isOtpSent && !isOtpVerified &&
+                            <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
+                                id='loginForm' onSubmit={handleSubmit(onSubmit3)}>
+                                <h1 className='text-2xl font-bold'>Add Visitor</h1>
+                                <p className='text-gray-500'>Please fill the form to add visitor.</p>
+                                <InputField
+                                    placeholder='Enter OTP'
+                                    label='OTP'
+                                    type='text'
+                                    register={register}
+                                    error={errors.OTP?.message}
+                                />
+                                <Button type='submit'>Submit</Button>
+                                <Button onClick={() => {
+                                    completeReset()
+                                    navigate('/dashboard')
+                                }}>Cancel</Button>
+                            </form>
+                        }
                     </TabPanel>
                     <TabPanel>
                         <div>
