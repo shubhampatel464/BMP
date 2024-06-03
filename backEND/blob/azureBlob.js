@@ -19,6 +19,9 @@ const docsUpload = async (name,type) => {
         else if(type == "staff"){
             contaninerName = process.env.BLOB_NAME_STAFF;
         }
+        else if(type == "visitor"){
+            contaninerName = process.env.BLOB_NAME_VISITOR;
+        }
 
         const containerClient = blobServiceClient.getContainerClient(contaninerName);
 

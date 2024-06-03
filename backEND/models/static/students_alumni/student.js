@@ -33,6 +33,9 @@ const studentSchema = new mongoose.Schema({
     },
     photo:{
         type: String
+    },
+    vehicle:{
+        type: String
     }
 });
 

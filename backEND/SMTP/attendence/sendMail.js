@@ -1,0 +1,32 @@
+const mailTransporter = require("../utils/setup");
+
+
+const sendReport = async (buffer,month) => {
+
+    let mailDetails = {
+        from: 'DAIICT-MainGate',
+        to: process.env.ATTENDENCE_EMAIL,
+        subject: `Attendance Report for ${month}`,
+        text: 'This email contains your attendance report.',
+        attachments: [
+            {
+                filename: 'Attendance_Report.xlsx',
+                content: buffer,
+                contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            }
+        ]
+    };
+
+    const s = await mailTransporter.sendMail(mailDetails, function (err, data) {
+        if (err) {
+            console.log('This is error from ./SMTP/attendence/sendMail.js');
+            console.log(err);
+            return 0;
+        } else {
+            // console.log('Email sent successfully');
+            return 1;
+        }
+    });
+}
+
+module.exports = sendReport;

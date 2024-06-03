@@ -12,97 +12,97 @@ const attendenceSchema = new mongoose.Schema({
     },
     attendence:{
         type: {
-                1:{
+                day1:{
                     type : Number,
                 },
-                2:{
+                day2:{
                     type : Number,
                 },
-                3:{
+                day3:{
                     type : Number,
                 },
-                4:{
+                day4:{
                     type : Number,
                 },
-                5:{
+                day5:{
                     type : Number,
                 },
-                6:{
+                day6:{
                     type : Number,
                 },
-                7:{
+                day7:{
                     type : Number,
                 },
-                8:{
+                day8:{
                     type : Number,
                 },
-                9:{
+                day9:{
                     type : Number,
                 },
-                10:{
+                day10:{
                     type : Number,
                 },
-                11:{
+                day11:{
                     type : Number,
                 },
-                12:{
+                day12:{
                     type : Number,
                 },
-                13:{
+                day13:{
                     type : Number,
                 },
-                14:{
+                day14:{
                     type : Number,
                 },
-                15:{
+                day15:{
                     type : Number,
                 },
-                16:{
+                day16:{
                     type : Number,
                 },
-                17:{
+                day17:{
                     type : Number,
                 },
-                18:{
+                day18:{
                     type : Number,
                 },
-                19:{
+                day19:{
                     type : Number,
                 },
-                20:{
+                day20:{
                     type : Number,
                 },
-                21:{
+                day21:{
                     type : Number,
                 },
-                22:{
+                day22:{
                     type : Number,
                 },
-                23:{
+                day23:{
                     type : Number,
                 },
-                24:{
+                day24:{
                     type : Number,
                 },
-                25:{
+                day25:{
                     type : Number,
                 },
-                26:{
+                day26:{
                     type : Number,
                 },
-                27:{
+                day27:{
                     type : Number,
                 },
-                28:{
+                day28:{
                     type : Number,
                 },
-                29:{
+                day29:{
                     type : Number,
                 },
-                30:{
+                day30:{
                     type : Number,
                 },
-                31:{
+                day31:{
                     type : Number,
                 }
         }

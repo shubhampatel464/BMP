@@ -27,6 +27,9 @@ app.use(cors(corsOptions));
 require('./connection/connect');
 require('./connection/azureBlob');
 
+// mailer
+require('./SMTP/utils/setup');
+
 
 // Triggers
 require('./triggers/controller');
@@ -43,6 +46,7 @@ const port = process.env.PORT || 7777;
 app.use('/test',require('./routes/test/test')); 
 app.use('/student',require('./routes/student/student'));
 app.use('/security',require('./routes/security/security'));
+app.use('/data',require('./routes/data/dataAPI'));
 
 
 
