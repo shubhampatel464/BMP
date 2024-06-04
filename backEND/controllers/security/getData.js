@@ -45,7 +45,7 @@ const getData = async (req, res) => {
             }
         }
     } catch (error) {
-
+        
         console.log("This is error from ./controller/security/getData.js");
         console.log(error);
         res.status(500).send();

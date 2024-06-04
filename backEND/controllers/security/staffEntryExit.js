@@ -50,10 +50,7 @@ const staffEntryExit = async (req, res) => {
             // save to logs
             const data = await staff_transactional.findOne({ uuid: uuid });
 
-            const resData = {
-                entry: false
-            };
-
+            
             const logs = new staff_logs({
                 uuid: uuid,
                 name: data.name,
@@ -63,12 +60,16 @@ const staffEntryExit = async (req, res) => {
                 entry_time: data.entry_time,
                 exit_time: istDateTime
             });
-
+            
             const saveLogs = await logs.save();
-
+            
             // delete from transactional
             const deleteData = await staff_transactional.deleteOne({ uuid: uuid });
-
+            
+            const resData = {
+                entry: false
+            };
+            
             res.status(200).send(resData);
 
         }

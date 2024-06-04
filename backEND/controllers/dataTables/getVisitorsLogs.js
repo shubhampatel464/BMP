@@ -7,7 +7,7 @@ const getVisitorsLogs = async (req, res) => {
     } catch (error) {
         console.log('This is error from ./dataTables/getVisitorsLogs.js');
         console.log(error);
-        res.status(404).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 }
 
