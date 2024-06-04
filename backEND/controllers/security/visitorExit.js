@@ -15,6 +15,11 @@ const visitorExit = async (req, res) => {
         // save to logs
         const data = await visitor_transactional.findOne({ uuid: uuid });
 
+        if(data == NULL){
+            res.status(404).send({ message: 'INVALID UUID FOR VISITOR'});
+            return;
+        }
+
         const logs = new visitor_logs({
             uuid: uuid,
             name: data.name,

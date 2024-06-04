@@ -7,7 +7,7 @@ const router = express.Router();
 
 const login = require('../../controllers/security/login');
 
-const getData = require('../../controllers/security/getData');
+const getData = require('../../controllers/security/verifyUser');
 
 const studentEntryExit = require('../../controllers/security/studentEntryExit');
 

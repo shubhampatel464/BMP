@@ -35,7 +35,7 @@ const visitorEntryExit = async (req, res) => {
 
         const save = await new_visitor.save();
 
-        res.status(200).send();
+        res.status(200).send({uuid : _uuid});
         
 
     } catch (error) {
