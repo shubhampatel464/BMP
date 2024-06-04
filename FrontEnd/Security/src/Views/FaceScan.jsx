@@ -30,7 +30,7 @@ const FaceScan = () => {
         navigate('/qr-reader');
     }
 
-    
+
 
     const handleSend = () => {
         // if()
@@ -58,20 +58,36 @@ const FaceScan = () => {
 
             // console.log(formData.get('file'));
             let type;
-            if(uuid.endsWith('student')) type = "student"
+            if (uuid.endsWith('student')) type = "student"
             // else if(uuid.endsWith('staff')) type = "staff"
             else type = "staff"
             // else {
             //     alert('Something Went Wrong. Please try again.');
             //     navigate('/qr-reader')
             // }
-            
-            console.log(`security/${type}EntryExit`)
+
 
             try {
-                const response = await postRequest(`security/${type}EntryExit`, formData, {
-                    'Content-Type': 'multipart/form-data'
-                }, {})
+                let response;
+                if (!uuid.endsWith('student')) {
+                    response = await postRequest(`security/studentEntryExit`, formData, {
+                        'Content-Type': 'multipart/form-data'
+                    }, {})
+                }
+                else if(uuid.endsWith('staff')){
+                    response = await postRequest(`security/staffEntryExit`, formData, {
+                        'Content-Type': 'multipart/form-data'
+                    }, {})
+                }
+                else if(uuid.endsWith('visitor')) {
+                    response = await postRequest(`security/visitorExit`, formData, {
+                        'Content-Type': 'multipart/form-data'
+                    }, {})
+                }
+                else {
+                    alert('Something Went Wrong. Please try again.');
+                    navigate('/qr-reader')
+                }
 
                 console.log(response)
 

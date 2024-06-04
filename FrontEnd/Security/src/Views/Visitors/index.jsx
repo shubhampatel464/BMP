@@ -10,9 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import WebcamDemo from '../../Components/FaceDetection';
 import { postRequest } from '../../Services/Api';
 import { base64ToFile } from '../../Services/Helpers';
+import CurrentList from './CurrentList';
+import { useLocation, Link } from 'react-router-dom';
 
 const Visitors = () => {
-
 
     const {
         register,
@@ -20,6 +21,18 @@ const Visitors = () => {
         handleSubmit,
         formState: { errors },
     } = useForm()
+
+    const location = useLocation();
+
+    const getTabIndex = (pathname) => {
+        switch (pathname) {
+            case '/current-visitor-list':
+                return 1;
+            case '/add-visitor':
+            default:
+                return 0;
+        }
+    };
 
     const [isOtpSent, setIsOtpSent] = React.useState(false)
     const [isOtpVerified, setIsOtpVerified] = React.useState(false)
@@ -44,15 +57,15 @@ const Visitors = () => {
     // This will contain all form data once submit button is clicked.
     const onSubmit1 = (data, e) => {
 
-        if(data.Name == '' || data.Reason == ''){
+        if (data.Name == '' || data.Reason == '') {
             alert('Please fill all fields')
             return
         }
-        else if(data.Name.length < 3){
+        else if (data.Name.length < 3) {
             alert('Name should be atleast 3 characters long')
             return
         }
-        else if(data.Reason.length < 3){
+        else if (data.Reason.length < 3) {
             alert('Reason should be atleast 3 characters long')
             return
         }
@@ -64,11 +77,11 @@ const Visitors = () => {
 
     const onSubmit2 = (data, e) => {
 
-        if(data.Mobile == ''){
+        if (data.Mobile == '') {
             alert('Please fill all fields')
             return
         }
-        else if(data.Mobile.length != 10){
+        else if (data.Mobile.length != 10) {
             alert('Mobile number should be of 10 digits')
             return
         }
@@ -81,11 +94,11 @@ const Visitors = () => {
 
     const onSubmit3 = (data, e) => {
 
-        if(data.OTP == ''){
+        if (data.OTP == '') {
             alert('Please fill all fields')
             return
         }
-        else if(data.OTP.length != 6){
+        else if (data.OTP.length != 6) {
             alert('OTP should be of 6 digits')
             return
         }
@@ -97,7 +110,7 @@ const Visitors = () => {
         const sendVisitorData = async () => {
             const formData = new FormData()
 
-             const file = base64ToFile(imgSrc, 'capture.png');
+            const file = base64ToFile(imgSrc, 'capture.png');
 
             formData.append('name', visitorData.Name)
             formData.append('mobile', visitorData.Mobile)
@@ -125,7 +138,7 @@ const Visitors = () => {
 
         sendVisitorData()
 
-        
+
     }
 
     const completeReset = () => {
@@ -144,14 +157,24 @@ const Visitors = () => {
         <>
             <Navbar />
             {/* <h1 className="text-2xl font-bold text-center mt-5">Visitors</h1> */}
-            <div className='w-screen md:w-1/2 mx-auto mt-5 flex items-center justify-center sticky' >
-                <Tabs>
-                    <TabList className="flex p-1 bg-gray-100 rounded-full mx-auto" style={{ width: 'fit-content' }}>
+            <div className='w-screen md:w-1/2 mx-auto mt-5 flex items-center justify-center top-0 sticky' >
+                <Tabs selectedIndex={getTabIndex(location.pathname)} onSelect={(index) => {
+                    switch (index) {
+                        case 1:
+                            window.history.pushState(null, '', '/current-visitor-list');
+                            break;
+                        case 0:
+                        default:
+                            window.history.pushState(null, '', '/add-visitor');
+                            break;
+                    }
+                }}>
+                    <TabList className="flex p-1 bg-gray-100 rounded-full mx-auto mb-4" style={{ width: 'fit-content' }}>
                         <Tab className="px-4 py-2 rounded-full cursor-pointer focus:outline-none" selectedClassName="bg-blue3 text-white">
-                            Add Visitor
+                            <Link to="/add-visitor">Add New Visitor</Link>
                         </Tab>
                         <Tab className="px-4 py-2 rounded-full cursor-pointer focus:outline-none" selectedClassName="bg-blue3 text-white">
-                            List
+                        <Link to="/current-visitor-list">Current Visitor Inside</Link>
                         </Tab>
                     </TabList>
 
@@ -272,7 +295,10 @@ const Visitors = () => {
                     <TabPanel>
                         <div>
                             {/* Content for List */}
-                            List Content
+                            <div className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl space-y-5 w-screen h-screen '>
+                                {/* <h1 className='text-2xl font-bold'>Current Visitors Inside Campus</h1> */}
+                                <CurrentList />
+                            </div>
                         </div>
                     </TabPanel>
                 </Tabs>

@@ -8,6 +8,7 @@ import QrScan from './Views/QrScan';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GridExample from './Views/ParentVisit/List';
 import Visitors from './Views/Visitors';
+import RecordsDashBoard from './Views/Records';
 
 // react router 
 
@@ -23,7 +24,12 @@ function App() {
                 <Route path='/face-detection' element={<FaceScan />} />
                 <Route path='/parent-list' element={<GridExample />} />
                 <Route path='/parent-list/:id' element={<GridExample />} />
-                <Route path='/visitors' element={<Visitors />} />
+
+                {/* general visitors */}
+                <Route path='/add-visitor' element={<Visitors />} />
+                <Route path='/current-visitor-list' element={<Visitors />} />
+                <Route path='/records' element={<RecordsDashBoard />} />
+
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
         </div>

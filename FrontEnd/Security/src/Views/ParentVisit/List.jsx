@@ -7,6 +7,8 @@ import { createRoot } from "react-dom/client";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
+import { Navbar } from "../../Components/Navbar";
+import { StickyFooterMobile } from "../../Components/StickyFooterMobile";
 
 var filterParams = {
     comparator: (filterLocalDateAtMidnight, cellValue) => {
@@ -48,6 +50,21 @@ const GridExample = () => {
             filterParams: filterParams,
         },
         { field: "total", filter: true },
+        {
+            field: "profile",
+            headerName: "Profile",
+            cellRenderer: (params) => {
+                const athleteName = params.data.athlete.replace(/\s+/g, '-').toLowerCase();
+                const url = `/athlete-profile/${athleteName}`;
+                return (
+                    <button className="btn btn-primary"
+                        onClick={() => window.location.href = url}
+                    >
+                        View Profile
+                    </button>
+                );
+            },
+        }
     ]);
 
     const defaultColDef = useMemo(() => {
@@ -66,12 +83,11 @@ const GridExample = () => {
     }, []);
 
     return (
-        // <div style={containerStyle}>
+        <>
+            <Navbar />
             <div
                 style={gridStyle}
-                className={
-                    "ag-theme-quartz"
-                }
+                className="ag-theme-quartz "
             >
                 <AgGridReact
                     rowData={rowData}
@@ -80,7 +96,9 @@ const GridExample = () => {
                     onGridReady={onGridReady}
                 />
             </div>
-        // </div>
+
+            <StickyFooterMobile />
+        </>
     );
 };
 
