@@ -22,7 +22,7 @@ router.post('/staffEntryExit', require('../../controllers/security/staffEntryExi
 
 router.post('/visitorEntry', require('../../controllers/security/visitorEntry'));
 
-router.get('/visitorExit', require('../../controllers/security/visitorExit'));
+router.post('/visitorExit', require('../../controllers/security/visitorExit'));
 
 
 

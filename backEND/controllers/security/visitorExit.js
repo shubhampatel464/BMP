@@ -8,7 +8,7 @@ const visitorExit = async (req, res) => {
     
     try {
 
-        const uuid = req.query.uuid;
+        const uuid = req.body.uuid;
         const photo = req.files.photo;
 
         // upload photo to blob
@@ -21,7 +21,7 @@ const visitorExit = async (req, res) => {
         // save to logs
         const data = await visitor_transactional.findOne({ uuid: uuid });
 
-        if(data == NULL){
+        if(!data){
             res.status(404).send({ message: 'INVALID UUID FOR VISITOR'});
             return;
         }
