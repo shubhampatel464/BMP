@@ -5,34 +5,24 @@ const express = require('express');
 const router = express.Router();
 
 
-const login = require('../../controllers/security/login');
-
-const getData = require('../../controllers/security/verifyUser');
-
-const studentEntryExit = require('../../controllers/security/studentEntryExit');
-
-const staffEntryExit = require('../../controllers/security/staffEntryExit');
-
-const visitorEntry = require('../../controllers/security/visitorEntry');
-
-const visitorExit = require('../../controllers/security/visitorExit');
+const auth = require('../../middleware/securityAuth');
 
 
 
 
 
 
-router.post('/login', login);
+router.post('/login', require('../../controllers/security/login'));
 
-router.get('/getData', getData);
+router.get('/getData', require('../../controllers/security/verifyUser'));
 
-router.post('/studentEntryExit', studentEntryExit);
+router.post('/studentEntryExit', require('../../controllers/security/studentEntryExit'));
 
-router.post('/staffEntryExit', staffEntryExit);
+router.post('/staffEntryExit', require('../../controllers/security/staffEntryExit'));
 
-router.post('/visitorEntry', visitorEntry);
+router.post('/visitorEntry', require('../../controllers/security/visitorEntry'));
 
-router.get('/visitorExit', visitorExit);
+router.get('/visitorExit', require('../../controllers/security/visitorExit'));
 
 
 

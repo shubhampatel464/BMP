@@ -22,7 +22,7 @@ const mailTransporter = nodemailer.createTransport({
 
 mailTransporter.verify((error, success) => {
     if (error) console.log(error);
-    console.log("Server is ready to take our messages");
+    console.log("SMTP Server is ready");
 });
 
 
