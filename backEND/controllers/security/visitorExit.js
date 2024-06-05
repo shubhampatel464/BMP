@@ -32,7 +32,7 @@ const visitorExit = async (req, res) => {
             mobile: data.mobile,
             purpose: data.purpose,
             entry_time: data.entry_time,
-            photo_entry: data.photo,
+            photo_entry: data.photo_entry,
             photo_exit: photoUrl,
             exit_time: istDateTime
         });
