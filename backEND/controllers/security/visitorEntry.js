@@ -29,7 +29,7 @@ const visitorEntryExit = async (req, res) => {
             name: name,
             mobile: mobile,
             purpose: purpose,
-            photo: photoUrl,
+            photo_entry: photoUrl,
             entry_time: entry_time 
         });
 

@@ -1,12 +1,18 @@
 const visitor_transactional = require('../../models/transactional/visitor');
 const visitor_logs = require('../../models/logs/visitor');
 
+const fileUpload = require('../../blob/azureBlob');
+
 
 const visitorExit = async (req, res) => {
     
     try {
 
         const uuid = req.query.uuid;
+        const photo = req.files.photo;
+
+        // upload photo to blob
+        const photoUrl = await fileUpload(photo.tempFilePath, "visitor");
 
         const current_time = new Date();
         const istDateTime = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
@@ -26,7 +32,8 @@ const visitorExit = async (req, res) => {
             mobile: data.mobile,
             purpose: data.purpose,
             entry_time: data.entry_time,
-            photo: data.photo,
+            photo_entry: data.photo,
+            photo_exit: photoUrl,
             exit_time: istDateTime
         });
 
