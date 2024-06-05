@@ -10,6 +10,7 @@ import GridExample from './Views/ParentVisit/List';
 import Visitors from './Views/Visitors';
 import RecordsDashBoard from './Views/Records';
 import TempPass from './Views/Visitors/TempPass';
+import StudentRecords from './Views/Records/Student';
 
 // react router 
 
@@ -32,6 +33,7 @@ function App() {
                 <Route path='/visitor-pass' element={<TempPass />} />
 
                 <Route path='/records' element={<RecordsDashBoard />} />
+                <Route path='/records/student' element={<StudentRecords />}  ></Route>
 
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>

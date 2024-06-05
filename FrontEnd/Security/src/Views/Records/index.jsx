@@ -29,7 +29,7 @@ const RecordsDashBoard = () => {
                             <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer' onClick={() => navigate('/visitors')} >
                                 <h1 className='text-xl font-bold'>Parent</h1>
                             </div>
-                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer'>
+                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer' onClick={() => navigate('/records/student')}>
                                 <h1 className='text-xl font-bold'>Student / Alumni</h1>
                             </div>
                         </div>
