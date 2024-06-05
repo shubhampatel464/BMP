@@ -20,18 +20,19 @@ const studentEntryExit = async (req, res) => {
             // save photo to blob 
             const photoUrl = await docsUpload(photo.tempFilePath, "student");
 
-            const update = await student_transactional.updateOne({ uuid: uuid }, { photo_entry: photoUrl });
+            // const update = await student_transactional.updateOne({ uuid: uuid }, { photo_entry: photoUrl });
 
             // save to logs
-            const data = await student_transactional.findOne({ uuid: uuid });
+            // const data = await student_transactional.findOne({ uuid: uuid });
+
             const logs = new student_logs({
-                student_id: data.student_id,
-                photo_exit: data.photo_exit,
-                photo_entry: data.photo_entry,
-                isLongLeave: data.isLongLeave,
-                reason: data.reason,
+                student_id: match.student_id,
+                photo_exit: match.photo_exit,
+                photo_entry: photoUrl,
+                isLongLeave: match.isLongLeave,
+                reason: match.reason,
                 entry_time: istDateTime,
-                exit_time: data.exit_time
+                exit_time: match.exit_time
             });
             
             const saveLogs = await logs.save();
