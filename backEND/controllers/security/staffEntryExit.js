@@ -6,9 +6,8 @@ const staff_transactional = require('../../models/transactional/staff');
 const staff_logs = require('../../models/logs/staff');
 const staff_attendence = require('../../models/attendence/staff');
 
+
 const docsUpload = require('../../blob/azureBlob');
-
-
 
 const current_time = new Date();
 const istDateTime = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
