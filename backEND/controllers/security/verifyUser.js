@@ -48,7 +48,10 @@ const getData = async (req, res) => {
         }else if(index_visitor){
             const data = await visitor.findOne({uuid: uuid});
             if(data){
-                res.status(200).send();
+                const resData = {
+                    entry : false
+                }
+                res.status(200).send(resData);
             }
             else{
                 res.status(404).send();
