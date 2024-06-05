@@ -10,10 +10,10 @@ const addVehicle = async (req, res) => {
 
         console.log(req.body);
         
-        const vehicleNo = req.body.vehicle;
-        const studentId = Number(req.body.studentId);
+        const vehicle = req.body.vehicle;
+        const student_id = Number(req.body.student_id);
 
-        const studentData = await student.findOne({ student_id: studentId});
+        const studentData = await student.findOne({ student_id });
 
         if (!studentData) {
             return res.status(400).json({ message: "Student not found" });
@@ -23,7 +23,7 @@ const addVehicle = async (req, res) => {
             return res.status(401).json({ message: "Vehicle already added" });
         }
 
-        const updateStudent = await student.updateOne({ student_id: studentId }, { vehicle: vehicleNo });
+        const updateStudent = await student.updateOne({ student_id }, { vehicle : vehicle});
 
         res.status(200).send({ message: "Vehicle added successfully" });
 

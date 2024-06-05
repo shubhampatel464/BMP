@@ -62,8 +62,6 @@ studentSchema.pre('updateOne', async function (next) {
 
 
 
-
-
 const Student = mongoose.model('Student', studentSchema);   
 
 module.exports = Student;
