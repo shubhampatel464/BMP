@@ -23,7 +23,10 @@ const visitorSchema = new mongoose.Schema({
     exit_time: {
         type: String,
     },
-    photo:{
+    photo_entry:{
+        type: String
+    },
+    photo_exit:{
         type: String
     }
 });
