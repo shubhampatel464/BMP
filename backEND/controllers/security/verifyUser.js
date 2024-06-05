@@ -2,6 +2,7 @@ const student = require('../../models/static/students_alumni/student');
 const student_transactional = require('../../models/transactional/student');
 const staff = require('../../models/static/staff/staff');
 const staff_transactional = require('../../models/transactional/staff');
+const visitor = require('../../models/transactional/visitor');
 
 
 const getData = async (req, res) => {
@@ -9,10 +10,11 @@ const getData = async (req, res) => {
 
         const uuid = req.query.uuid;
 
-        const index_student = uuid.indexOf("student");
-        const index_staff = uuid.indexOf("staff");
+        const index_student = uuid.endsWith("student");
+        const index_staff = uuid.endsWith("staff");
+        const index_visitor = uuid.endsWith("visitor");
 
-        if(index_student != -1){
+        if(index_student){
             const data2 = await student_transactional.findOne({uuid: uuid});
             const data = await student.findOne({uuid: uuid});
             if(data){
@@ -28,7 +30,7 @@ const getData = async (req, res) => {
                 res.status(404).send();
             }
         }
-        else{
+        else if(index_staff){
             const data2 = await staff_transactional.findOne({uuid: uuid});
             const data = await staff.findOne({uuid: uuid});
             if(data){
@@ -39,6 +41,14 @@ const getData = async (req, res) => {
                     resData.entry = false;
                 }
                 res.status(200).send(resData);
+            }
+            else{
+                res.status(404).send();
+            }
+        }else if(index_visitor){
+            const data = await visitor.findOne({uuid: uuid});
+            if(data){
+                res.status(200).send();
             }
             else{
                 res.status(404).send();
