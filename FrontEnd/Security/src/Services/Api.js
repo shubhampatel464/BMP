@@ -5,7 +5,7 @@ import { BACKEND_URL } from "./Helpers";
 const user = JSON.parse(Cookies.get('user') || null);
 
 export const postRequest = async (endpoint, data, headers = {}, params = {}) => {
-
+    // console.log('data', data);
     try {
         const response = await commonrequest("POST", `${BACKEND_URL}/${endpoint}`, data, headers, params);
         return response;

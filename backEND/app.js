@@ -9,6 +9,7 @@ require('dotenv').config();
 
 
 
+
 // Middleware
 const app = express();
 
@@ -21,6 +22,8 @@ const corsOptions = {
     origin: '*', // Allow all origins
 };
 app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));    
 
 
 // Connection
@@ -41,7 +44,6 @@ const port = process.env.PORT || 7777;
 
 
 // Routes
-
 
 app.use('/test',require('./routes/test/test')); 
 app.use('/student',require('./routes/student/student'));

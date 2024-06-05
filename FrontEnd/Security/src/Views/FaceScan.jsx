@@ -56,17 +56,6 @@ const FaceScan = () => {
             formData.append('isLongLeave', isLongLeave);
             formData.append('reason', reason);
 
-            // console.log(formData.get('file'));
-            let type;
-            if (uuid.endsWith('student')) type = "student"
-            // else if(uuid.endsWith('staff')) type = "staff"
-            else type = "staff"
-            // else {
-            //     alert('Something Went Wrong. Please try again.');
-            //     navigate('/qr-reader')
-            // }
-
-
             try {
                 let response;
                 if (!uuid.endsWith('student')) {
