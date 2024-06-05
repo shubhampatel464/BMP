@@ -7,8 +7,6 @@ const student = require('../../models/static/students_alumni/student');
 
 const addVehicle = async (req, res) => {
     try {
-
-        console.log(req.body);
         
         const vehicle = req.body.vehicle;
         const student_id = Number(req.body.student_id);

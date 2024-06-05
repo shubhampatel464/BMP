@@ -31,4 +31,6 @@ router.get('/visitorExit', require('../../controllers/security/visitorExit'));
 
 
 
+
+
 module.exports = router;

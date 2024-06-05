@@ -44,20 +44,20 @@ const staffEntryExit = async (req, res) => {
             const photoUrl = await docsUpload(photo.tempFilePath, "staff");
 
             // save photo to transactional
-            const update = await staff_transactional.updateOne({ uuid: uuid }, { photo_exit: photoUrl });
+            // const update = await staff_transactional.updateOne({ uuid: uuid }, { photo_exit: photoUrl });
 
 
             // save to logs
-            const data = await staff_transactional.findOne({ uuid: uuid });
+            // const data = await staff_transactional.findOne({ uuid: uuid });
 
             
             const logs = new staff_logs({
                 uuid: uuid,
-                name: data.name,
-                mobile: data.mobile,
-                photo_exit: data.photo_exit,
-                photo_entry: data.photo_entry,
-                entry_time: data.entry_time,
+                name: match.name,
+                mobile: match.mobile,
+                photo_exit: photoUrl,
+                photo_entry: match.photo_entry,
+                entry_time: match.entry_time,
                 exit_time: istDateTime
             });
             
