@@ -54,10 +54,6 @@ app.use('/data',require('./routes/data/dataAPI'));
 
 
 
-
-
-
-
 app.listen(port, () => {    
     console.log(`Server is Listening on port ${port}`);
     }
