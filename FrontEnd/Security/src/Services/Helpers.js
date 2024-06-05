@@ -1,4 +1,4 @@
-export const BACKEND_URL = "http://127.0.0.1:7000";
+export const BACKEND_URL = "http://localhost:7000";
 
 export const base64ToFile = (base64, filename) => {
     const arr = base64.split(',');

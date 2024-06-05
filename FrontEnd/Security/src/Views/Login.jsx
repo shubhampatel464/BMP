@@ -17,34 +17,34 @@ const LoginForm = () => {
     const navigate = useNavigate()
 
     // This will contain all form data once submit button is clicked.
-    const onSubmit = async (data) => {
-        try {
+    const onSubmit1 = (data) => {
+        const sendDataToLogin = async () => {
+            try {
+                const dataToSend = {
+                    mobile: data.Mobile,
+                    password: data.Password
+                }
 
-            // console.log(data)
-            const dataToSend = {
-                mobile: data.Mobile,
-                password: data.Password
-            }
-            
-            console.log(dataToSend)
-            const response = await postRequest('security/login', dataToSend)
-            console.log(response)
+                console.log(dataToSend)
 
-            if (response.status === 200) {
-                alert('Login Successful')
-                navigate('/dashboard')
-            }
-            else if (response.status === 400) {
+                const response = await postRequest('security/login', dataToSend)
+                console.log(response)
+
+                if (response.status === 200) {
+                    alert('Login Successful')
+                    navigate('/dashboard')
+                }
+                else if(response.status === 400){
+                    alert('Invalid Credentials')
+                }
+                else {
+                    alert('Something went wrong')
+                }
+            } catch (error) {
                 alert('Invalid Credentials')
             }
-            else {
-                alert('Internal Server Error')
-            }
         }
-        catch (error) {
-            console.log(error)
-            alert('Internal Server Error')
-        }
+        sendDataToLogin()
     }
 
     register('Mobile', {
@@ -70,7 +70,7 @@ const LoginForm = () => {
 
                     {/* form with box shadow */}
                     <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
-                        id='loginForm' onSubmit={handleSubmit(onSubmit)}>
+                        id='loginForm' onSubmit={handleSubmit(onSubmit1)}>
                         <h1 className='text-2xl font-bold'>Admin Login</h1>
                         <p className='text-gray-500'>Please fill your detail to access your account.</p>
 
