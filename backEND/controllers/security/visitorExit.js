@@ -11,6 +11,9 @@ const visitorExit = async (req, res) => {
         const uuid = req.body.uuid;
         const photo = req.files.photo;
 
+        console.log(req.body)
+        console.log(req.files)
+
         // upload photo to blob
         const photoUrl = await fileUpload(photo.tempFilePath, "visitor");
 
@@ -41,8 +44,10 @@ const visitorExit = async (req, res) => {
 
         // delete from transactional
         const deleteData = await visitor_transactional.deleteOne({ uuid: uuid });
-
-        res.status(200).send();
+        const resData = {
+            entry : false
+        }
+        res.status(200).send(resData);
 
     } catch (error) {
         console.log("This is error from ./controllers/security/visitorExit.js");
