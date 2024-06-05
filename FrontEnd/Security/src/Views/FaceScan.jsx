@@ -58,7 +58,8 @@ const FaceScan = () => {
 
             try {
                 let response;
-                if (!uuid.endsWith('student')) {
+
+                if (uuid.endsWith('student')) {
                     response = await postRequest(`security/studentEntryExit`, formData, {
                         'Content-Type': 'multipart/form-data'
                     }, {})

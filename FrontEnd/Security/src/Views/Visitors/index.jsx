@@ -127,7 +127,17 @@ const Visitors = () => {
             if (response.status == 200) {
                 alert('Visitor Added Successfully')
                 completeReset()
-                navigate('/dashboard')
+                navigate('/visitor-pass', { state: {
+                    name: visitorData.Name, 
+                    purpose: visitorData.Reason, 
+                    mobile: visitorData.Mobile, 
+                    entryTime: new Date().toLocaleTimeString(), 
+                    validityFrom: new Date().toLocaleDateString(), 
+                    validityTo: new Date().toLocaleDateString(),
+                    qrCodeValue: response.data.uuid,
+                    date: new Date().toLocaleDateString(),
+                    visitorPhoto: imgSrc
+                } })
             }
             else {
                 alert('Error Occured')

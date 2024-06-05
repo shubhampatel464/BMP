@@ -6,6 +6,7 @@ import { StickyFooterMobile } from '../Components/StickyFooterMobile'
 import { Navbar } from '../Components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { postRequest } from '../Services/Api'
+import Cookies from 'js-cookie'
 
 const LoginForm = () => {
     const {
@@ -25,13 +26,16 @@ const LoginForm = () => {
                     password: data.Password
                 }
 
-                console.log(dataToSend)
+                // console.log(dataToSend)
 
                 const response = await postRequest('security/login', dataToSend)
-                console.log(response)
+                // console.log(response)
 
                 if (response.status === 200) {
                     alert('Login Successful')
+                    // set cookie with token, secure and httpOnly, expires in 1 day
+                    // console.log(response.data.token)
+                    Cookies.set('token', response.data.token, { expires: 1, secure: true, sameSite: 'strict' })
                     navigate('/dashboard')
                 }
                 else if(response.status === 400){

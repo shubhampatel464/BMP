@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import GridExample from './Views/ParentVisit/List';
 import Visitors from './Views/Visitors';
 import RecordsDashBoard from './Views/Records';
+import TempPass from './Views/Visitors/TempPass';
 
 // react router 
 
@@ -28,6 +29,8 @@ function App() {
                 {/* general visitors */}
                 <Route path='/add-visitor' element={<Visitors />} />
                 <Route path='/current-visitor-list' element={<Visitors />} />
+                <Route path='/visitor-pass' element={<TempPass />} />
+
                 <Route path='/records' element={<RecordsDashBoard />} />
 
                 <Route path="*" element={<h1>Not Found</h1>} />
