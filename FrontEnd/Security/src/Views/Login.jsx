@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form'
 import { InputField } from './../Components/InputField'
 import { Button } from '../Components/Button'
 import LoginImg from './../Assets/LoginImg.png'
-import Logo from './../Assets/Logo.png'
-import {StickyFooterMobile} from '../Components/StickyFooterMobile'
+import { StickyFooterMobile } from '../Components/StickyFooterMobile'
 import { Navbar } from '../Components/Navbar'
 import { useNavigate } from 'react-router-dom'
+import { postRequest } from '../Services/Api'
 
 const LoginForm = () => {
     const {
@@ -17,21 +17,50 @@ const LoginForm = () => {
     const navigate = useNavigate()
 
     // This will contain all form data once submit button is clicked.
-    const onSubmit = (data) => {
-        console.log(data)
-        // {Email: 'John@example.com', Password: 'secret'}
+    const onSubmit = async (data) => {
+        try {
 
-        navigate("/dashboard")
+            // console.log(data)
+            const dataToSend = {
+                mobile: data.Mobile,
+                password: data.Password
+            }
+            
+            console.log(dataToSend)
+            const response = await postRequest('security/login', dataToSend)
+            console.log(response)
+
+            if (response.status === 200) {
+                alert('Login Successful')
+                navigate('/dashboard')
+            }
+            else if (response.status === 400) {
+                alert('Invalid Credentials')
+            }
+            else {
+                alert('Internal Server Error')
+            }
+        }
+        catch (error) {
+            console.log(error)
+            alert('Internal Server Error')
+        }
     }
 
-    register('Email', { required: { value: true, message: 'Email is required' } })
+    register('Mobile', {
+        required: { value: true, message: 'Mobile number is required' },
+        pattern: { value: /^[0-9]*$/, message: 'Mobile number must be a 10 digit number' },
+        minLength: { value: 10, message: 'Mobile number must be a 10 digit number' },
+        maxLength: { value: 10, message: 'Mobile number must be a 10 digit number' },
+    })
+
     register('Password', {
         required: { value: true, message: 'Password is required' },
     })
 
     return (
         <>
-           <Navbar />
+            <Navbar />
 
             {/* flex div with login and image  */}
             <div className='flex justify-evenly w-screen items-center h-screen'>
@@ -45,15 +74,16 @@ const LoginForm = () => {
                         <h1 className='text-2xl font-bold'>Admin Login</h1>
                         <p className='text-gray-500'>Please fill your detail to access your account.</p>
 
-                        {/* email and password input fields */}
+                        {/* Mobile and password input fields */}
                         <InputField
-                            placeholder='admin@daiict.ac.in'
-                            label='Email'
-                            type='email'
+                            placeholder='Enter Mobile Number'
+                            label='Mobile'
+                            type='text'
                             register={register}
-                            error={errors.Email?.message}
+                            error={errors.Mobile?.message}
                         />
                         <InputField
+                            placeholder='Enter Password'
                             label='Password'
                             type='password'
                             register={register}

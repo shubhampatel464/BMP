@@ -82,6 +82,12 @@ const GridExample = () => {
             .then((data) => setRowData(data));
     }, []);
 
+    // const pagination = true;
+
+    // const paginationPageSize = 5;
+
+    // const paginationPageSizeSelector = [5, 20, 50, 100];
+
     return (
         <>
             <Navbar />
@@ -94,6 +100,9 @@ const GridExample = () => {
                     columnDefs={columnDefs}
                     defaultColDef={defaultColDef}
                     onGridReady={onGridReady}
+                    // pagination={pagination}
+                    // paginationPageSize={paginationPageSize}
+                    // paginationPageSizeSelector={paginationPageSizeSelector}
                 />
             </div>
 
