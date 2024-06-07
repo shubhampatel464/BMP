@@ -7,6 +7,9 @@ const staffSchema = new mongoose.Schema({
     mobile:{
         type: Number
     },
+    name:{
+        type: String
+    },
     photo_exit:{
         type: String
     },
