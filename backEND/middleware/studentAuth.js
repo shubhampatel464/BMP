@@ -4,7 +4,7 @@ const auth = async (req, res, next) => {
     try {
         // console.log(req.headers)
         const token = req.headers.authorization;
-        const data = await jwt.verify(token, process.env.JWT_KEY);
+        const data = await jwt.verify(token, process.env.JWT_SECRET);
         // console.log(data);
         req.user = data;
         next();

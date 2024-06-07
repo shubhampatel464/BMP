@@ -8,7 +8,7 @@ const auth = require('../../middleware/studentAuth');
 
 
 
-router.post('/login',auth,require('../../controllers/students_alumni/login'));
+router.post('/login',require('../../controllers/students_alumni/login'));
 router.get('/getData',auth,require('../../controllers/students_alumni/getData'));
 
 

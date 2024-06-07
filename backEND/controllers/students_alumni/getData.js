@@ -2,9 +2,11 @@ const student = require('../../models/static/students_alumni/student');
 
 const getData = async (req, res) => {  
     try {
+
+        console.log(req.user);
         const student_id = Number(req.user.student_id);
 
-        const studentData = await student.findOne({ student_id : Number(student_id) });
+        const studentData = await student.findOne({ student_id : student_id });
         if (!studentData) {
             res.status(400).send({ error: "Invalid ID" });
             return;
