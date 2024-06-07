@@ -12,6 +12,10 @@ const securitySchema = new mongoose.Schema({
         type: Number,
         unique: true
     },
+    email: {
+        type: String,
+        unique: true
+    },
     startTime:{
         type: Date
     },
