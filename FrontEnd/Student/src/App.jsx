@@ -1,12 +1,39 @@
-import { useState } from 'react'
-import './App.css'
+import { Navigate, Outlet } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom';
+import QrCode from './Views/QrCode';
+import Login from './Views/Login';
+import { UserProvider } from './Services/AuthContext'
+import Cookies from 'js-cookie'
+import Profile from './Views/Profile';
+
+const PrivateRoutes = () => {
+    const token = Cookies.get('token')
+    if (token) {
+        return <Outlet />
+    }
+    else {
+        return <Navigate to='/login' />
+    }
+}
 
 function App() {
-    const [count, setCount] = useState(0)
+
+
 
     return (
         <>
-            Home
+            <UserProvider>
+                <div className="App h-screen">
+                    <Routes>
+                        <Route path='/' element={<Login />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route element={<PrivateRoutes />}>
+                            <Route path='/qr-code' element={<QrCode />} />
+                            <Route path='/profile' element={<Profile />} />
+                        </Route>
+                    </Routes>
+                </div>
+            </UserProvider>
         </>
     )
 }

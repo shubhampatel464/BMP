@@ -7,6 +7,7 @@ import { Navbar } from '../Components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { postRequest } from '../Services/Api'
 import Cookies from 'js-cookie'
+import { useUser } from '../Services/AuthContext'
 
 const LoginForm = () => {
     const {
@@ -19,30 +20,30 @@ const LoginForm = () => {
 
     // This will contain all form data once submit button is clicked.
     const onSubmit1 = (data) => {
+        console.log(data)
         const sendDataToLogin = async () => {
             try {
                 const dataToSend = {
-                    mobile: data.Mobile,
+                    student_id: data.StudentID,
                     password: data.Password
                 }
 
                 // console.log(dataToSend)
 
-                const response = await postRequest('security/login', dataToSend)
-                // console.log(response)
+                const response = await postRequest('student/login', dataToSend)
+                console.log(response)
 
-                if (response.status === 200) {
+                if (response.status == 200) {
                     alert('Login Successful')
-                    // set cookie with token, secure and httpOnly, expires in 1 day
-                    // console.log(response.data.token)
-                    Cookies.set('token', response.data.token, { expires: 1, secure: true, sameSite: 'strict' })
-                    navigate('/dashboard')
+                    // window.location.reload()
+                    await Cookies.set('token', response.data.token, { expires: 1, secure: true, sameSite: 'strict' })
+                    navigate('/profile')
                 }
-                else if(response.status === 400){
+                else if (response.status === 400) {
                     alert('Invalid Credentials')
                 }
                 else {
-                    alert('Something went wrong')
+                    alert('Something went wrong fwdfdffdfdf')
                 }
             } catch (error) {
                 alert('Invalid Credentials')
@@ -51,11 +52,9 @@ const LoginForm = () => {
         sendDataToLogin()
     }
 
-    register('Mobile', {
-        required: { value: true, message: 'Mobile number is required' },
-        pattern: { value: /^[0-9]*$/, message: 'Mobile number must be a 10 digit number' },
-        minLength: { value: 10, message: 'Mobile number must be a 10 digit number' },
-        maxLength: { value: 10, message: 'Mobile number must be a 10 digit number' },
+    // Registering the fields with react-hook-form
+    register('StudentID', {
+        required: { value: true, message: 'Student ID is required' },
     })
 
     register('Password', {
@@ -75,16 +74,16 @@ const LoginForm = () => {
                     {/* form with box shadow */}
                     <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
                         id='loginForm' onSubmit={handleSubmit(onSubmit1)}>
-                        <h1 className='text-2xl font-bold'>Security Login</h1>
+                        <h1 className='text-2xl font-bold'>Student Login</h1>
                         <p className='text-gray-500'>Please fill your detail to access your account.</p>
 
                         {/* Mobile and password input fields */}
                         <InputField
-                            placeholder='Enter Mobile Number'
-                            label='Mobile'
+                            placeholder='Enter StudentID'
+                            label='StudentID'
                             type='text'
                             register={register}
-                            error={errors.Mobile?.message}
+                            error={errors.StudentID?.message}
                         />
                         <InputField
                             placeholder='Enter Password'
@@ -94,7 +93,7 @@ const LoginForm = () => {
                             error={errors.Password?.message}
                         />
 
-                        {/* full width submit button */}
+                        {/* login button */}
                         <Button type='submit'>Login</Button>
                     </form>
                 </div>

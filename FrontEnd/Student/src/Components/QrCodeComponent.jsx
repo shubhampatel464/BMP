@@ -1,10 +1,12 @@
 import React from 'react'
 import { QRCodeSVG } from 'qrcode.react';
 import Logo from './../Assets/Logo.png'
-import { Navbar } from './Navbar';
-import { StickyFooterMobile } from './StickyFooterMobile';
+import { useNavigate } from 'react-router-dom';
 
-const QrCodeComponent = ({ value = "www.reactjs.org" }) => {
+const QrCodeComponent = ({ value ="www.reactjs.com" }) => {
+
+
+    // console.log(value);
     return (
         <QRCodeSVG
             value={value}
@@ -17,8 +19,8 @@ const QrCodeComponent = ({ value = "www.reactjs.org" }) => {
                 src: Logo,
                 x: undefined,
                 y: undefined,
-                height: 70,
-                width: 70,
+                height:50,
+                width:50,
                 excavate: true,
             }}
         />

@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { commonrequest } from "./CommonRequest";
 import { BACKEND_URL } from "./Helpers";
 
-const user = JSON.parse(Cookies.get('user') || null);
+// const token = ;
 
 export const postRequest = async (endpoint, data, headers = {}, params = {}) => {
     // console.log('data', data);
@@ -14,13 +14,15 @@ export const postRequest = async (endpoint, data, headers = {}, params = {}) => 
     }
 };
 
-export const postRequestWithToken = async (endpoint, data, headers = {}, params = {}) => {
-    const token = user?.token;
+export const postRequestWithToken = async (endpoint, data={}, headers = {}, params = {}) => {
+    const token = Cookies.get('token') || '';
     if (!token) {
+        alert('Please login to access this page');
         throw new Error('No token found');
     }
     headers['Authorization '] = token;
-    // headers['Content-Type'] = 'application/json';
+    headers['Content-Type'] = 'application/json';
+    console.log('headers', headers);
     try {
         const response = await commonrequest("POST", `${BACKEND_URL}/${endpoint}`, data, headers, params);
         return response;
@@ -38,11 +40,11 @@ export const getRequest = async (endpoint, params = {}) => {
     }
 }
 
-export const getRequestWithLogin = async (endpoint, params = {}) => {
-    const token = user?.token;
+export const getRequestWithToken = async (endpoint, params = {}) => {
+    const token = Cookies.get('token') || '';
     if (!token) {
         alert('Please login to access this page');
-        window.location.href = `/home`;
+        window.location.href = `/login`;
         // throw new Error('No token found');
     }
     const headers = {};
