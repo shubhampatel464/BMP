@@ -11,19 +11,21 @@ import { BACKEND_URL } from "../../Services/Helpers";
 
 
 
-// sample data from response
+
+
 // [
 //     {
-//         "_id": "6658be4fa97ab95fa0405724",
-//         "student_id": 202116456,
-//         "photo_exit": "https://btsri.blob.core.windows.net/student//tmp/tmp-1-1717091726398",
-//         "photo_entry": "https://btsri.blob.core.windows.net/student//tmp/tmp-2-1717091917565",
-//         "isLongLeave": true,
-//         "reason": "Home",
-//         "entry_time": "30/5/2024, 11:28:38 pm",
-//         "exit_time": "30/5/2024, 11:23:39 pm",
+//         "_id": "6660a1bab4d9b6089f9454e1",
+//         "uuid": "f906268e-c5ab-4b0f-82c1-f74a62269f9bvisitor",
+//         "name": "shubham ",
+//         "mobile": "9898989898",
+//         "purpose": "To meet dean",
+//         "entry_time": "5/6/2024, 11:04:20 pm",
+//         "exit_time": "5/6/2024, 11:04:50 pm",
+//         "photo_entry": "https://btsri.blob.core.windows.net/visitor//tmp/tmp-1-1717608860009",
+//         "photo_exit": "https://btsri.blob.core.windows.net/visitor//tmp/tmp-2-1717608889345",
 //         "__v": 0
-//     },
+//     }
 // ]
 
 const getValue = (inputSelector) => {
@@ -45,7 +47,7 @@ const getParams = () => {
 };
 
 
-const StudentRecordList = () => {
+const VisitorRecordList = () => {
 
     const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
     const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
@@ -54,20 +56,20 @@ const StudentRecordList = () => {
 
     const [columnDefs, setColumnDefs] = useState([
         {
-            headerName: "Student ID",
-            field: "student_id",
+            headerName: "Name",
+            field: "name",
             filter: "agTextColumnFilter",
             sortable: true,
         },
         {
-            headerName: "Long Leave ?",
-            field: "isLongLeave",
-            filter: "agTextColumnFilter",
-            sortable: true,
+            headerName:"Mobile",
+            field:"mobile",
+            filter:"agTextColumnFilter",
+            sortable:true,
         },
         {
             headerName: "Purpose",
-            field: "reason",
+            field: "purpose",
             filter: "agTextColumnFilter",
             sortable: true,
         },
@@ -193,7 +195,7 @@ const StudentRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/data/getStudentLogs`)
+        fetch(`${BACKEND_URL}/data/getVisitorsLogs`)
             .then((resp) => resp.json())
             .then((data) => setRowData(data));
     }, []);
@@ -206,7 +208,7 @@ const StudentRecordList = () => {
         const keys = columnDefs.map(column => column.field);
 
         // Create CSV header row
-        const headerRow = "Student ID,Long Leave ?,Purpose,Exit Date,Exit Time,Entry Date,EntryTime,Exit Photo,Entry Photo";
+        const headerRow = "Name,Mobile,Purpose,Exit Date,Exit Time,Entry Date,Entry Time,Exit Photo,Entry Photo";
         // console.log(headerRow)
 
         // Create CSV data rows
@@ -224,13 +226,13 @@ const StudentRecordList = () => {
         const rowData = gridRef.current.api.getModel().rowsToDisplay.map(row => row.data);
 
         const orderedColumnDefs = [
-            { headerName: "Student ID", field: "student_id" },
-            { headerName: "Long Leave ?", field: "isLongLeave" },
-            { headerName: "Purpose", field: "reason" },
+            { headerName: "Name", field: "name" },
+            { headerName: "Mobile", field: "mobile" },
+            { headerName: "Purpose", field: "purpose" },
             { headerName: "Exit Date & Time", field: "exit_time" },
             { headerName: "Entry Date & Time", field: "entry_time" },
             { headerName: "Exit Photo", field: "photo_exit" },
-            { headerName: "Entry Photo", field: "photo_entry" }
+            { headerName: "Entry Photo", field: "photo_entry" },
         ];
 
         const csv = convertToCsv(rowData, orderedColumnDefs);
@@ -272,6 +274,6 @@ const StudentRecordList = () => {
     );
 };
 
-export default StudentRecordList
+export default VisitorRecordList
 
 // Path: FrontEnd/Security/src/Views/Visitors/index.jsx

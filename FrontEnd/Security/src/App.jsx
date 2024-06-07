@@ -11,6 +11,8 @@ import Visitors from './Views/Visitors';
 import RecordsDashBoard from './Views/Records';
 import TempPass from './Views/Visitors/TempPass';
 import StudentRecords from './Views/Records/Student';
+import VisitorRecords from './Views/Records/Visitors';
+import StaffRecords from './Views/Records/Staff';
 
 // react router 
 
@@ -34,7 +36,8 @@ function App() {
 
                 <Route path='/records' element={<RecordsDashBoard />} />
                 <Route path='/records/student' element={<StudentRecords />}  ></Route>
-
+                <Route path='/records/visitor' element={<VisitorRecords />}  ></Route>
+                <Route path='/records/staff' element={<StaffRecords />}  ></Route>
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
         </div>

@@ -9,21 +9,18 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
 
-
-
-// sample data from response
 // [
-//     {
-//         "_id": "6658be4fa97ab95fa0405724",
-//         "student_id": 202116456,
-//         "photo_exit": "https://btsri.blob.core.windows.net/student//tmp/tmp-1-1717091726398",
-//         "photo_entry": "https://btsri.blob.core.windows.net/student//tmp/tmp-2-1717091917565",
-//         "isLongLeave": true,
-//         "reason": "Home",
-//         "entry_time": "30/5/2024, 11:28:38 pm",
-//         "exit_time": "30/5/2024, 11:23:39 pm",
-//         "__v": 0
-//     },
+    // {
+    //     "_id": "6663036eff94869cd7915b52",
+    //     "uuid": "a1b2c3d4e5f678901234567890abcdef1234567890abcdef1234567890abcdefstaff",
+    //     "mobile": 9876543210,
+    //     "name": "Amit Sharma",
+    //     "photo_exit": "https://btsri.blob.core.windows.net/staff//tmp/tmp-2-1717764973186",
+    //     "photo_entry": "https://btsri.blob.core.windows.net/staff//tmp/tmp-1-1717764965087",
+    //     "entry_time": "7/6/2024, 6:26:05 pm",
+    //     "exit_time": "7/6/2024, 6:26:13 pm",
+    //     "__v": 0
+    // }
 // ]
 
 const getValue = (inputSelector) => {
@@ -45,7 +42,7 @@ const getParams = () => {
 };
 
 
-const StudentRecordList = () => {
+const StaffRecordList = () => {
 
     const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
     const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
@@ -54,22 +51,16 @@ const StudentRecordList = () => {
 
     const [columnDefs, setColumnDefs] = useState([
         {
-            headerName: "Student ID",
-            field: "student_id",
+            headerName: "Name",
+            field: "name",
             filter: "agTextColumnFilter",
             sortable: true,
         },
         {
-            headerName: "Long Leave ?",
-            field: "isLongLeave",
-            filter: "agTextColumnFilter",
-            sortable: true,
-        },
-        {
-            headerName: "Purpose",
-            field: "reason",
-            filter: "agTextColumnFilter",
-            sortable: true,
+            headerName:"Mobile",
+            field:"mobile",
+            filter:"agTextColumnFilter",
+            sortable:true,
         },
         {
             headerName: "Exit Date & Time",
@@ -193,7 +184,7 @@ const StudentRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/data/getStudentLogs`)
+        fetch(`${BACKEND_URL}/data/getStaffLogs`)
             .then((resp) => resp.json())
             .then((data) => setRowData(data));
     }, []);
@@ -206,7 +197,7 @@ const StudentRecordList = () => {
         const keys = columnDefs.map(column => column.field);
 
         // Create CSV header row
-        const headerRow = "Student ID,Long Leave ?,Purpose,Exit Date,Exit Time,Entry Date,EntryTime,Exit Photo,Entry Photo";
+        const headerRow = "Name,Mobile,Exit Date,Exit Time,Entry Date,Entry Time,Exit Photo,Entry Photo";
         // console.log(headerRow)
 
         // Create CSV data rows
@@ -218,19 +209,16 @@ const StudentRecordList = () => {
         return csv;
     }
 
-
-
     const onBtnExport = useCallback(() => {
         const rowData = gridRef.current.api.getModel().rowsToDisplay.map(row => row.data);
 
         const orderedColumnDefs = [
-            { headerName: "Student ID", field: "student_id" },
-            { headerName: "Long Leave ?", field: "isLongLeave" },
-            { headerName: "Purpose", field: "reason" },
+            { headerName: "Name", field: "name" },
+            { headerName: "Mobile", field: "mobile" },
             { headerName: "Exit Date & Time", field: "exit_time" },
             { headerName: "Entry Date & Time", field: "entry_time" },
             { headerName: "Exit Photo", field: "photo_exit" },
-            { headerName: "Entry Photo", field: "photo_entry" }
+            { headerName: "Entry Photo", field: "photo_entry" },
         ];
 
         const csv = convertToCsv(rowData, orderedColumnDefs);
@@ -272,6 +260,6 @@ const StudentRecordList = () => {
     );
 };
 
-export default StudentRecordList
+export default StaffRecordList
 
 // Path: FrontEnd/Security/src/Views/Visitors/index.jsx
