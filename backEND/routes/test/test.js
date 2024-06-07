@@ -16,7 +16,7 @@ router.post('/upload', async (req,res) => {
 });
 
 
-const updatePassword = require('../../controllers/test/updatePassword');
+const updatePassword = require('../../controllers/test/updatePassword.test');
 
 router.get('/updatePassword',updatePassword);
 

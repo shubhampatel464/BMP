@@ -23,9 +23,9 @@ const login = async (req, res) => {
             res.status(400).send({ error: "Invalid ID or Password" });
             return;
         }
-        const token = jwt.sign({ id: studentData.student_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: studentData.student_id, uuid:studentData.uuid }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        res.status(200).send({ studentData,token });
+        res.status(200).send({token});
 
     } catch (error) {
         console.log("Error from ./controllers/students_alumni/login.js");

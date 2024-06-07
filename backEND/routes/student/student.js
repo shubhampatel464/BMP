@@ -4,10 +4,10 @@ const express = require('express');
 
 const router = express.Router();
 
-const login = require('../../controllers/students_alumni/login');
 
 
-router.post('/login',login);
+router.post('/login',require('../../controllers/students_alumni/login'));
+router.get('/getData',require('../../controllers/students_alumni/getData'));
 
 
 
