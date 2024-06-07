@@ -3,7 +3,7 @@ const student = require('../../models/static/students_alumni/student');
 const getData = async (req, res) => {  
     try {
 
-        console.log(req.user);
+        // console.log(req.user);
         const student_id = Number(req.user.student_id);
 
         const studentData = await student.findOne({ student_id : student_id });
