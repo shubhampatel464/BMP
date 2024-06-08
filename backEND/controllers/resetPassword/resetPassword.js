@@ -12,6 +12,7 @@ const resetPassword = async (req, res) => {
         const newPassword = req.body.newPassword;
 
         // console.log(resetToken);
+        // console.log(newPassword);
 
         const resetObj = await reset.findOne({resetToken});
         

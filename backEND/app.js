@@ -2,17 +2,18 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+const hbs = require('hbs') 
 require('dotenv').config();
 
 
+const app = express();
 
-
-
+// View Engine Setup 
+app.set('views', './hbsTemplates') 
+app.set('view engine', 'hbs') 
 
 
 // Middleware
-const app = express();
-
 app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : '/tmp/'
