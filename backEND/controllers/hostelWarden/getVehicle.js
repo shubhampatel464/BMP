@@ -15,3 +15,5 @@ const getStudentData = async (req, res) => {
     }
 
 }
+
+module.exports = getStudentData;
