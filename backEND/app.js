@@ -51,6 +51,7 @@ app.use('/test',require('./routes/test/test'));
 app.use('/student',require('./routes/student/student'));
 app.use('/security',require('./routes/security/security'));
 app.use('/hostelWarden',require('./routes/hostelWarden/hostelWarden'));
+app.use('/staff',require('./routes/staff/staff'));
 app.use('/data',require('./routes/data/dataAPI'));
 app.use('/reset',require('./routes/resetPassword/resetPassword'));
 
