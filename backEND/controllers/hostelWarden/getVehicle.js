@@ -4,7 +4,22 @@ const getStudentData = async (req, res) => {
 
     try {
 
-        const studentData = await student.find({ vehicle: { $ne: "" } });
+        const pipe = [
+            {
+                $match: {
+                    vehicle: { $ne: "" }
+                }
+            },
+            {
+                $project: {
+                    student_id: 1,
+                    name: 1,
+                    vehicle: 1
+                }
+            }
+        ]
+
+        const studentData = await student.aggregate(pipe);
 
         res.status(200).send(studentData);
         
