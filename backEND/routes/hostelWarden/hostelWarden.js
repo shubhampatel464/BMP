@@ -15,6 +15,8 @@ router.post('/removeVehicle', require('../../controllers/hostelWarden/removeVehi
 
 router.get('/getStudentData', require('../../controllers/hostelWarden/getStudentData'));
 
+router.post('/addParentVisit', require('../../controllers/hostelWarden/addParentVisit'));
+
 
 
 

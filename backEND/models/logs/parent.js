@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const parentSchema = new mongoose.Schema({
+const parentLogsSchema = new mongoose.Schema({
     uuid: {
         type: String,
         required: true,
@@ -32,4 +32,4 @@ const parentSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('Parent', parentSchema);
+module.exports = mongoose.model('ParentLogs', parentLogsSchema);
