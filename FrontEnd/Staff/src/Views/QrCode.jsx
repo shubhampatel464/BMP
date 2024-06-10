@@ -13,7 +13,7 @@ const QrCode = () => {
 
     // Fetching data from backend
     useEffect(() => {
-        getRequestWithToken('student/getData')
+        getRequestWithToken('staff/getData')
             .then((res) => {
                 setData(res.data);
                 setLoading(false);

@@ -30,7 +30,7 @@ const LoginForm = () => {
 
                 // console.log(dataToSend)
 
-                const response = await postRequest('student/login', dataToSend)
+                const response = await postRequest('staff/login', dataToSend)
                 console.log(response)
 
                 if (response.status == 200) {
