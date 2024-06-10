@@ -37,7 +37,7 @@ const Vehicle = () => {
     register('VehicleNumber', { required: 'Vehicle Number is required' })
     const onSubmit = async (data) => {
         try {
-            console.log(data)
+            // console.log(data)
             const dataToSend = {
                 student_id: data.StudentID,
                 vehicle: data.VehicleNumber
@@ -94,8 +94,8 @@ const Vehicle = () => {
                             <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
                                 id='loginForm' onSubmit={handleSubmit(onSubmit)}>
 
-                                <h1 className='text-2xl font-bold'>Add Visitor</h1>
-                                <p className='text-gray-500'>Please fill the form to add visitor.</p>
+                                <h1 className='text-2xl font-bold'>Add Vehicle</h1>
+                                <p className='text-gray-500'>Please fill the form to add Vehicle.</p>
 
                                 {/* student id, vechile number */}
                                 <InputField
