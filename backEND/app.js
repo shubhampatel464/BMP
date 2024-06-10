@@ -8,6 +8,7 @@ require('dotenv').config();
 
 const app = express();
 
+
 // View Engine Setup 
 app.set('views', './hbsTemplates') 
 app.set('view engine', 'hbs') 

@@ -24,18 +24,22 @@ const resetPassword = async (req, res) => {
 
         if(uuid.endsWith('student')){
             const user = await student.updateOne({uuid},{password:newPassword});
+            const dlt = await reset.deleteOne({resetToken});
             res.status(200).json({message: 'Password Updated Successfully'});
         }
         else if(uuid.endsWith('staff')){
             const user = await staff.updateOne({uuid},{password:newPassword});
+            const dlt = await reset.deleteOne({resetToken});
             res.status(200).json({message: 'Password Updated Successfully'});
         }
         else if(uuid.endsWith('security')){
             const user = await security.updateOne({uuid},{password:newPassword});
+            const dlt = await reset.deleteOne({resetToken});
             res.status(200).json({message: 'Password Updated Successfully'});
         }
         else if(uuid.endsWith('hostelWarden')){
             const user = await hostelWarden.updateOne({uuid},{password:newPassword});
+            const dlt = await reset.deleteOne({resetToken});
             res.status(200).json({message: 'Password Updated Successfully'});
         }
         else{
