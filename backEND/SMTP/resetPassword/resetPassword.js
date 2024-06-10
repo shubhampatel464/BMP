@@ -7,7 +7,7 @@ const resetPassword = async (email,resetToken) => {
         from: 'Admin Attendance System,DA-IICT',
         to: email,
         subject: "Password Reset",
-        text: `Please click on the following link to reset your password: ${process.env.BASE_URL}/reset/reset-password?resetToken=${resetToken}`,
+        text: `Please click on the following link to reset your password:127.0.0.1:${process.env.PORT}/reset/reset-password?resetToken=${resetToken}`,
     };
 
     const s = await mailTransporter.sendMail(mailDetails, function (err, data) {
