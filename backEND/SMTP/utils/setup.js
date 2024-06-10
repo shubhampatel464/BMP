@@ -18,6 +18,15 @@ const mailTransporter = nodemailer.createTransport({
     }
 });
 
+mailTransporter.use('compile', hbs({
+    viewEngine: {
+        extname: '.hbs',
+        // layoutsDir: './mailer/',
+        defaultLayout: false,
+        // partialsDir: './mailer/',
+    }, viewPath: '../backEND/hbsTemplates/', extName: '.hbs'
+}));
+
 
 
 mailTransporter.verify((error, success) => {
