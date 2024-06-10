@@ -14,11 +14,11 @@ const addVehicle = async (req, res) => {
         const studentData = await student.findOne({ student_id });
 
         if (!studentData) {
-            return res.status(400).json({ message: "Student not found" });
+            return res.status(400).send({ error: "Student not found" });
         }
 
         if(studentData.vehicle){
-            return res.status(401).json({ message: "Vehicle already added" });
+            return res.status(401).send({ error: "Vehicle already added" });
         }
 
         const updateStudent = await student.updateOne({ student_id }, { vehicle : vehicle});
