@@ -7,7 +7,7 @@ const addParentVisit = async (req, res) => {
     try {
         
         const { name1,name2,student_id,mobile,arrival_date,purpose } = req.body;
-        const _uuid = uuid.v4();
+        const _uuid = `${uuid.v4()}parent`;
         
         const visit = new parent_transactional({
             name1,
@@ -21,7 +21,7 @@ const addParentVisit = async (req, res) => {
 
         const parentVisit = await visit.save();
 
-        res.status(201).send(parentVisit);
+        res.status(201).send();
 
     } catch (error) {
         console.log("This is error from ./controllers/hostelWarden/addParentVisit.js");
