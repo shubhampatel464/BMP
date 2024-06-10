@@ -1,5 +1,6 @@
 const hostelWardenSchema = require('../../models/static/hostelWarden/hostelWarden');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 
 
@@ -20,7 +21,9 @@ const login = async (req, res) => {
             return res.status(400).send({ error: 'Invalid login credentials' });
         }
 
-        res.status(200).send({ user });
+        const token = jwt.sign({ mobile : user.mobile ,uuid : user.uuid}, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+        res.status(200).send({ token,user });
 
     } catch (error) {
         console.log("This is an error from ./controllers/hostelWarden/login.js")

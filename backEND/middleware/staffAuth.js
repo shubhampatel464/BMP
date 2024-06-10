@@ -9,7 +9,7 @@ const auth = async (req, res, next) => {
         req.user = data;
         next();
     } catch (error) {
-        console.log("This is error from ./middleware/studentAuth.js");
+        console.log("This is error from ./middleware/staffAuth.js");
         console.log(error);
         return res.status(401).json({
             message: 'Auth failed'
