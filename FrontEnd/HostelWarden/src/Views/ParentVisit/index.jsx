@@ -1,10 +1,10 @@
 import React from 'react'
-import { Navbar } from '../Components/Navbar';
-import { StickyFooterMobile } from '../Components/StickyFooterMobile';
+import { Navbar } from '../../Components/Navbar';
+import { StickyFooterMobile } from '../../Components/StickyFooterMobile';
 import { useForm } from 'react-hook-form';
-import { InputField } from '../Components/InputField';
-import { Button } from '../Components/Button';
-import { getRequest, postRequest } from '../Services/Api';
+import { InputField } from '../../Components/InputField';
+import { Button } from '../../Components/Button';
+import { getRequest, postRequest } from '../../Services/Api';
 
 // sample form data : {
 //     name1 : 'Rahul',
