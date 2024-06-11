@@ -1,8 +1,6 @@
 const student = require('../../models/static/students_alumni/student');
 
 // erroe: 400 -> Student not found
-
-
 // error: 500 -> error from server
 
 const getStudentData = async (req, res) => {
