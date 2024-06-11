@@ -19,10 +19,10 @@ const Dashboard = () => {
                     <div className='flex flex-wrap gap-10 justify-center items-center h-1/2 w-screen mt-16 md:mt-48 '>
 
                         {/* <div className='flex flex-col gap-10 justify-between items-center h-full m-10'> */}
-                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() => navigate('/qr-reader')}>
+                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() => navigate('/student-records')}>
                                 <h1 className='text-xl font-bold'>Student Records</h1>
                             </div>
-                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	'>
+                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() =>navigate('/add-parent-visit')}>
                                 <h1 className='text-xl font-bold'>Add Parent Visit</h1>
                             </div>
                         {/* </div> */}
