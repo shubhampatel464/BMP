@@ -15,7 +15,6 @@ const parentSchema = new mongoose.Schema({
     },
     name2: {
         type: String,
-        required: true
     },
     mobile: {
         type: String,

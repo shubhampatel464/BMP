@@ -6,6 +6,7 @@ import { Outlet, Navigate } from 'react-router-dom'
 import { UserProvider } from './Services/AuthContext'
 import Dashboard from './Views/Dashboard';
 import Vehicle from './Views/Vehicle';
+import AddParentVisit from './ParentVisit';
 
 
 const PrivateRoutes = () => {
@@ -33,6 +34,8 @@ function App() {
 
                             <Route path="/vehicle/add-vehicle" element={<Vehicle />} />
                             <Route path="/vehicle/records" element={<Vehicle />} />
+
+                            <Route path="/add-parent-visit" element={<AddParentVisit />} />
                         </Route>
                     </Routes>
                 </div>
