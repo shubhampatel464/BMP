@@ -6,11 +6,9 @@ import { StickyFooterMobile } from '../../Components/StickyFooterMobile';
 import { useForm } from 'react-hook-form';
 import { InputField } from '../../Components/InputField';
 import { Button } from '../../Components/Button';
-import { useNavigate } from 'react-router-dom';
-import { postRequest } from '../../Services/Api';
-import { base64ToFile } from '../../Services/Helpers';
-// import CurrentList from './CurrentList';
+import { getRequest, postRequest } from '../../Services/Api';
 import { useLocation, Link } from 'react-router-dom';
+import VechicleList from './VehicleList';
 
 const Vehicle = () => {
 
@@ -35,8 +33,44 @@ const Vehicle = () => {
 
     register('StudentID', { required: 'Student ID is required' })
     register('VehicleNumber', { required: 'Vehicle Number is required' })
+
+    const verifyStudent = async (studentID) => {
+        try {
+            const res = await getRequest('hostelWarden/getStudentData?student_id=' + studentID, {})
+            // console.log(res)
+            if (res.status == 200) {
+                return res.data.studentData
+            }
+            else if (res.status == 400) {
+                return false
+            }
+            else {
+                return false
+            }
+        } catch (error) {
+            return false
+        }
+    }
+
     const onSubmit = async (data) => {
         try {
+
+            const isStudent = await verifyStudent(data.StudentID)
+            if (!isStudent) {
+                alert('Student not found')
+                return
+            }
+            else {
+
+                const msg = "Student Name : " + isStudent.name + "\nStudent ID : " + isStudent.student_id + "\nVehicle Number : " + data.VehicleNumber + "\n\nAre you sure you want to add this vehicle?"
+                // console.log(msg)
+                // take confirmation from user
+                const confirmation = window.confirm(msg, { title: 'Confirm Vehicle Addition'})
+                if (!confirmation) {
+                    return
+                }
+            }
+
             // console.log(data)
             const dataToSend = {
                 student_id: data.StudentID,
@@ -44,16 +78,16 @@ const Vehicle = () => {
             }
 
             const res = await postRequest('hostelWarden/addVehicle', dataToSend)
-            // console.log(res.response)
+            // console.log(res)
 
-            if (res.response.status == 200) {
+            if (res.status == 200) {
                 alert('Vehicle Added Successfully')
                 reset()
             }
-            else if (res.response.status == 400) {
+            else if (res.status == 400) {
                 alert('Student not found')
             }
-            else if (res.response.status == 401) {
+            else if (res.status == 401) {
                 alert('Vehicle already added')
             }
             else {
@@ -66,18 +100,18 @@ const Vehicle = () => {
 
 
     return (
-        <>
+        <div className='h-screen'>
             <Navbar />
             {/* <h1 className="text-2xl font-bold text-center mt-5">Visitors</h1> */}
             <div className='w-screen md:w-1/2 mx-auto mt-5 flex items-center justify-center top-0 sticky' >
                 <Tabs selectedIndex={getTabIndex(location.pathname)} onSelect={(index) => {
                     switch (index) {
                         case 1:
-                            window.history.pushState(null, '', '/vehicle/add-vehicle');
+                            window.history.pushState(null, '', '/vehicle/records');
                             break;
                         case 0:
                         default:
-                            window.history.pushState(null, '', '/vehicle/records');
+                            window.history.pushState(null, '', '/vehicle/add-vehicle');
                             break;
                     }
                 }}>
@@ -90,7 +124,7 @@ const Vehicle = () => {
                         </Tab>
                     </TabList>
                     <TabPanel>
-                        <div className='md:mt-32'>
+                        <div className='mt-32'>
                             <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
                                 id='loginForm' onSubmit={handleSubmit(onSubmit)}>
 
@@ -123,14 +157,14 @@ const Vehicle = () => {
                             {/* Content for List */}
                             <div className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl space-y-5 w-screen h-screen '>
                                 {/* <h1 className='text-2xl font-bold'>Current Visitors Inside Campus</h1> */}
-                                {/* <CurrentList /> */}
+                                <VechicleList />
                             </div>
                         </div>
                     </TabPanel>
                 </Tabs>
             </div>
             <StickyFooterMobile />
-        </>
+        </div>
     )
 }
 
