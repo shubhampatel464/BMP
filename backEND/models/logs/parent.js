@@ -15,12 +15,9 @@ const parentLogsSchema = new mongoose.Schema({
     },
     name2: {
         type: String,
-        required: true
     },
     mobile: {
-        type: String,
-        required: true,
-        unique: true
+        type: Number
     },
     arrival_date:{
         type: Date,
@@ -30,6 +27,26 @@ const parentLogsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    entry_time:{
+        type: Date,
+        default: Date.now
+    },
+    entry_photo1:{
+        type: String
+    },
+    entry_photo2:{
+        type: String
+    },
+    exit_time:{
+        type: Date,
+        default: Date.now
+    },
+    exit_photo1:{
+        type: String
+    },
+    exit_photo2:{
+        type: String
+    }
 });
 
-module.exports = mongoose.model('ParentLogs', parentLogsSchema);
+module.exports = mongoose.model('Parent_logs', parentLogsSchema);

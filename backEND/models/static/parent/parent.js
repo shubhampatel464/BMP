@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const parentSchema = new mongoose.Schema({
+const parentVisitSchema = new mongoose.Schema({
     uuid: {
         type: String,
         required: true,
@@ -17,7 +17,7 @@ const parentSchema = new mongoose.Schema({
         type: String,
     },
     mobile: {
-        type: Number,
+        type: Number
     },
     arrival_date:{
         type: Date,
@@ -26,17 +26,7 @@ const parentSchema = new mongoose.Schema({
     purpose:{
         type: String,
         required: true
-    },
-    entry_time:{
-        type: Date,
-        default: Date.now
-    },
-    entry_photo1:{
-        type: String
-    },
-    entry_photo2:{
-        type: String
     }
 });
 
-module.exports = mongoose.model('Parent_Transactional', parentSchema);
+module.exports = mongoose.model('Parent', parentVisitSchema);

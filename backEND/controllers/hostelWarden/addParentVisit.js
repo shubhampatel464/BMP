@@ -1,4 +1,4 @@
-const parent_transactional = require('../../models/transactional/parent');
+const parent = require('../../models/static/parent/parent');
 
 const uuid = require('uuid');
 
@@ -9,7 +9,7 @@ const addParentVisit = async (req, res) => {
         const { name1,name2,student_id,mobile,arrival_date,purpose } = req.body;
         const _uuid = `${uuid.v4()}parent`;
         
-        const visit = new parent_transactional({
+        const visit = new parent({
             name1,
             name2,
             student_id : Number(student_id),

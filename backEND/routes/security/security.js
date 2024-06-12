@@ -24,6 +24,8 @@ router.post('/visitorEntry', require('../../controllers/security/visitorEntry'))
 
 router.post('/visitorExit', require('../../controllers/security/visitorExit'));
 
+router.post('/parentEntryExit', require('../../controllers/security/parentEntryExit'));
+
 
 
 

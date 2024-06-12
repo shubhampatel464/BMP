@@ -1,10 +1,10 @@
-const parent_transactional = require('../../models/transactional/parent');
+const parent = require('../../models/static/parent/parent');
 
 const deleteParent = async (req, res) => {
     
     try {
         const currentDate = new Date();
-        const result = await parent_transactional.deleteMany({arrival_date: { $lt: currentDate }});
+        const result = await parent.deleteMany({arrival_date: { $lt: currentDate }});
         return;
 
     } catch (error) {
