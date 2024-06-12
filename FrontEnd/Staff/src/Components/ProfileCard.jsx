@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StickyFooterMobile } from './StickyFooterMobile';
 import { getRequestWithToken } from '../Services/Api';
 import { useNavigate } from 'react-router-dom';
-
+import building from '../Assets/building.svg'
 const ProfileCard = () => {
 
     const [data, setData] = React.useState({});
@@ -43,9 +43,9 @@ const ProfileCard = () => {
                         />
                     </div>
                 </div>
-                <div className="text-center px-6 py-3">
+                <div className="text-center px-12 py-3">
                     <h2 className="text-2xl font-semibold text-gray-800">{data.name}</h2>
-                    <p className="text-sm text-gray-600">{data.student_id}</p>
+                    <p className="text-sm text-gray-600">{data.email}</p>
                     <div className="flex justify-between mt-8 text-gray-600">
                         <div className=" flex justify-center text-gray-600">
                             <svg
@@ -61,16 +61,10 @@ const ProfileCard = () => {
                         </div>
                         <div className="flex justify-center">
                             <div className="flex items-center text-gray-600">
-                                <svg
-                                    className="w-5 h-5 mr-2"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"
-                                    ></path>
-                                </svg>
-                                {data.room}
+                                <span className='mr-2 w-5 h-5'>
+                                    <img src={building} alt="department" />
+                                </span>
+                                {data.department}
                             </div>
                         </div>
                     </div>

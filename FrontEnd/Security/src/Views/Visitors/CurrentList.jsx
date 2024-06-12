@@ -102,11 +102,11 @@ const CurrentList = () => {
         },
         {
             headerName: "Photo",
-            field: "photo",
+            field: "photo_entry",
             cellRenderer: function (params) {
                 return (
                     // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
-                        <a href={`${params.data.photo}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
+                        <a href={`${params.data.photo_entry}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
                             View Photo
                         </a>
                     // {/* </button> */}

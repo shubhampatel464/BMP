@@ -24,7 +24,7 @@ const LoginForm = () => {
         const sendDataToLogin = async () => {
             try {
                 const dataToSend = {
-                    student_id: data.StudentID,
+                    mobile: data.Mobile,
                     password: data.Password
                 }
 
@@ -43,7 +43,7 @@ const LoginForm = () => {
                     alert('Invalid Credentials')
                 }
                 else {
-                    alert('Something went wrong fwdfdffdfdf')
+                    alert('Something went wrong')
                 }
             } catch (error) {
                 alert('Invalid Credentials')
@@ -53,8 +53,8 @@ const LoginForm = () => {
     }
 
     // Registering the fields with react-hook-form
-    register('StudentID', {
-        required: { value: true, message: 'Student ID is required' },
+    register('Mobile', {    
+        required: { value: true, message: 'Mobile is required' },
     })
 
     register('Password', {
@@ -79,12 +79,13 @@ const LoginForm = () => {
 
                         {/* Mobile and password input fields */}
                         <InputField
-                            placeholder='Enter StaffID'
-                            label='StudentID'
+                            placeholder='Enter Mobile'
+                            label='Mobile'
                             type='text'
                             register={register}
-                            error={errors.StudentID?.message}
+                            error={errors.Mobile?.message}
                         />
+                        
                         <InputField
                             placeholder='Enter Password'
                             label='Password'
