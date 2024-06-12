@@ -12,16 +12,16 @@ const addParentVisit = async (req, res) => {
         const visit = new parent_transactional({
             name1,
             name2,
-            student_id,
-            mobile,
-            arrival_date,
+            student_id : Number(student_id),
+            mobile : Number(mobile),
+            arrival_date:Date(arrival_date),
             purpose,
             uuid : _uuid
         });
 
         const parentVisit = await visit.save();
 
-        res.status(201).send();
+        res.status(200).send();
 
     } catch (error) {
         console.log("This is error from ./controllers/hostelWarden/addParentVisit.js");

@@ -1,14 +1,17 @@
-// const parent_transactional = require('../../models/transactional/parent');
+const parent_transactional = require('../../models/transactional/parent');
 
-// const deleteParent = async (req, res) => {
-//     try {
-//         const 
-//         res.status(200).send();
-//     } catch (error) {
-//         console.log("This is error from ./controllers/parent/deleteParent.js");
-//         console.log(error);
-//         res.status(500).send(error);
-//     }
-// }
+const deleteParent = async (req, res) => {
+    
+    try {
+        const currentDate = new Date();
+        const result = await parent_transactional.deleteMany({arrival_date: { $lt: currentDate }});
+        return;
 
-// module.exports = deleteParent;
+    } catch (error) {
+        console.log("This is error from ./triggers/parent/deleteParent.js")
+        console.error(error);
+        return;
+    }
+}
+
+module.exports = deleteParent;

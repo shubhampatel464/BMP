@@ -40,7 +40,8 @@ const studentSchema = new mongoose.Schema({
         type: String
     },
     vehicle:{
-        type: String
+        type: String,
+        default: ""
     }
 });
 
