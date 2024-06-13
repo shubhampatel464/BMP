@@ -50,7 +50,7 @@ const AddParentVisit = () => {
     }
 
     const onSubmit = async (data) => {
-        console.log(data)
+        // console.log(data)
         try {
 
             const isStudent = await verifyStudent(data.StudentID)
@@ -80,7 +80,7 @@ const AddParentVisit = () => {
             }
 
             const res = await postRequest('hostelWarden/addParentVisit', dataToSend)
-            console.log(res)
+            // console.log(res)
 
             if (res.status == 201) {
                 alert('Parent Visit added successfully')

@@ -2,8 +2,12 @@ import React from 'react'
 import { Navbar } from '../Components/Navbar'
 import { StickyFooterMobile } from '../Components/StickyFooterMobile'
 import QrReader from '../Components/ReadQRComponent'
+import { Button } from '../Components/Button'
+import { useNavigate } from 'react-router-dom'
 
 const QrScan = () => {
+
+    const navigate = useNavigate();
     return (
         <>
             <Navbar />
@@ -17,7 +21,7 @@ const QrScan = () => {
                     <div className='flex justify-center items-center bg-gray-200 p-8 rounded-2xl'>
                         <QrReader />
                     </div>
-
+                    <Button onClick={() => { navigate('/dashboard') }} > Cancel </Button>
                 </div>
             </div>
             <StickyFooterMobile />

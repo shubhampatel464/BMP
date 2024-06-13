@@ -130,7 +130,7 @@ const StudentRecordList = () => {
                         Number(dateParts[0]),
                     );
 
-                    console.log("filterLocalDateAtMidnight", cellDate, filterLocalDateAtMidnight);
+                    // console.log("filterLocalDateAtMidnight", cellDate, filterLocalDateAtMidnight);
                     if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
                         return 0;
                     }
