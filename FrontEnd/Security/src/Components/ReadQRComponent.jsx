@@ -55,7 +55,7 @@ const QrReader = () => {
     // Fail
     const onScanFail = (err) => {
         console.log(err);
-        navigate("/dashboard");
+        // navigate("/dashboard");
         return;
     };
 
