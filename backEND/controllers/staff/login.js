@@ -10,10 +10,10 @@ const login = async (req, res) => {
 
     try {
 
-        const mobile = req.body.mobile;
+        const mobile = Number(req.body.mobile);
         const password = req.body.password;
 
-        const staffData = await staff.findOne({ mobile : Number(mobile) });
+        const staffData = await staff.findOne({ mobile : mobile });
         if (!staffData) {
             res.status(400).send({ error: "Invalid ID or Password" });
             return;

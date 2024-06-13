@@ -54,6 +54,7 @@ app.use('/hostelWarden',require('./routes/hostelWarden/hostelWarden'));
 app.use('/staff',require('./routes/staff/staff'));
 app.use('/data',require('./routes/data/dataAPI'));
 app.use('/reset',require('./routes/resetPassword/resetPassword'));
+app.use('/itAdmin',require('./routes/IT-Admin/itAdmin'));
 
 
 app.listen(port, () => {    

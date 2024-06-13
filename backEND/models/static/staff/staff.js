@@ -26,9 +26,6 @@ const staffSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    photo:{
-        type: String
-    },
     department:{
         type: String,
         required: true

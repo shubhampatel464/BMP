@@ -2,7 +2,9 @@ const student = require('../../models/static/students_alumni/student');
 const student_transactional = require('../../models/transactional/student');
 const staff = require('../../models/static/staff/staff');
 const staff_transactional = require('../../models/transactional/staff');
+const parent = require('../../models/static/parents/parent');
 const visitor = require('../../models/transactional/visitor');
+
 
 
 const getData = async (req, res) => {
@@ -13,6 +15,7 @@ const getData = async (req, res) => {
         const index_student = uuid.endsWith("student");
         const index_staff = uuid.endsWith("staff");
         const index_visitor = uuid.endsWith("visitor");
+        const index_parent = uuid.endsWith("parent");
 
         if(index_student){
             const data2 = await student_transactional.findOne({uuid: uuid});
@@ -45,7 +48,8 @@ const getData = async (req, res) => {
             else{
                 res.status(404).send();
             }
-        }else if(index_visitor){
+        }
+        else if(index_visitor){
             const data = await visitor.findOne({uuid: uuid});
             if(data){
                 const resData = {
@@ -57,6 +61,16 @@ const getData = async (req, res) => {
                 res.status(404).send();
             }
         }
+        else if(index_parent){
+            const data = await parent.findOne({uuid: uuid});
+            if(data){
+                res.status(200).send({data,isParent:true});
+            }
+            else{
+                res.status(404).send();
+            }
+        }
+
     } catch (error) {
         
         console.log("This is error from ./controller/security/getData.js");

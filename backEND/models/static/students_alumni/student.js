@@ -36,9 +36,6 @@ const studentSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    photo:{
-        type: String
-    },
     vehicle:{
         type: String,
         default: ""
