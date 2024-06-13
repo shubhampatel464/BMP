@@ -26,7 +26,7 @@ const addUser = async (req, res) => {
                 password: req.body.mobile,
                 mobile: req.body.mobile,
                 department: req.body.department,
-                uuid : uuid.v4()
+                uuid : `${uuid.v4()}staff`
             });
 
             await newStaff.save();
@@ -37,7 +37,7 @@ const addUser = async (req, res) => {
                     email: req.body.email,
                     password: req.body.mobile,
                     mobile: req.body.mobile,
-                    uuid : uuid.v4()
+                    uuid : `${uuid.v4()}security`
                 });
 
                 await newSecurity.save();
@@ -52,7 +52,7 @@ const addUser = async (req, res) => {
                 email: req.body.email,
                 password: req.body.mobile,
                 mobile: req.body.mobile,
-                uuid : uuid.v4()
+                uuid : `${uuid.v4()}hostelWarden`
             });
 
             await newHostelWarden.save();
@@ -81,7 +81,7 @@ const addUser = async (req, res) => {
             //     email: req.body.email,
             //     password: req.body.mobile,
             //     mobile: req.body.mobile,
-            //     uuid : uuid.v4()
+            //     uuid : `${uuid.v4()}registrar`
             // });
 
             // await newRegistrar.save();
@@ -95,7 +95,7 @@ const addUser = async (req, res) => {
             //     email: req.body.email,
             //     password: req.body.mobile,
             //     mobile: req.body.mobile,
-            //     uuid : uuid.v4()
+            //     uuid : `${uuid.v4()}securityManager`
             // });
 
             // await newSecurityManager.save();

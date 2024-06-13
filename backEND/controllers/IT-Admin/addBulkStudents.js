@@ -1,5 +1,6 @@
 const uuid = require('uuid');
 const excel = require('xlsx');
+const bcrypt = require('bcryptjs');
 
 
 const student = require('../../models/static/students_alumni/student');
@@ -11,39 +12,28 @@ const addBulkStudents = async (req, res) => {
 
         const file = req.files.student;
 
-        console.log(file);
-
         const buffer = Buffer.from(file.data);
 
-        console.log(buffer);
+        const workbool = excel.readFile(file.tempFilePath, {type: 'buffer'});
+        const sheet_name_list = workbool.SheetNames;
+        const xlData = excel.utils.sheet_to_json(workbool.Sheets[sheet_name_list[0]]);
+        const students = [];
 
-        const dt = excel.readFile(file.tempFilePath, {type: 'buffer'});
-        // console.log(dt);
+        for (const student of xlData) {
+            const pass = `${student.student_id}${student.room}`;
+            const hashedPass = await bcrypt.hash(pass, 8);
+            students.push({
+                name: student.name,
+                email: student.email,
+                password: hashedPass,
+                mobile: student.mobile,
+                student_id: student.student_id,
+                room: student.room,
+                uuid: `${uuid.v4()}student`
+            });
+        }
 
-        const workbook = excel.read(buffer, {type: 'buffer'});
-        console.log(workbook);
-
-        const sheet_name_list = workbook.SheetNames;
-        console.log(sheet_name_list);
-
-        const xlData = excel.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-        console.log(xlData);
-
-        // const students = [];
-
-        // xlData.forEach((student) => {
-        //     students.push({
-        //         name: student.name,
-        //         email: student.email,
-        //         password: student.mobile,
-        //         mobile: student.mobile,
-        //         student_id: student.student_id,
-        //         room : student.room,
-        //         uuid: uuid.v4()
-        //     });
-        // });
-
-        // await student.insertMany(students);
+        await student.insertMany(students);
 
         res.status(200).send({message: "Students added successfully"});
 

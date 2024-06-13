@@ -2,7 +2,7 @@ const student = require('../../models/static/students_alumni/student');
 const student_transactional = require('../../models/transactional/student');
 const staff = require('../../models/static/staff/staff');
 const staff_transactional = require('../../models/transactional/staff');
-const parent = require('../../models/static/parents/parent');
+const parent = require('../../models/transactional/parent');
 const visitor = require('../../models/transactional/visitor');
 
 
