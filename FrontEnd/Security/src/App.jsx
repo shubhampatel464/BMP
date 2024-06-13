@@ -20,7 +20,7 @@ function App() {
     return (
         <div className="App h-screen">
             <Routes>
-                <Route path="/" element={<h1>Home</h1>} />
+                <Route path="/" element={<LoginForm />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/qr-code' element={<QrCode />} />
