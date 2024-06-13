@@ -25,7 +25,7 @@ const QrReader = () => {
         // console.log(result);
 
         const response = await getRequest(`security/getData?uuid=${result?.data}`);
-        console.log(response)
+        // console.log(response)
         if (response.status === 200) {
             const sending = {
                 uuid : result?.data,
@@ -33,7 +33,19 @@ const QrReader = () => {
             if(response.data.hasOwnProperty('entry')){ 
                 sending.entry = response?.data?.entry;
             }
-            navigate("/face-detection", { state: sending});
+
+            if(response.data.hasOwnProperty('isParent')){
+                sending.isParent = response?.data?.isParent;
+
+                sending.parentdata = response?.data?.data;
+                
+                // console.log(sending)
+                navigate('/parent/exit', { state: sending });
+
+            }
+            else{
+                navigate("/face-detection", { state: sending});
+            }
         }
         else {
             alert("Invalid QR Code");
@@ -43,6 +55,8 @@ const QrReader = () => {
     // Fail
     const onScanFail = (err) => {
         console.log(err);
+        navigate("/dashboard");
+        return;
     };
 
     useEffect(() => {

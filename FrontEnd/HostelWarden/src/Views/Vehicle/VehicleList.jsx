@@ -29,7 +29,7 @@ const VechicleList = () => {
         // console.log(student_id)
         const response = await postRequest('hostelWarden/removeVehicle', { student_id: student_id })
 
-        console.log(response)
+        // console.log(response)
         if (response.status == 200) {
             alert('Vehicle Deleted Successfully')
             const data = await fetch(`${BACKEND_URL}/hostelWarden/getVehicle`)

@@ -23,7 +23,7 @@ const FaceScan = () => {
     const navigate = useNavigate();
     const handleClose = () => setIsStudent(false);
     const { state } = useLocation();
-    console.log(state);
+    // console.log(state);
     const uuid = state?.uuid;
     if (!uuid) {
         alert('Please scan your Id first.');
@@ -74,21 +74,28 @@ const FaceScan = () => {
                         'Content-Type': 'multipart/form-data'
                     }, {})
                 }
+                // else if(uuid.endsWith('parent')) {
+                //     response = await postRequest(`security/parentEntryExit`, formData, {
+                //         'Content-Type': 'multipart/form-data'
+                //     }, {})
+                // }
                 else {
                     alert('Something Went Wrong. Please try again.');
                     navigate('/qr-reader')
                 }
 
-                console.log(response)
+                // console.log(response)
 
                 if (response.status == 200) {
-
                     if (response.data.hasOwnProperty('entry')) {
                         if (response.data.entry) {
                             alert('Entry Successful');
                         } else {
                             alert('Exit Successful');
                         }
+                    }
+                    else{
+                        alert(response.data.message);
                     }
                 } else {
                     console.error('File upload failed');
@@ -120,7 +127,6 @@ const FaceScan = () => {
 
                     <div className='flex flex-col justify-center items-center bg-gray-200 p-8 rounded-2xl'>
                         {
-
                             faceDetected &&
                             <>
                                 <img src={imgSrc} alt="face" className='w-[300px] h-[300px]' />

@@ -1,7 +1,7 @@
 import React from 'react'
-import VisiorPass from '../../Components/VisitorPass'
 import { useLocation } from 'react-router-dom'
 import { Button } from '../../Components/Button'
+import VisiorPassForTwo from '../../Components/VisitorPassForTwo'
 
 // const visitorData = {
 //     date: '21/01/2012',
@@ -14,7 +14,7 @@ import { Button } from '../../Components/Button'
 //     validityTo: '22/01/2012',
 // };
 
-const TempPass = () => {
+const ParentTempPass = () => {
 
     const data = useLocation().state
     // console.log(data);
@@ -33,10 +33,10 @@ const TempPass = () => {
 
     return (
         <>
-        <VisiorPass visitorData={data} />
-        <Button onClick={() => window.location.href='/dashboard'}>Back</Button>
+            <VisiorPassForTwo visitorData={data} />
+            <Button onClick={() => window.location.href = '/dashboard'}>Back</Button>
         </>
     )
 }
 
-export default TempPass
+export default ParentTempPass

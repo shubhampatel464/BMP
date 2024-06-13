@@ -70,7 +70,7 @@ const Visitors = () => {
             return
         }
 
-        console.log(data)
+        // console.log(data)
         setVisitorData({ ...visitorData, Name: data.Name, Reason: data.Reason })
         setIsDetailsFilled(true)
     }
@@ -86,7 +86,7 @@ const Visitors = () => {
             return
         }
 
-        console.log(data)
+        // console.log(data)
         setVisitorData({ ...visitorData, Mobile: data.Mobile })
         setIsVisitorAdded(true)
         setIsOtpSent(true)
@@ -103,7 +103,7 @@ const Visitors = () => {
             return
         }
 
-        console.log(data)
+        // console.log(data)
         setVisitorData({ ...visitorData, OTP: data.OTP })
 
         // send data to backend
@@ -117,12 +117,12 @@ const Visitors = () => {
             formData.append('purpose', visitorData.Reason)
             formData.append('photo', file)
 
-            console.log(formData)
+            // console.log(formData)
 
             const response = await postRequest('security/visitorEntry', formData, {
                 'Content-Type': 'multipart/form-data'
             }, {})
-            console.log(response)
+            // console.log(response)
 
             if (response.status == 200) {
                 alert('Visitor Added Successfully')
