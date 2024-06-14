@@ -1,4 +1,5 @@
 const student = require("../../models/static/students_alumni/student");
+const uuid = require("uuid");
 
 const addStudent = async (req, res) => {
     try {
