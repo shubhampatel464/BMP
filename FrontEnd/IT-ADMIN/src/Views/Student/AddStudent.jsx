@@ -1,9 +1,17 @@
 import React from 'react'
 import { InputField } from '../../Components/InputField';
 import { Button } from '../../Components/Button';
-import { getRequest, postRequest } from '../../Services/Api';
+import { postRequest } from '../../Services/Api';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
+// {
+//         name,
+//         email,
+//         mobile,
+//         student_id,
+//         room,
+// }
 
 const AddStudent = () => {
 
@@ -14,56 +22,66 @@ const AddStudent = () => {
         formState: { errors },
     } = useForm()
 
+    const navigate = useNavigate()
+
+    register('Name', { required: 'Name is required' })
     register('StudentID', { required: 'Student ID is required' })
-    register('VehicleNumber', { required: 'Vehicle Number is required' })
+    register('Email', { required: 'Email is required' })
+    register('Mobile', { required: 'Mobile is required' })
+    register('Room', { required: 'Room is required' })
 
     const onSubmit = async (data) => {
+        console.log(data)
+
         try {
-            const msg = "Student Name : " + isStudent.name + "\nStudent ID : " + isStudent.student_id + "\nVehicle Number : " + data.VehicleNumber + "\n\nAre you sure you want to add this vehicle?"
-            // console.log(msg)
-            // take confirmation from user
-            const confirmation = window.confirm(msg, { title: 'Confirm Vehicle Addition' })
+            const msg = `Are you sure you want to add ${data.Name} - ${data.StudentID} as a student?`
+            const confirmation = window.confirm(msg, { title: 'Confirm Student' })
             if (!confirmation) {
                 return
             }
 
-            // console.log(data)
             const dataToSend = {
+                name: data.Name,
+                email: data.Email,
+                mobile: data.Mobile,
                 student_id: data.StudentID,
-                vehicle: data.VehicleNumber
+                room: data.Room,
             }
 
-            const res = await postRequest('hostelWarden/addVehicle', dataToSend)
-            // console.log(res)
+            const res = await postRequest('itAdmin/addStudent', dataToSend)
+            console.log(res)
 
             if (res.status == 200) {
-                alert('Vehicle Added Successfully')
+                alert('Student added successfully.')
                 reset()
-            }
-            else if (res.status == 400) {
-                alert('Student not found')
-            }
-            else if (res.status == 401) {
-                alert('Vehicle already added')
+                navigate('/dashboard')
             }
             else {
-                alert('Failed to add vehicle. Please try again later.')
+                alert('Failed to add student. Please try again.')
             }
         } catch (error) {
-            alert('Failed to add vehicle')
+            console.log(error)
+            alert('Failed to add student. Please try again.')
         }
     }
 
     return (
         <>
-            <div className='mt-32'>
+            <div className='mt-4'>
                 <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
                     id='loginForm' onSubmit={handleSubmit(onSubmit)}>
 
                     <h1 className='text-2xl font-bold'>Add Student</h1>
                     <p className='text-gray-500'>Please fill the form to add Vehicle.</p>
 
-                    {/* student id, vechile number */}
+                    <InputField
+                        placeholder='Name'
+                        label='Name'
+                        type='text'
+                        register={register}
+                        error={errors.Name?.message}
+                    />
+
                     <InputField
                         placeholder='Student ID'
                         label='StudentID'
@@ -73,14 +91,30 @@ const AddStudent = () => {
                     />
 
                     <InputField
-                        placeholder='XX-XX-YY-XXXX'
-                        label='VehicleNumber'
-                        type='text'
+                        placeholder='Email'
+                        label='Email'
+                        type='email'
                         register={register}
-                        error={errors.VehicleNumber?.message}
+                        error={errors.Email?.message}
                     />
 
-                    <Button type='submit'> Add Visitor </Button>
+                    <InputField
+                        placeholder='Mobile'
+                        label='Mobile'
+                        type='text'
+                        register={register}
+                        error={errors.Mobile?.message}
+                    />
+
+                    <InputField
+                        placeholder='L122'
+                        label='Room'
+                        type='text'
+                        register={register}
+                        error={errors.Room?.message}
+                    />
+
+                    <Button type='submit'> Add Student </Button>
                 </form>
             </div>
         </>

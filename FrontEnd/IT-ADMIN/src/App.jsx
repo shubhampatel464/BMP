@@ -32,6 +32,7 @@ function App() {
                             <Route path="/dashboard" element={<Dashboard />} />
                             
                             <Route path='/add-student' element={<Student />} />
+                            <Route path='/add-batch' element={<Student />} />
                             <Route path='/delete-student' element={<Student />} />
 
                         {/* </Route> */}
