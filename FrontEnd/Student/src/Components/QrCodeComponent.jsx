@@ -19,8 +19,8 @@ const QrCodeComponent = ({ value ="www.reactjs.com" }) => {
                 src: Logo,
                 x: undefined,
                 y: undefined,
-                height:50,
-                width:50,
+                height:20,
+                width:20,
                 excavate: true,
             }}
         />

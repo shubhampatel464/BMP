@@ -5,9 +5,7 @@ import Cookies from 'js-cookie'
 import { Outlet, Navigate } from 'react-router-dom'
 import { UserProvider } from './Services/AuthContext'
 import Dashboard from './Views/Dashboard';
-import Vehicle from './Views/Vehicle';
-import AddParentVisit from './Views/ParentVisit';
-import StudentRecords from './Views/StudentRecords/Student';
+import Student from './Views/Student';
 
 
 const PrivateRoutes = () => {
@@ -27,19 +25,17 @@ function App() {
             <UserProvider>
                 <div className="App h-screen">
                     <Routes>
-                        <Route path="/" element={<LoginForm />>} />
+                        <Route path="/" element={<LoginForm />} />
                         <Route path="/login" element={<LoginForm />} />
 
-                        <Route element={<PrivateRoutes />}>
+                        {/* <Route element={<PrivateRoutes />}> */}
                             <Route path="/dashboard" element={<Dashboard />} />
+                            
+                            <Route path='/add-student' element={<Student />} />
+                            <Route path='/delete-student' element={<Student />} />
 
-                            <Route path="/vehicle/add-vehicle" element={<Vehicle />} />
-                            <Route path="/vehicle/records" element={<Vehicle />} />
-
-                            <Route path="/add-parent-visit" element={<AddParentVisit />} />
-
-                            <Route path='/student-records' element={<StudentRecords />} />
-                        </Route>
+                        {/* </Route> */}
+                            <Route path='*' element={<h1>Not Found</h1>} />
                     </Routes>
                 </div>
             </UserProvider>
