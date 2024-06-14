@@ -20,13 +20,14 @@ const addUser = async (req, res) => {
 
         if(role == "staff"){
 
+            const _uuid = uuid.v4();
             const newStaff = new staff({
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.mobile,
                 mobile: req.body.mobile,
                 department: req.body.department,
-                uuid : `${uuid.v4()}staff`
+                uuid : `${_uuid}staff`
             });
 
             await newStaff.save();
@@ -37,7 +38,7 @@ const addUser = async (req, res) => {
                     email: req.body.email,
                     password: req.body.mobile,
                     mobile: req.body.mobile,
-                    uuid : `${uuid.v4()}security`
+                    uuid : `${_uuid}staff`
                 });
 
                 await newSecurity.save();

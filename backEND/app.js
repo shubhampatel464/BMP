@@ -57,6 +57,9 @@ app.use('/reset',require('./routes/resetPassword/resetPassword'));
 app.use('/itAdmin',require('./routes/IT-Admin/itAdmin'));
 
 
+
+
+
 app.listen(port, () => {    
     console.log(`Server is Listening on port ${port}`);
     }

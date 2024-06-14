@@ -1,0 +1,32 @@
+const It_Admin = require('../../models/static/IT-Admin/IT-Admin');  
+const bcrypt = require('bcryptjs');
+
+const login = async (req, res) => {
+
+    try {
+
+        const { email, password } = req.body;
+        const user = await It_Admin.findOne({ email });
+
+        if (!user) {
+            return res.status(400).send({message: "Invalid credentials"});
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(400).send({message: "Invalid credentials"});
+        }
+
+        res.status(200).send({message: "Login successful"});
+
+        
+    } catch (error) {
+        console.log("This is error from ./controllers/IT-Admin/login.js");
+        console.log(error);
+        res.status(500).send({message: "Internal server error"});
+    }
+    
+}
+
+module.exports = login;
