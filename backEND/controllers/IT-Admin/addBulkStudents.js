@@ -43,9 +43,16 @@ const addBulkStudents = async (req, res) => {
                         uuid: `${uuid.v4()}student`
                     });
                 }
-        
-                await student.insertMany(students);
-                return res.status(200).send({message: "Students added successfully"});
+                
+                try {
+                    const result = await student.insertMany(students);
+                    return res.status(200).send({message: "Students added successfully"});
+                }
+                catch (error) {
+                    console.log("This is error from ./controllers/IT-Admin/addBulkStudents.js");
+                    console.log(error);
+                    return res.status(402).send({message: "There is some problem in data. Please check and try again."});
+                }
             }
         } else {
             return res.status(400).json({ error: 'Excel file is empty or has no data' });

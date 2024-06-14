@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { commonrequest } from "./CommonRequest";
 import { BACKEND_URL } from "./Helpers";
 
-const user = JSON.parse(Cookies.get('user') || null);
+// const token = JSON.parse(Cookies.get('token') || null);
 
 export const postRequest = async (endpoint, data, headers = {}, params = {}) => {
     // console.log('data', data);
@@ -15,7 +15,7 @@ export const postRequest = async (endpoint, data, headers = {}, params = {}) => 
 };
 
 export const postRequestWithToken = async (endpoint, data, headers = {}, params = {}) => {
-    const token = user?.token;
+    const token = Cookies.get('token') || null;
     if (!token) {
         throw new Error('No token found');
     }
@@ -39,7 +39,7 @@ export const getRequest = async (endpoint, params = {}) => {
 }
 
 export const getRequestWithLogin = async (endpoint, params = {}) => {
-    const token = user?.token;
+    const token = Cookies.get('token') || null;
     if (!token) {
         alert('Please login to access this page');
         window.location.href = `/home`;

@@ -28,7 +28,7 @@ const LoginForm = () => {
 
                 // console.log(dataToSend)
 
-                const response = await postRequest('hostelWarden/login', dataToSend)
+                const response = await postRequest('itAdmin/login', dataToSend)
                 // console.log(response)
 
                 if (response.status === 200) {
@@ -36,7 +36,7 @@ const LoginForm = () => {
                     Cookies.set('token', response.data.token, { expires: 1, secure: true, sameSite: 'strict' })
                     navigate('/dashboard')
                 }
-                else if(response.status === 400){
+                else if (response.status === 400) {
                     alert('Invalid Credentials')
                 }
                 else {

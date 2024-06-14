@@ -28,14 +28,15 @@ function App() {
                         <Route path="/" element={<LoginForm />} />
                         <Route path="/login" element={<LoginForm />} />
 
-                        {/* <Route element={<PrivateRoutes />}> */}
+                        <Route element={<PrivateRoutes />}>
                             <Route path="/dashboard" element={<Dashboard />} />
                             
                             <Route path='/add-student' element={<Student />} />
                             <Route path='/add-batch' element={<Student />} />
                             <Route path='/delete-student' element={<Student />} />
+                            <Route path='/delete-batch' element={<Student />} />
 
-                        {/* </Route> */}
+                        </Route>
                             <Route path='*' element={<h1>Not Found</h1>} />
                     </Routes>
                 </div>

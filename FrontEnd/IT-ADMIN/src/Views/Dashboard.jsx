@@ -22,7 +22,7 @@ const Dashboard = () => {
                             <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() => navigate('/student-records')}>
                                 <h1 className='text-xl font-bold'>Manage Roles</h1>
                             </div>
-                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() =>navigate('/add-parent-visit')}>
+                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() =>navigate('/add-student')}>
                                 <h1 className='text-xl font-bold'>Manage Students</h1>
                             </div>
                         {/* </div> */}

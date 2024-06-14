@@ -1,7 +1,7 @@
 import React from 'react'
 import { InputField } from '../../Components/InputField';
 import { Button } from '../../Components/Button';
-import { postRequest } from '../../Services/Api';
+import { postRequest, postRequestWithToken } from '../../Services/Api';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const AddBatch = () => {
 
     const navigate = useNavigate()
 
-    register('File', {required: 'Please upload a file'})
+    register('File', { required: 'Please upload a file' })
 
 
     const onSubmit = async (data) => {
@@ -30,21 +30,24 @@ const AddBatch = () => {
             }
 
             const dataToSend = {
-                student : data.File[0]
+                student: data.File[0]
             }
 
-            console.log(dataToSend)
+            // console.log(dataToSend)
 
-            const res = await postRequest('itAdmin/addBulkStudents', dataToSend, {
-                'Content-Type': 'multipart/form-data'   
+            const res = await postRequestWithToken('itAdmin/addBulkStudents', dataToSend, {
+                'Content-Type': 'multipart/form-data'
             }, {})
-            
-            console.log(res)
+
+            // console.log(res)
 
             if (res.status == 200) {
                 alert('Batch added successfully.')
                 reset()
                 navigate('/dashboard')
+            }
+            else if (res.status == 402) {
+                alert('There is some problem in Excel file. Please check and try again.')
             }
             else {
                 alert('Failed to add Batch. Please try again.')
@@ -62,7 +65,14 @@ const AddBatch = () => {
                     id='loginForm' onSubmit={handleSubmit(onSubmit)}>
 
                     <h1 className='text-2xl font-bold'>Add Batch</h1>
-                    <p className='text-gray-500'>Please fill the form to add Vehicle.</p>
+                    <p className='text-gray-500'>Please fill the form to add Batch.</p>
+                    <p className='text-gray-500'>Please upload a file in .xlsx, .xls or .csv format.
+                        The file should contain the following columns:
+                    </p>
+                    <p className='text-gray-900'>
+
+                        name, student_id, mobile, room, vehicle, email
+                    </p>
 
                     <InputField
                         label='File'
