@@ -56,7 +56,7 @@ app.use('/data',require('./routes/data/dataAPI'));
 app.use('/reset',require('./routes/resetPassword/resetPassword'));
 app.use('/itAdmin',require('./routes/IT-Admin/itAdmin'));
 
-
+require('./models/static/IT-Admin/IT-Admin');   
 
 
 

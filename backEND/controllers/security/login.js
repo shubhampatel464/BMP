@@ -6,10 +6,10 @@ const security = require('../../models/static/security/security');
 
 const login = async (req, res) => {
     try {
-        const mobile = Number(req.body.mobile);
+        const email = req.body.email;
         const password = req.body.password;
 
-        const user = await security.findOne({ mobile: mobile });
+        const user = await security.findOne({ email: email });
         if (!user) {
             return res.status(404).send("User not found");
         }
@@ -17,7 +17,7 @@ const login = async (req, res) => {
         if (!isMatch) {
             return res.status(401).send("Invalid Password");
         }
-        const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
+        const token = jwt.sign({ _id: user._id.toString(), email:user.email }, process.env.JWT_SECRET);
         res.status(200).send({ user,token });
     }
     catch (error) {

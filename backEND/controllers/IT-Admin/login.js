@@ -1,11 +1,13 @@
 const It_Admin = require('../../models/static/IT-Admin/IT-Admin');  
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const login = async (req, res) => {
 
     try {
 
         const { email, password } = req.body;
+        
         const user = await It_Admin.findOne({ email });
 
         if (!user) {
@@ -18,7 +20,10 @@ const login = async (req, res) => {
             return res.status(400).send({message: "Invalid credentials"});
         }
 
-        res.status(200).send({message: "Login successful"});
+        const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+
+        res.status(200).send({token});
 
         
     } catch (error) {
