@@ -11,21 +11,24 @@ const mailTransporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     service: 'gmail',
     port: '587',
-    // secure:'true', 
+    secure:'true', 
     auth: {
         user: process.env.SMTP_EMAIL,
         pass: process.env.SMTP_PASSWORD
     }
 });
 
-mailTransporter.use('compile', hbs({
+const handlebarOptions = {
     viewEngine: {
-        extname: '.hbs',
-        // layoutsDir: './mailer/',
+        extName: '.hbs',
+        partialsDir: '../backEND/hbsTemplates/',
+        layoutsDir: '../backEND/hbsTemplates/',
         defaultLayout: false,
-        // partialsDir: './mailer/',
     }, viewPath: '../backEND/hbsTemplates/', extName: '.hbs'
-}));
+}
+
+
+mailTransporter.use('compile', hbs(handlebarOptions));
 
 
 

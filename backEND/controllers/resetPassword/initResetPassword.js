@@ -14,19 +14,21 @@ const initResetPassword = async (req, res) => {
 
 
     try {  
-        const _uuid = req.body.uuid;
-        var email = '';
-        if(_uuid.endsWith('student')){
-            email = (await student.findOne({uuid:_uuid})).email;
+        const email = req.body.email;
+        const type = req.body.type;
+
+        var _uuid = '';
+        if(type == 'student'){
+            _uuid = (await student.findOne({email})).uuid;
         }
-        else if(_uuid.endsWith('staff')){
-            email = (await staff.findOne({uuid:_uuid})).email;
+        else if(type == 'staff'){
+            _uuid = (await staff.findOne({email})).uuid;
         }
-        else if(_uuid.endsWith('security')){
-            email = (await security.findOne({uuid:_uuid})).email;
+        else if(type == 'security'){
+            _uuid = (await security.findOne({email})).uuid;
         }
-        else if(_uuid.endsWith('hostelWarden')){
-            email = (await hostelWarden.findOne({uuid:_uuid})).email;
+        else if(type == 'hostelWarden'){
+            _uuid = (await hostelWarden.findOne({email})).uuid;
         }
         else{
             return res.status(401).json({message: 'Invalid Link'});
@@ -57,13 +59,13 @@ const initResetPassword = async (req, res) => {
         // Send an email
         await mailer(email,resetToken);
 
-        res.status(200).json({message: 'Email sent successfully'});
+        res.status(200).send({message: 'Email sent successfully'});
 
 
     } catch (error) {
         console.log("This is error from ./controllers/resetPassword/initResetPassword.js");
         console.log(error);
-        res.status(500).json({message: 'Internal server error'});
+        res.status(500).send({message: 'Internal server error'});
     }
 
 }
