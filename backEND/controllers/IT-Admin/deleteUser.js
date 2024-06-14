@@ -42,6 +42,26 @@ const deleteUser = async (req, res) => {
                 res.status(400).send({ message: "Hostel Warden not found" });
             }
         }
+        else if(role == "registrar"){
+            // const registrarData = await registrar.findOne({ uuid: req.body.uuid });
+
+            // if (registrarData) {
+            //     await registrar.deleteOne({ uuid: req.body.uuid });
+            //     res.status(200).send({ message: "Registrar deleted successfully" });
+            // } else {
+            //     res.status(400).send({ message: "Registrar not found" });
+            // }
+        }
+        else if(role == "security_manager"){
+            // const security_managerData = await security_manager.findOne({ uuid: req.body.uuid });
+
+            // if (security_managerData) {
+            //     await security_manager.deleteOne({ uuid: req.body.uuid });
+            //     res.status(200).send({ message: "Security Manager deleted successfully" });
+            // } else {
+            //     res.status(400).send({ message: "Security Manager not found" });
+            // }
+        }
         else{
             res.status(400).send({message: "Invalid role"});
         }

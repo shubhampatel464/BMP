@@ -1,13 +1,21 @@
+const { stringify } = require('uuid');
 const student = require('../../models/static/students_alumni/student');
 
 const deleteWholeBatch = async (req, res) => {
     try {
         const { batch } = req.body;
 
-        const regex = new RegExp(`^${batch}`);
-
-        // Delete the documents
-        const result = await Student.deleteMany({ student_id: { $regex: regex } });
+        const start = Number(batch + '000'); // e.g., 2021-xx-xxx
+        const end = Number(batch + '999');   // e.g., 2021-xx-xxx
+ 
+         // Delete the documents
+        const result = await student.deleteMany({
+             student_id: {
+                 $gte: start,
+                 $lt: end
+             }
+        });
+ 
 
         if(result.deletedCount > 0){
             res.status(200).send({ message: "Batch deleted successfully" });

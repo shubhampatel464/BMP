@@ -7,7 +7,7 @@ const deleteStudent = async (req, res) => {
         const studentData = await student.findOne({ student_id });
 
         if (studentData) {
-            await student.deleteOne({ uuid });
+            await student.deleteOne({ student_id });
             res.status(200).send({ message: "Student deleted successfully" });
         } else {
             res.status(400).send({ message: "Student not found" });
