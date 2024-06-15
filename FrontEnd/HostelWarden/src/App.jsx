@@ -8,6 +8,7 @@ import Dashboard from './Views/Dashboard';
 import Vehicle from './Views/Vehicle';
 import AddParentVisit from './Views/ParentVisit';
 import StudentRecords from './Views/StudentRecords/Student';
+import ResetPasssword from './Views/ResetPassword';
 
 
 const PrivateRoutes = () => {
@@ -40,6 +41,8 @@ function App() {
 
                             <Route path='/student-records' element={<StudentRecords />} />
                         </Route>
+                        <Route path='/reset-password' element={<ResetPasssword />} />
+                        <Route path='*' element={<Navigate to='/' />} />
                     </Routes>
                 </div>
             </UserProvider>

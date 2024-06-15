@@ -19,19 +19,41 @@ const initResetPassword = async (req, res) => {
 
         var _uuid = '';
         if(type == 'student'){
-            _uuid = (await student.findOne({email})).uuid;
+            const temp = await student.findOne({email});
+            if(temp){
+                _uuid = temp.uuid;
+            }
         }
         else if(type == 'staff'){
-            _uuid = (await staff.findOne({email})).uuid;
+            const temp = await staff.findOne({email});
+            if(temp){
+                _uuid = temp.uuid;
+            }
         }
         else if(type == 'security'){
-            _uuid = (await security.findOne({email})).uuid;
+            const temp = await security.findOne({email});
+            if(temp){
+                _uuid = temp.uuid;
+            }
         }
         else if(type == 'hostelWarden'){
-            _uuid = (await hostelWarden.findOne({email})).uuid;
+            const temp = await hostelWarden.findOne({email});
+            if(temp){
+                _uuid = temp.uuid;
+            }
+        }
+        else if(type == 'itAdmin'){
+            const temp = await itAdmin.findOne({email});
+            if(temp){
+                _uuid = temp.uuid;
+            }
         }
         else{
-            return res.status(401).json({message: 'Invalid Link'});
+            return res.status(500).send({message: 'Invalid Type'});
+        }
+
+        if(_uuid == ""){
+            return res.status(404).send({message: 'Email not found'});
         }
 
         const uuid1 = uuid.v4();

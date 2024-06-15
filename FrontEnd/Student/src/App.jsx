@@ -5,6 +5,7 @@ import Login from './Views/Login';
 import { UserProvider } from './Services/AuthContext'
 import Cookies from 'js-cookie'
 import Profile from './Views/Profile';
+import ResetPasssword from './Views/ResetPasssword';
 
 const PrivateRoutes = () => {
     const token = Cookies.get('token')
@@ -31,6 +32,8 @@ function App() {
                             <Route path='/qr-code' element={<QrCode />} />
                             <Route path='/profile' element={<Profile />} />
                         </Route>
+                        <Route path='/reset-password' element={<ResetPasssword />} />
+                        <Route path='*' element={<Navigate to='/' />} />
                     </Routes>
                 </div>
             </UserProvider>

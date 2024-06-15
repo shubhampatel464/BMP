@@ -7,8 +7,9 @@ import { Navbar } from '../Components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { postRequest } from '../Services/Api'
 import Cookies from 'js-cookie'
+import { useUser } from '../Services/AuthContext'
 
-const LoginForm = () => {
+const ResetPasssword = () => {
     const {
         register,
         handleSubmit,
@@ -19,28 +20,29 @@ const LoginForm = () => {
 
     // This will contain all form data once submit button is clicked.
     const onSubmit1 = (data) => {
+        console.log(data);
         const sendDataToLogin = async () => {
             try {
                 const dataToSend = {
                     email: data.Email,
-                    password: data.Password
+                    type: 'hostelWarden'
                 }
 
                 // console.log(dataToSend)
 
-                const response = await postRequest('hostelWarden/login', dataToSend)
+                const response = await postRequest('reset/initResetPassword', dataToSend)
                 // console.log(response)
 
-                if (response.status === 200) {
-                    alert('Login Successful')
-                    Cookies.set('token', response.data.token, { expires: 1, secure: true, sameSite: 'strict' })
-                    navigate('/dashboard')
+                if (response.status == 200) {
+                    alert('Reset Link has been sent Successfully')
+                    // window.location.reload()
+                    navigate('/login')
                 }
-                else if(response.status === 400){
-                    alert('Invalid Credentials')
+                else if (response.response.status == 404) {
+                    alert('Email not found')
                 }
                 else {
-                    alert('Something went wrong')
+                    alert('Internal Server Error')
                 }
             } catch (error) {
                 alert('Invalid Credentials')
@@ -49,12 +51,9 @@ const LoginForm = () => {
         sendDataToLogin()
     }
 
+    // Registering the fields with react-hook-form
     register('Email', {
         required: { value: true, message: 'Email is required' },
-    })
-
-    register('Password', {
-        required: { value: true, message: 'Password is required' },
     })
 
     return (
@@ -70,10 +69,10 @@ const LoginForm = () => {
                     {/* form with box shadow */}
                     <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
                         id='loginForm' onSubmit={handleSubmit(onSubmit1)}>
-                        <h1 className='text-2xl font-bold'>Hostel Warden Login</h1>
-                        <p className='text-gray-500'>Please fill your detail to access your account.</p>
+                        <h1 className='text-2xl font-bold'>Reset Password</h1>
+                        <p className='text-gray-500'>Please fill your Email to reset your password.</p>
 
-                        {/* Email and password input fields */}
+                        {/* Mobile and password input fields */}
                         <InputField
                             placeholder='Enter Email'
                             label='Email'
@@ -81,17 +80,9 @@ const LoginForm = () => {
                             register={register}
                             error={errors.Email?.message}
                         />
-                        <InputField
-                            placeholder='Enter Password'
-                            label='Password'
-                            type='password'
-                            register={register}
-                            error={errors.Password?.message}
-                        />
 
-                        {/* full width submit button */}
-                        <Button type='submit'>Login</Button>
-                        <p className='text-gray-500'>Forgot Password? <span className='text-blue-500 cursor-pointer' onClick={() => navigate('/reset-password')}>reset-password</span></p>
+                        {/* login button */}
+                        <Button type='submit'>Submit</Button>
                     </form>
                 </div>
 
@@ -107,4 +98,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm
+export default ResetPasssword;

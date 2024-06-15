@@ -37,7 +37,8 @@ function App() {
                             <Route path='/delete-batch' element={<Student />} />
 
                         </Route>
-                            <Route path='*' element={<h1>Not Found</h1>} />
+                        <Route path='/reset-password' element={<ResetPasssword />} />   
+                        <Route path='*' element={<Navigate to='/' />} />
                     </Routes>
                 </div>
             </UserProvider>
