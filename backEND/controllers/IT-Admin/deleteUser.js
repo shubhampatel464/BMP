@@ -3,7 +3,7 @@ const hostelWarden = require('../../models/static/hostelWarden/hostelWarden');
 const staff = require('../../models/static/staff/staff');
 const faculty = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
 const registrar = require('../../models/static/registrar/registrar');
-const security_manager = require('../../models/static/security_manager/security_manager');
+const security_manager = require('../../models/static/securityManager/securityManager');
 
 
 const deleteUser = async (req, res) => {
