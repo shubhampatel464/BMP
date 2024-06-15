@@ -26,6 +26,8 @@ router.get('/getRegistrar',auth, require('../../controllers/IT-Admin/getUsers').
 
 router.get('/getHostelWarden',auth, require('../../controllers/IT-Admin/getUsers').getHostelWarden);
 
+router.get('/getSecurityManager',auth, require('../../controllers/IT-Admin/getUsers').getSecurityManager);
+
 router.get('/getStaff',auth, require('../../controllers/IT-Admin/getUsers').getStaff);
 
 

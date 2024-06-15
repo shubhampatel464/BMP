@@ -1,6 +1,7 @@
 const registrar = require('../../models/static/registrar/registrar');
 const hostelWarden = require('../../models/static/hostelWarden/hostelWarden');
 const staff = require('../../models/static/staff/staff');
+const securityManager = require('../../models/static/securityManager/securityManager');
 
 
 
@@ -43,6 +44,16 @@ const getStaff = async (req, res) => {
     }
 }
 
+const getSecurityManager = async (req, res) => {
+    try {
+        const securityManagerData = await securityManager.find();
+        res.status(200).send(securityManagerData);
+    } catch (error) {
+        console.log("This is is error from ./controllers/IT-Admin/getUsers.js ")
+        console.log(error);
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+}
 
 
-module.exports = {getRegistrar, getHostelWarden, getStaff};
+module.exports = {getRegistrar, getHostelWarden, getStaff, getSecurityManager};
