@@ -1,9 +1,9 @@
 const security = require('../../models/static/security/security');
 const hostelWarden = require('../../models/static/hostelWarden/hostelWarden');
 const staff = require('../../models/static/staff/staff');
-// const faculty = require('../../models/');
-// const registrar = require('../../models/static/registrar/registrar');
-// const security_manager = require('../../models/static/security_manager/security_manager');
+const faculty = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
+const registrar = require('../../models/static/registrar/registrar');
+const security_manager = require('../../models/static/security_manager/security_manager');
 
 
 const deleteUser = async (req, res) => {
@@ -43,24 +43,34 @@ const deleteUser = async (req, res) => {
             }
         }
         else if(role == "registrar"){
-            // const registrarData = await registrar.findOne({ uuid: req.body.uuid });
+            const registrarData = await registrar.findOne({ uuid: req.body.uuid });
 
-            // if (registrarData) {
-            //     await registrar.deleteOne({ uuid: req.body.uuid });
-            //     res.status(200).send({ message: "Registrar deleted successfully" });
-            // } else {
-            //     res.status(400).send({ message: "Registrar not found" });
-            // }
+            if (registrarData) {
+                await registrar.deleteOne({ uuid: req.body.uuid });
+                res.status(200).send({ message: "Registrar deleted successfully" });
+            } else {
+                res.status(400).send({ message: "Registrar not found" });
+            }
         }
         else if(role == "security_manager"){
-            // const security_managerData = await security_manager.findOne({ uuid: req.body.uuid });
+            const security_managerData = await security_manager.findOne({ uuid: req.body.uuid });
 
-            // if (security_managerData) {
-            //     await security_manager.deleteOne({ uuid: req.body.uuid });
-            //     res.status(200).send({ message: "Security Manager deleted successfully" });
-            // } else {
-            //     res.status(400).send({ message: "Security Manager not found" });
-            // }
+            if (security_managerData) {
+                await security_manager.deleteOne({ uuid: req.body.uuid });
+                res.status(200).send({ message: "Security Manager deleted successfully" });
+            } else {
+                res.status(400).send({ message: "Security Manager not found" });
+            }
+        }
+        else if(role == "faculty"){
+            const facultyData = await faculty.findOne({ uuid: req.body.uuid });
+
+            if (facultyData) {
+                await faculty.deleteOne({ uuid: req.body.uuid });
+                res.status(200).send({ message: "Faculty deleted successfully" });
+            } else {
+                res.status(400).send({ message: "Faculty not found" });
+            }
         }
         else{
             res.status(400).send({message: "Invalid role"});
