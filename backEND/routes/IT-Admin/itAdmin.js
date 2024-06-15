@@ -22,6 +22,12 @@ router.post('/deleteStudent',auth, require('../../controllers/IT-Admin/deleteStu
 
 router.post('/deleteUser',auth, require('../../controllers/IT-Admin/deleteUser'));
 
+router.get('/getRegistrar',auth, require('../../controllers/IT-Admin/getUsers').getRegistrar);
+
+router.get('/getHostelWarden',auth, require('../../controllers/IT-Admin/getUsers').getHostelWarden);
+
+router.get('/getStaff',auth, require('../../controllers/IT-Admin/getUsers').getStaff);
+
 
 
 
