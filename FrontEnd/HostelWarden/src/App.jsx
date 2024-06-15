@@ -28,7 +28,7 @@ function App() {
             <UserProvider>
                 <div className="App h-screen">
                     <Routes>
-                        <Route path="/" element={<LoginForm />>} />
+                        <Route path="/" element={<LoginForm />} />
                         <Route path="/login" element={<LoginForm />} />
 
                         <Route element={<PrivateRoutes />}>

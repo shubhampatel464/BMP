@@ -59,7 +59,6 @@ app.use('/itAdmin',require('./routes/IT-Admin/itAdmin'));
 require('./models/static/IT-Admin/IT-Admin');   
 
 
-
 app.listen(port, () => {    
     console.log(`Server is Listening on port ${port}`);
     }

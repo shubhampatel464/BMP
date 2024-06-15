@@ -7,7 +7,6 @@ import { Navbar } from '../Components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { postRequest } from '../Services/Api'
 import Cookies from 'js-cookie'
-import { useUser } from '../Services/AuthContext'
 
 const ResetPasssword = () => {
     const {

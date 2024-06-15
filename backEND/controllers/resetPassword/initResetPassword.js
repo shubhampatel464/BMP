@@ -8,6 +8,7 @@ const student = require('../../models/static/students_alumni/student');
 const staff = require('../../models/static/staff/staff');
 const security = require('../../models/static/security/security');
 const hostelWarden = require('../../models/static/hostelWarden/hostelWarden');
+const itAdmin = require('../../models/static/IT-Admin/IT-Admin');
 
 
 const initResetPassword = async (req, res) => {

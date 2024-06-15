@@ -6,7 +6,7 @@ import { Outlet, Navigate } from 'react-router-dom'
 import { UserProvider } from './Services/AuthContext'
 import Dashboard from './Views/Dashboard';
 import Student from './Views/Student';
-
+import ResetPasssword from './Views/ResetPassword';
 
 const PrivateRoutes = () => {
     // const token = Cookies.get('token') || "";

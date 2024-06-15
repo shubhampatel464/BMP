@@ -8,6 +8,10 @@ const ITAdminSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    uuid: {
+        type: String,
+        required: true
     }
 });
 
