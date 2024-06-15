@@ -86,7 +86,7 @@ const addUser = async (req, res) => {
             res.status(200).send({message: "Registrar added successfully"});
 
         }
-        else if(role == "security_manager"){
+        else if(role == "securityManager"){
 
             const newSecurityManager = new security_manager({
                 name: req.body.name,

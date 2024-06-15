@@ -52,7 +52,7 @@ const deleteUser = async (req, res) => {
                 res.status(400).send({ message: "Registrar not found" });
             }
         }
-        else if(role == "security_manager"){
+        else if(role == "securityManager"){
             const security_managerData = await security_manager.findOne({ uuid: req.body.uuid });
 
             if (security_managerData) {
