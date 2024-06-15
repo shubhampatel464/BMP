@@ -8,6 +8,7 @@ import Dashboard from './Views/Dashboard';
 import Vehicle from './Views/Vehicle';
 import AddParentVisit from './Views/ParentVisit';
 import StudentRecords from './Views/StudentRecords/Student';
+import ResetPasssword from './Views/ResetPassword';
 
 
 const PrivateRoutes = () => {
@@ -27,7 +28,7 @@ function App() {
             <UserProvider>
                 <div className="App h-screen">
                     <Routes>
-                        <Route path="/" element={<LoginForm />>} />
+                        <Route path="/" element={<LoginForm />} />
                         <Route path="/login" element={<LoginForm />} />
 
                         <Route element={<PrivateRoutes />}>
@@ -40,6 +41,8 @@ function App() {
 
                             <Route path='/student-records' element={<StudentRecords />} />
                         </Route>
+                        <Route path='/reset-password' element={<ResetPasssword />} />
+                        <Route path='*' element={<Navigate to='/' />} />
                     </Routes>
                 </div>
             </UserProvider>

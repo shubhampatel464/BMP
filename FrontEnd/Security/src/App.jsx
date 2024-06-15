@@ -16,6 +16,7 @@ import ParentListForToday from './Views/ParentVisit';
 import ParentEntry from './Views/ParentVisit/ParentEntry';
 import VisiorPassForTwo from './Components/VisitorPassForTwo';
 import ParentTempPass from './Views/ParentVisit/ParentTempPass';
+import ResetPasssword from './Views/ResetPassword';
 
 // react router 
 
@@ -26,6 +27,7 @@ function App() {
                 {/* QR-code scanner for entry and exit */}
                 <Route path="/" element={<LoginForm />} />
                 <Route path="/login" element={<LoginForm />} />
+                <Route path='/reset-password' element={<ResetPasssword />} />
                 <Route path='/dashboard' element={<Dashboard />} />
                 <Route path='/qr-code' element={<QrCode />} />
                 <Route path='/qr-reader' element={<QrScan />} />
