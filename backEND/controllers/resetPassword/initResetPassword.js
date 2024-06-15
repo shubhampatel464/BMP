@@ -9,6 +9,9 @@ const staff = require('../../models/static/staff/staff');
 const security = require('../../models/static/security/security');
 const hostelWarden = require('../../models/static/hostelWarden/hostelWarden');
 const itAdmin = require('../../models/static/IT-Admin/IT-Admin');
+const registrar = require('../../models/static/registrar/registrar');
+const securityManager = require('../../models/static/securityManager/securityManager');
+const faculty = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
 
 
 const initResetPassword = async (req, res) => {
@@ -45,6 +48,24 @@ const initResetPassword = async (req, res) => {
         }
         else if(type == 'itAdmin'){
             const temp = await itAdmin.findOne({email});
+            if(temp){
+                _uuid = temp.uuid;
+            }
+        }
+        else if(type == 'registrar'){
+            const temp = await registrar.findOne({email});
+            if(temp){
+                _uuid = temp.uuid;
+            }
+        }
+        else if(type == 'securityManager'){
+            const temp = await securityManager.findOne({email});
+            if(temp){
+                _uuid = temp.uuid;
+            }
+        }
+        else if(type == 'faculty'){
+            const temp = await faculty.findOne({email});
             if(temp){
                 _uuid = temp.uuid;
             }

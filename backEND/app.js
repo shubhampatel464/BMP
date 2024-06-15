@@ -55,8 +55,8 @@ app.use('/staff',require('./routes/staff/staff'));
 app.use('/data',require('./routes/data/dataAPI'));
 app.use('/reset',require('./routes/resetPassword/resetPassword'));
 app.use('/itAdmin',require('./routes/IT-Admin/itAdmin'));
-
-require('./models/static/IT-Admin/IT-Admin');   
+app.use('/registrar',require('./routes/registrar/registrar'));
+  
 
 
 app.listen(port, () => {    

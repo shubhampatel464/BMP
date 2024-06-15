@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const registrarSchema = new mongoose.Schema({
+const facultySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -9,7 +9,7 @@ const registrarSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true
-    },  
+    },
     password: {
         type: String,
         required: true
@@ -20,8 +20,7 @@ const registrarSchema = new mongoose.Schema({
     },
 });
 
-
-registrarSchema.pre("save", (async function (next) {
+facultySchema.pre("save", (async function (next) {
     
     const password = this.password;
 
@@ -33,7 +32,7 @@ registrarSchema.pre("save", (async function (next) {
 ))
 
 
-registrarSchema.pre('updateOne', async function (next) {
+facultySchema.pre('updateOne', async function (next) {
     const update = this.getUpdate();
     if (update.password) {
         const hashed_pass = await bcrypt.hash(update.password, 8);
@@ -42,4 +41,4 @@ registrarSchema.pre('updateOne', async function (next) {
     next();
 });
 
-module.exports = mongoose.model('Registrar', registrarSchema);
+module.exports = mongoose.model('Faculty_AdminStaff', facultySchema);

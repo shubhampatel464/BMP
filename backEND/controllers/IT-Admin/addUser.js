@@ -1,9 +1,9 @@
 const security = require('../../models/static/security/security');
 const hostelWarden = require('../../models/static/hostelWarden/hostelWarden');
 const staff = require('../../models/static/staff/staff');
-// const faculty = require('../../models/');
-// const registrar = require('../../models/static/registrar/registrar');
-// const security_manager = require('../../models/static/security_manager/security_manager');/
+const faculty = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
+const registrar = require('../../models/static/registrar/registrar');
+const security_manager = require('../../models/static/securityManager/securityManager');
 
 
 const uuid = require('uuid');
@@ -62,44 +62,41 @@ const addUser = async (req, res) => {
         }
         else if(role == "faculty"){
 
-            // const newFaculty = new faculty({
-            //     name: req.body.name,
-            //     email: req.body.email,
-            //     password: req.body.mobile,
-            //     mobile: req.body.mobile,
-            //     department: req.body.department,
-            //     uuid : uuid.v4()
-            // });
+            const newFaculty = new faculty({
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.email,
+                uuid : uuid.v4()
+            });
 
-            // await newFaculty.save();
+            await newFaculty.save();
             res.status(200).send({message: "Faculty added successfully"});
 
         }
         else if(role == "registrar"){
 
-            // const newRegistrar = new registrar({
-            //     name: req.body.name,
-            //     email: req.body.email,
-            //     password: req.body.mobile,
-            //     mobile: req.body.mobile,
-            //     uuid : `${uuid.v4()}registrar`
-            // });
+            const newRegistrar = new registrar({
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.email,
+                uuid : `${uuid.v4()}registrar`
+            });
 
-            // await newRegistrar.save();
+            await newRegistrar.save();
             res.status(200).send({message: "Registrar added successfully"});
 
         }
         else if(role == "security_manager"){
 
-            // const newSecurityManager = new security_manager({
-            //     name: req.body.name,
-            //     email: req.body.email,
-            //     password: req.body.mobile,
-            //     mobile: req.body.mobile,
-            //     uuid : `${uuid.v4()}securityManager`
-            // });
+            const newSecurityManager = new security_manager({
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.mobile,
+                mobile: req.body.mobile,
+                uuid : `${uuid.v4()}securityManager`
+            });
 
-            // await newSecurityManager.save();
+            await newSecurityManager.save();
             res.status(200).send({message: "Security Manager added successfully"});
 
         }
