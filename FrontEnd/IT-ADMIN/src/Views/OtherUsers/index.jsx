@@ -3,27 +3,22 @@ import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { Navbar } from '../../Components/Navbar';
 import { StickyFooterMobile } from '../../Components/StickyFooterMobile';
-import { useForm } from 'react-hook-form';
 import { useLocation, Link } from 'react-router-dom';
-import AddStudent from './AddStudent';
-import AddBatch from './AddBatch';
-import DeleteStudent from './DeleteStudent';
-import DeleteBatch from './Deletebatch';
+import RegistrarList from './Registrar';
+import HostelWardenList from './HostelWarden';
 
-const Student = () => {
+const OtherUsers = () => {
 
 
     const location = useLocation();
 
     const getTabIndex = (pathname) => {
         switch (pathname) {
-            case '/delete-batch':
-                return 3;
-            case '/delete-student':
+            case '/registrar':
                 return 2;
-            case '/add-batch':
+            case '/hostel-warden':
                 return 1;
-            case '/add-student':
+            case '/security-admin':
             default:
                 return 0;
         }
@@ -37,53 +32,43 @@ const Student = () => {
                 <Tabs
                 selectedIndex={getTabIndex(location.pathname)} onSelect={(index) => {
                     switch (index) {
-                        case 3:
-                            window.history.pushState(null, '', '/delete-batch');
-                            break;
                         case 2:
-                            window.history.pushState(null, '', '/delete-student');
+                            window.history.pushState(null, '', '/registrar');
                             break;
                         case 1:
-                            window.history.pushState(null, '', '/add-batch');
+                            window.history.pushState(null, '', '/hostel-warden');
                             break;
                         case 0:
                         default:
-                            window.history.pushState(null, '', '/add-student');
+                            window.history.pushState(null, '', '/security-admin');
                             break;
                     }
                 }}>
                     <TabList className="flex p-1 bg-gray-100 rounded-full mx-auto mb-4" style={{ width: 'fit-content' }}>
+
                         <Tab className="px-4 py-2 rounded-full cursor-pointer focus:outline-none" selectedClassName="bg-blue3 text-white">
-                            <Link to="/add-student">Add Student</Link>
+                            <Link to="/security-admin">Security Admin</Link>
                         </Tab>
 
                         <Tab className="px-4 py-2 rounded-full cursor-pointer focus:outline-none" selectedClassName="bg-blue3 text-white">
-                            <Link to="/add-batch">Add Batch</Link>
+                            <Link to="/hostel-warden">Hostel Warden</Link>
                         </Tab>
 
                         <Tab className="px-4 py-2 rounded-full cursor-pointer focus:outline-none" selectedClassName="bg-blue3 text-white">
-                            <Link to="/delete-student">Delete Student</Link>
-                        </Tab>
-
-                        <Tab className="px-4 py-2 rounded-full cursor-pointer focus:outline-none" selectedClassName="bg-blue3 text-white">
-                            <Link to="/delete-batch">Delete Batch</Link>
+                            <Link to="/registrar">Registrar</Link>
                         </Tab>
                     </TabList>
-                
+
                     <TabPanel className={'flex flex-col items-center'}>
-                        <AddStudent />
+                        {/* <AddBatch /> */}
                     </TabPanel>
 
                     <TabPanel className={'flex flex-col items-center'}>
-                        <AddBatch />
+                        <HostelWardenList />
                     </TabPanel>
 
                     <TabPanel className={'flex flex-col items-center'}>
-                        <DeleteStudent />
-                    </TabPanel>
-
-                    <TabPanel className={'flex flex-col items-center'}>
-                        <DeleteBatch />
+                        {/* <RegistrarList /> */}
                     </TabPanel>
                 </Tabs>
             </div>
@@ -92,4 +77,4 @@ const Student = () => {
     )
 }
 
-export default Student
+export default OtherUsers

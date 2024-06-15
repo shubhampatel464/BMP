@@ -6,6 +6,7 @@ import { Outlet, Navigate } from 'react-router-dom'
 import { UserProvider } from './Services/AuthContext'
 import Dashboard from './Views/Dashboard';
 import Student from './Views/Student';
+import OtherUsers from './Views/OtherUsers';
 
 
 const PrivateRoutes = () => {
@@ -36,6 +37,11 @@ function App() {
                             <Route path='/delete-student' element={<Student />} />
                             <Route path='/delete-batch' element={<Student />} />
 
+                            <Route path='/registrar' element={<OtherUsers />} />
+                            <Route path='/hostel-warden' element={<OtherUsers />} />
+                            <Route path='/security-admin' element={<OtherUsers />} />
+
+                            <Route path='/staff' element={<h1>Staff</h1>} />
                         </Route>
                             <Route path='*' element={<h1>Not Found</h1>} />
                     </Routes>
