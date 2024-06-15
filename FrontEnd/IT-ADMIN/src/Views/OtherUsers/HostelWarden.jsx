@@ -9,7 +9,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
 import Cookies from "js-cookie";
-import { postRequest } from "../../Services/Api";
+import { postRequest, postRequestWithToken } from "../../Services/Api";
 
 // sample data from response
 // [
@@ -47,16 +47,22 @@ const HostelWardenList = () => {
     const [rowData, setRowData] = useState();
     const gridRef = useRef();
 
-    const deleteVehicle = async (uuid) => {
-        const response = await postRequest('itAdmin/deleteUser', { 
+    const deleteWarden = async (uuid) => {
+        const response = await postRequestWithToken('itAdmin/deleteUser', {
             uuid: uuid,
-            rolw: 'hostelWarden'
-         })
+            role: 'hostelWarden'
+        })
 
         // console.log(response)
         if (response.status == 200) {
             alert('Hostel-Warden Deleted Successfully')
-            const data = await fetch(`${BACKEND_URL}/itAdmin/getHostelWarden`)
+            const data = await fetch(`${BACKEND_URL}/itAdmin/getHostelWarden`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": Cookies.get("token"),
+                },
+            })
             const dataJson = await data.json()
             setRowData(dataJson)
         }
@@ -64,7 +70,6 @@ const HostelWardenList = () => {
             alert('Failed to delete. Please try again later.')
         }
     }
-
 
     const [columnDefs, setColumnDefs] = useState([
         {
@@ -91,7 +96,7 @@ const HostelWardenList = () => {
             cellRenderer: function (params) {
                 const _uuid = params.data.uuid
                 return (
-                    <span onClick={() => deleteVehicle(_uuid)} className="bg-red-500 hover:bg-red-400 text-white h-[40px] py-2 px-8 rounded-3xl" >
+                    <span onClick={() => deleteWarden(_uuid)} className="bg-red-500 hover:bg-red-400 text-white h-[40px] py-2 px-8 rounded-3xl" >
                         Delete
                     </span>
                 )
@@ -124,20 +129,24 @@ const HostelWardenList = () => {
     return (
         <>
             <div className="w-screen h-screen p-8" >
-
-                <div
-                    style={gridStyle}
-                    className="ag-theme-quartz "
-                >
-                    <AgGridReact
-                        ref={gridRef}
-                        rowData={rowData}
-                        columnDefs={columnDefs}
-                        defaultColDef={defaultColDef}
-                        onGridReady={onGridReady}
-                        suppressExcelExport={true}
-                    />
-                </div>
+                {
+                    !rowData && <div>Loading...</div>
+                }
+                {
+                    <div
+                        style={gridStyle}
+                        className="ag-theme-quartz "
+                    >
+                        <AgGridReact
+                            ref={gridRef}
+                            rowData={rowData}
+                            columnDefs={columnDefs}
+                            defaultColDef={defaultColDef}
+                            onGridReady={onGridReady}
+                            suppressExcelExport={true}
+                        />
+                    </div>
+                }
             </div>
         </>
     );

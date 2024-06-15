@@ -37,7 +37,7 @@ const ResetPasssword = () => {
                     // window.location.reload()
                     navigate('/login')
                 }
-                else if (response.response.status == 404) {
+                else if (response.status == 404) {
                     alert('Email not found')
                 }
                 else {

@@ -4,19 +4,19 @@ import { StickyFooterMobile } from '../../Components/StickyFooterMobile'
 import { useForm } from 'react-hook-form'
 import { InputField } from '../../Components/InputField'
 import { Button } from '../../Components/Button'
+import departmentData from './DepartmentData'
 import { postRequestWithToken } from '../../Services/Api'
 import { useNavigate } from 'react-router-dom'
-import UserData from './UsersData'
 
 // {
-//      "role": "User"
+//      "role": "staff"
 //     "name": "John Doe",
 //      "mobile": "03001234567",
 //      "email": "
-//      "Role": "IT"
+//      "department": "IT"
 // }
 
-const AddUser = () => {
+const AddStaff = () => {
 
     const navigate = useNavigate();
 
@@ -25,20 +25,20 @@ const AddUser = () => {
     const onSubmit = async (data) => {
         try {
             const dataTosend = {
-                role: data.Role,
+                role: 'staff',
                 name: data.Name,
                 mobile: data.Mobile,
                 email: data.Email,
+                department: data.Department,
             }
 
-            console.log(dataTosend);
+            // console.log(dataTosend);
 
             const reponse = await postRequestWithToken('itAdmin/addUser', dataTosend);  
             // console.log(reponse);
 
             if(reponse.status === 200){
-                alert('User Added Successfully');
-                navigate('/security-admin')
+                alert('Staff Added Successfully');
                 reset();
             }
             else if(reponse.status === 401){
@@ -59,7 +59,7 @@ const AddUser = () => {
     register('Name', { required: 'Name is required' });
     register('Mobile', { required: 'Mobile is required' });
     register('Email', { required: 'Email is required' });
-    register('Role', { required: 'Role is required' });
+    register('Department', { required: 'Department is required' });
 
 
     return (
@@ -70,8 +70,8 @@ const AddUser = () => {
                 <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[400px] space-y-5 ' autoComplete='off'
                     id='loginForm' onSubmit={handleSubmit(onSubmit)}>
 
-                    <h1 className='text-2xl font-bold'>Add User</h1>
-                    <p className='text-gray-500'>Please fill the form to add user.</p>
+                    <h1 className='text-2xl font-bold'>Add Staff</h1>
+                    <p className='text-gray-500'>Please fill the form to add staff.</p>
 
                     <InputField
                         placeholder='Name'
@@ -97,22 +97,23 @@ const AddUser = () => {
                         error={errors.Email?.message}
                     />
 
-                    <label className='mt-4 block text-sm font-medium text-gray-700'>Select Role</label>
+                    <label className='mt-4 block text-sm font-medium text-gray-700'>Select Department</label>
                     <select className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue3 focus:border-transparent' 
-                        {...register('Role')}
+                        {...register('Department')}
                         >
-                        <option value="" >Select Role</option>
+                        <option value="" >Select Department</option>
                         {
-                            UserData?.map((Role, index) => {
+                            departmentData.map((department, index) => {
                                 return (
-                                    <option key={index} value={Role.value}>{Role.Role}</option>
+                                    <option key={index} value={department.value}>{department.name}</option>
                                 )
                             })
                         }
                     </select>
-                    {errors.Roles && <p className='text-red-500 text-xs mt-1'>{errors.Roles.message}</p>}
+                    {errors.Department && <p className='text-red-500 text-xs mt-1'>{errors.Department.message}</p>}
                     
-                    <Button type='submit'> Add User </Button>
+
+                    <Button type='submit'> Add Student </Button>
                 </form>
             </div>
             <StickyFooterMobile />
@@ -121,4 +122,4 @@ const AddUser = () => {
     )
 }
 
-export default AddUser
+export default AddStaff

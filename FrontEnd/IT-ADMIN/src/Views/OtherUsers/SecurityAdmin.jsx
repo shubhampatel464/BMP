@@ -9,22 +9,15 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
 import Cookies from "js-cookie";
-import { postRequestWithToken } from "../../Services/Api";
-
-
+import { postRequest, postRequestWithToken } from "../../Services/Api";
 
 // sample data from response
 // [
 //     {
-//         "_id": "6658be4fa97ab95fa0405724",
-//         "student_id": 202116456,
-//         "photo_exit": "https://btsri.blob.core.windows.net/student//tmp/tmp-1-1717091726398",
-//         "photo_entry": "https://btsri.blob.core.windows.net/student//tmp/tmp-2-1717091917565",
-//         "isLongLeave": true,
-//         "reason": "Home",
-//         "entry_time": "30/5/2024, 11:28:38 pm",
-//         "exit_time": "30/5/2024, 11:23:39 pm",
-//         "__v": 0
+//         "name" : "John Doe",
+//         "email" : "asaa@daii",
+//         "mobile" : "1234567890",
+//         "uuid" : "232312312ljafbwhd",
 //     },
 // ]
 
@@ -47,24 +40,23 @@ const getParams = () => {
 };
 
 
-const RegistrarList = () => {
+const SecurityAdminList = () => {
 
     const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
     const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
     const [rowData, setRowData] = useState();
     const gridRef = useRef();
 
-    const deleteRegistrar = async (uuid) => {
-        console.log(uuid)
+    const deleteWarden = async (uuid) => {
         const response = await postRequestWithToken('itAdmin/deleteUser', {
             uuid: uuid,
-            role: 'registrar'
+            role: 'securityManager'
         })
 
         // console.log(response)
         if (response.status == 200) {
-            alert('Registrar Deleted Successfully')
-            const data = await fetch(`${BACKEND_URL}/itAdmin/getRegistrar`, {
+            alert('Security-Admin Deleted Successfully')
+            const data = await fetch(`${BACKEND_URL}/itAdmin/getSecurityManager`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -93,12 +85,18 @@ const RegistrarList = () => {
             sortable: true,
         },
         {
+            headerName: "Mobile",
+            field: "mobile",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
             headerName: "Delete",
             field: "uuid",
             cellRenderer: function (params) {
                 const _uuid = params.data.uuid
                 return (
-                    <span onClick={() => deleteRegistrar(_uuid)} className="bg-red-500 hover:bg-red-400 text-white h-[40px] py-2 px-8 rounded-3xl cursor-pointer" >
+                    <span onClick={() => deleteWarden(_uuid)} className="bg-red-500 hover:bg-red-400 text-white h-[40px] py-2 px-8 rounded-3xl" >
                         Delete
                     </span>
                 )
@@ -117,7 +115,7 @@ const RegistrarList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/itAdmin/getRegistrar`, {
+        fetch(`${BACKEND_URL}/itAdmin/getSecurityManager`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -131,25 +129,29 @@ const RegistrarList = () => {
     return (
         <>
             <div className="w-screen h-screen p-8" >
-
-                <div
-                    style={gridStyle}
-                    className="ag-theme-quartz "
-                >
-                    <AgGridReact
-                        ref={gridRef}
-                        rowData={rowData}
-                        columnDefs={columnDefs}
-                        defaultColDef={defaultColDef}
-                        onGridReady={onGridReady}
-                        suppressExcelExport={true}
-                    />
-                </div>
+                {
+                    !rowData && <div>Loading...</div>
+                }
+                {
+                    <div
+                        style={gridStyle}
+                        className="ag-theme-quartz "
+                    >
+                        <AgGridReact
+                            ref={gridRef}
+                            rowData={rowData}
+                            columnDefs={columnDefs}
+                            defaultColDef={defaultColDef}
+                            onGridReady={onGridReady}
+                            suppressExcelExport={true}
+                        />
+                    </div>
+                }
             </div>
         </>
     );
 };
 
-export default RegistrarList
+export default SecurityAdminList
 
 // path: FrontEnd/IT-ADMIN/src/Views/OtherUsers/Registrar.jsx
