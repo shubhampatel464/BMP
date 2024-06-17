@@ -37,7 +37,7 @@ const DeleteStudent = () => {
             if (res.status == 200) {
                 alert('Student deleted successfully.')
                 reset()
-                navigate('/dashboard')
+                // navigate('/dashboard')
             }
             else if(res.status == 400){
                 alert('Student not found.')

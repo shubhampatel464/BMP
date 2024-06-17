@@ -7,6 +7,7 @@ import { Button } from '../../Components/Button'
 import { postRequestWithToken } from '../../Services/Api'
 import { useNavigate } from 'react-router-dom'
 import UserData from './UsersData'
+import { useEffect, useState } from 'react'
 
 // {
 //      "role": "User"
@@ -20,7 +21,19 @@ const AddUser = () => {
 
     const navigate = useNavigate();
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const [showMobile, setShowMobile] = useState(true);
+
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
+
+    const roleValue = watch('Role');
+
+    useEffect(() => {
+        if (roleValue === 'registrar') {
+            setShowMobile(false);
+        } else {
+            setShowMobile(true);
+        }
+    }, [roleValue]);
 
     const onSubmit = async (data) => {
         try {
@@ -73,30 +86,6 @@ const AddUser = () => {
                     <h1 className='text-2xl font-bold'>Add User</h1>
                     <p className='text-gray-500'>Please fill the form to add user.</p>
 
-                    <InputField
-                        placeholder='Name'
-                        label='Name'
-                        type='text'
-                        register={register}
-                        error={errors.Name?.message}
-                    />
-
-                    <InputField
-                        placeholder='Mobile'
-                        label='Mobile'
-                        type='text'
-                        register={register}
-                        error={errors.Mobile?.message}
-                    />
-
-                    <InputField
-                        placeholder='Email'
-                        label='Email'
-                        type='email'
-                        register={register}
-                        error={errors.Email?.message}
-                    />
-
                     <label className='mt-4 block text-sm font-medium text-gray-700'>Select Role</label>
                     <select className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue3 focus:border-transparent' 
                         {...register('Role')}
@@ -111,6 +100,34 @@ const AddUser = () => {
                         }
                     </select>
                     {errors.Roles && <p className='text-red-500 text-xs mt-1'>{errors.Roles.message}</p>}
+
+                    <InputField
+                        placeholder='Name'
+                        label='Name'
+                        type='text'
+                        register={register}
+                        error={errors.Name?.message}
+                    />
+                    
+                    {/* show mobile field if registrar is not selected */}
+                    {
+                        showMobile &&
+                        <InputField
+                            placeholder='Mobile'
+                            label='Mobile'
+                            type='text'
+                            register={register}
+                            error={errors.Mobile?.message}
+                        />
+                    }
+
+                    <InputField
+                        placeholder='Email'
+                        label='Email'
+                        type='email'
+                        register={register}
+                        error={errors.Email?.message}
+                    />
                     
                     <Button type='submit'> Add User </Button>
                 </form>

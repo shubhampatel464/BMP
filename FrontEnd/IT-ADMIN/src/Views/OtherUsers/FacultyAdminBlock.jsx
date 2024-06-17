@@ -39,7 +39,8 @@ const getParams = () => {
     };
 };
 
-const StaffList = () => {
+
+const FacultyAdminBlockList = () => {
 
     const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
     const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
@@ -49,13 +50,13 @@ const StaffList = () => {
     const deleteWarden = async (uuid) => {
         const response = await postRequestWithToken('itAdmin/deleteUser', {
             uuid: uuid,
-            role: 'staff'
+            role: 'faculty_adminBlock'
         })
 
         // console.log(response)
         if (response.status == 200) {
-            alert('Staff Deleted Successfully')
-            const data = await fetch(`${BACKEND_URL}/itAdmin/getStaff`, {
+            alert('Faculty / Admin Block Deleted Successfully')
+            const data = await fetch(`${BACKEND_URL}/itAdmin/getFaculty_adminBlock`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -90,12 +91,6 @@ const StaffList = () => {
             sortable: true,
         },
         {
-            headerName: "Department",
-            field: "department",
-            filter: "agTextColumnFilter",
-            sortable: true,
-        },
-        {
             headerName: "Delete",
             field: "uuid",
             cellRenderer: function (params) {
@@ -120,7 +115,7 @@ const StaffList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/itAdmin/getStaff`, {
+        fetch(`${BACKEND_URL}/itAdmin/getFaculty_adminBlock`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -157,6 +152,6 @@ const StaffList = () => {
     );
 };
 
-export default StaffList
+export default FacultyAdminBlockList
 
 // path: FrontEnd/IT-ADMIN/src/Views/OtherUsers/Registrar.jsx

@@ -44,6 +44,7 @@ function App() {
                             <Route path='/registrar' element={<OtherUsers />} />
                             <Route path='/hostel-warden' element={<OtherUsers />} />
                             <Route path='/security-admin' element={<OtherUsers />} />
+                            <Route path='/faculty-adminblock' element={<OtherUsers />} />
                             <Route path='/add-user' element={<AddUser />} />
 
                             <Route path='/staff' element={<Staff />} />

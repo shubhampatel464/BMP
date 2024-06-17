@@ -1,8 +1,8 @@
 const UserData = [
     {
         id: 1,
-        Role: 'Security',
-        value: 'security'
+        Role: 'Faculty / Admin Block',
+        value: 'faculty_adminBlock'
     },
     {
         id: 2,

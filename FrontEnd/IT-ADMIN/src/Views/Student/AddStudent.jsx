@@ -1,7 +1,7 @@
 import React from 'react'
 import { InputField } from '../../Components/InputField';
 import { Button } from '../../Components/Button';
-import { postRequest } from '../../Services/Api';
+import { postRequest, postRequestWithToken } from '../../Services/Api';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -48,7 +48,7 @@ const AddStudent = () => {
                 room: data.Room,
             }
 
-            const res = await postRequest('itAdmin/addStudent', dataToSend)
+            const res = await postRequestWithToken('itAdmin/addStudent', dataToSend)
             console.log(res)
 
             if (res.status == 200) {

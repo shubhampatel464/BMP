@@ -96,7 +96,7 @@ const HostelWardenList = () => {
             cellRenderer: function (params) {
                 const _uuid = params.data.uuid
                 return (
-                    <span onClick={() => deleteWarden(_uuid)} className="bg-red-500 hover:bg-red-400 text-white h-[40px] py-2 px-8 rounded-3xl" >
+                    <span onClick={() => deleteWarden(_uuid)} className="bg-red-500 hover:bg-red-400 text-white h-[40px] py-2 px-8 rounded-3xl cursor-pointer" >
                         Delete
                     </span>
                 )
