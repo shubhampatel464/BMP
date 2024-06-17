@@ -52,7 +52,7 @@ app.use('/student',require('./routes/student/student'));
 app.use('/security',require('./routes/security/security'));
 app.use('/hostelWarden',require('./routes/hostelWarden/hostelWarden'));
 app.use('/staff',require('./routes/staff/staff'));
-app.use('/data',require('./routes/data/dataAPI'));
+// app.use('/data',require('./routes/data/dataAPI'));
 app.use('/reset',require('./routes/resetPassword/resetPassword'));
 app.use('/itAdmin',require('./routes/IT-Admin/itAdmin'));
 app.use('/registrar',require('./routes/registrar/registrar'));
