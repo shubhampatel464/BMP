@@ -1,7 +1,7 @@
 const security = require('../../models/static/security/security');
 const hostelWarden = require('../../models/static/hostelWarden/hostelWarden');
 const staff = require('../../models/static/staff/staff');
-const faculty = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
+const faculty_adminBlock = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
 const registrar = require('../../models/static/registrar/registrar');
 const security_manager = require('../../models/static/securityManager/securityManager');
 
@@ -62,11 +62,11 @@ const deleteUser = async (req, res) => {
                 res.status(400).send({ message: "Security Manager not found" });
             }
         }
-        else if(role == "faculty"){
-            const facultyData = await faculty.findOne({ uuid: req.body.uuid });
+        else if(role == "faculty_adminBlock"){
+            const facultyData = await faculty_adminBlock.findOne({ uuid: req.body.uuid });
 
             if (facultyData) {
-                await faculty.deleteOne({ uuid: req.body.uuid });
+                await faculty_adminBlock.deleteOne({ uuid: req.body.uuid });
                 res.status(200).send({ message: "Faculty deleted successfully" });
             } else {
                 res.status(400).send({ message: "Faculty not found" });

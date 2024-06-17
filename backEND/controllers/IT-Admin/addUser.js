@@ -1,7 +1,7 @@
 const security = require('../../models/static/security/security');
 const hostelWarden = require('../../models/static/hostelWarden/hostelWarden');
 const staff = require('../../models/static/staff/staff');
-const faculty = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
+const faculty_adminBlock = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
 const registrar = require('../../models/static/registrar/registrar');
 const security_manager = require('../../models/static/securityManager/securityManager');
 
@@ -60,9 +60,9 @@ const addUser = async (req, res) => {
             res.status(200).send({message: "Hostel Warden added successfully"});
 
         }
-        else if(role == "faculty"){
+        else if(role == "faculty_adminBlock"){
 
-            const newFaculty = new faculty({
+            const newFaculty = new faculty_adminBlock({
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.email,
