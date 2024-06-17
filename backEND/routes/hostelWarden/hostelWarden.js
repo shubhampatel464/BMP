@@ -19,6 +19,10 @@ router.get('/getStudentData', require('../../controllers/hostelWarden/getStudent
 
 router.post('/addParentVisit', require('../../controllers/hostelWarden/addParentVisit'));
 
+router.get('/getStudentLogs', require('../../controllers/dataTables/getStudentLogs'));
+
+
+
 
 
 

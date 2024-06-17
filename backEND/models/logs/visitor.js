@@ -32,3 +32,20 @@ const visitorSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('visitor_logs', visitorSchema);
+
+
+
+// aditionally needed in visitor static
+
+// Order by
+// scheduled date
+
+
+
+
+
+
+
+
+
+
