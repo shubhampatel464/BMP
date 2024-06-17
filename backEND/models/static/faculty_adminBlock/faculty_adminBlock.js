@@ -14,6 +14,10 @@ const facultySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    mobile :{
+        type: Number,
+        required: true
+    },
     uuid: {
         type: String,
         required: true
