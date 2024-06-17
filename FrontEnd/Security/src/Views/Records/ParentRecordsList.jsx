@@ -11,19 +11,21 @@ import { BACKEND_URL } from "../../Services/Helpers";
 
 
 
-// sample data from response
+
+
 // [
 //     {
-//         "_id": "6658be4fa97ab95fa0405724",
-//         "student_id": 202116456,
-//         "photo_exit": "https://btsri.blob.core.windows.net/student//tmp/tmp-1-1717091726398",
-//         "photo_entry": "https://btsri.blob.core.windows.net/student//tmp/tmp-2-1717091917565",
-//         "isLongLeave": true,
-//         "reason": "Home",
-//         "entry_time": "30/5/2024, 11:28:38 pm",
-//         "exit_time": "30/5/2024, 11:23:39 pm",
+//         "_id": "6660a1bab4d9b6089f9454e1",
+//         "uuid": "f906268e-c5ab-4b0f-82c1-f74a62269f9bvisitor",
+//         "name": "shubham ",
+//         "mobile": "9898989898",
+//         "purpose": "To meet dean",
+//         "entry_time": "5/6/2024, 11:04:20 pm",
+//         "exit_time": "5/6/2024, 11:04:50 pm",
+//         "photo_entry": "https://btsri.blob.core.windows.net/visitor//tmp/tmp-1-1717608860009",
+//         "photo_exit": "https://btsri.blob.core.windows.net/visitor//tmp/tmp-2-1717608889345",
 //         "__v": 0
-//     },
+//     }
 // ]
 
 const getValue = (inputSelector) => {
@@ -45,7 +47,7 @@ const getParams = () => {
 };
 
 
-const StudentRecordList = () => {
+const ParentRecordsList = () => {
 
     const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
     const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
@@ -60,14 +62,26 @@ const StudentRecordList = () => {
             sortable: true,
         },
         {
-            headerName: "Long Leave ?",
-            field: "isLongLeave",
+            headerName: "Name 1",
+            field: "name1",
             filter: "agTextColumnFilter",
             sortable: true,
         },
         {
+            headerName: "Name 2",
+            field: "name2",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
+            headerName:"Mobile",
+            field:"mobile",
+            filter:"agTextColumnFilter",
+            sortable:true,
+        },
+        {
             headerName: "Purpose",
-            field: "reason",
+            field: "purpose",
             filter: "agTextColumnFilter",
             sortable: true,
         },
@@ -114,7 +128,7 @@ const StudentRecordList = () => {
         },
         {
             headerName: "Entry Date & Time",
-            field: "entry_time",
+            field: "exit_photo1",
             filter: "agDateColumnFilter",
             sortable: true,
             filterParams: {
@@ -155,26 +169,52 @@ const StudentRecordList = () => {
 
         },
         {
-            headerName: "Exit Photo",
+            headerName: "Exit Photo1",
             field: "photo_exit",
             cellRenderer: function (params) {
                 return (
                     // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
-                    <a href={`${params.data.photo_exit}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
-                        View Photo
+                    <a href={`${params.data.exit_photo1}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
+                        Exit Photo1
                     </a>
                     // {/* </button> */}
                 )
             },
         },
         {
-            headerName: "Entry Photo",
-            field: "photo_entry",
+            headerName: "Exit Photo2",
+            field: "exit_photo1",
             cellRenderer: function (params) {
                 return (
                     // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
-                    <a href={`${params.data.photo_entry}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
-                        View Photo
+                    <a href={`${params.data.exit_photo2}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
+                        Exit Photo2
+                    </a>
+                    // {/* </button> */}
+                )
+            },
+        },
+        {
+            headerName: "Entry Photo1",
+            field: "entry_photo1",
+            cellRenderer: function (params) {
+                return (
+                    // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
+                    <a href={`${params.data.entry_photo1}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
+                        Entry Photo2
+                    </a>
+                    // {/* </button> */}
+                )
+            },
+        },
+        {
+            headerName: "Entry Photo2",
+            field: "entry_photo2",
+            cellRenderer: function (params) {
+                return (
+                    // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
+                    <a href={`${params.data.entry_photo2}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
+                        Entry Photo2
                     </a>
                     // {/* </button> */}
                 )
@@ -185,15 +225,15 @@ const StudentRecordList = () => {
     const defaultColDef = useMemo(() => {
         return {
             flex: 1,
-            minWidth: 150,
-            resizable: true,
+            minWidth: 200,
+            resizable: false,
             // filter: true,
             // floatingFilter: true,
         };
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/security/getStudentLogs`)
+        fetch(`${BACKEND_URL}/security/getParentLogs`)
             .then((resp) => resp.json())
             .then((data) => setRowData(data));
     }, []);
@@ -206,7 +246,7 @@ const StudentRecordList = () => {
         const keys = columnDefs.map(column => column.field);
 
         // Create CSV header row
-        const headerRow = "Student ID,Long Leave ?,Purpose,Exit Date,Exit Time,Entry Date,EntryTime,Exit Photo,Entry Photo";
+        const headerRow = 'student_id,name1,name2,mobile,purpose,exit_time,entry_time,photo_exit1,photo_exit2,entry_photo1,entry_photo2'
         // console.log(headerRow)
 
         // Create CSV data rows
@@ -225,12 +265,16 @@ const StudentRecordList = () => {
 
         const orderedColumnDefs = [
             { headerName: "Student ID", field: "student_id" },
-            { headerName: "Long Leave ?", field: "isLongLeave" },
-            { headerName: "Purpose", field: "reason" },
+            { headerName: "Name 1", field: "name1" },
+            { headerName: "Name 2", field: "name2" },
+            { headerName: "Mobile", field: "mobile" },
+            { headerName: "Purpose", field: "purpose" },
             { headerName: "Exit Date & Time", field: "exit_time" },
             { headerName: "Entry Date & Time", field: "entry_time" },
-            { headerName: "Exit Photo", field: "photo_exit" },
-            { headerName: "Entry Photo", field: "photo_entry" }
+            { headerName: "Exit Photo1", field: "exit_photo1" },
+            { headerName: "Exit Photo2", field: "exit_photo2" },
+            { headerName: "Entry Photo1", field: "entry_photo1" },
+            { headerName: "Entry Photo2", field: "entry_photo2" },
         ];
 
         const csv = convertToCsv(rowData, orderedColumnDefs);
@@ -272,6 +316,4 @@ const StudentRecordList = () => {
     );
 };
 
-export default StudentRecordList
-
-// Path: FrontEnd/Security/src/Views/Visitors/index.jsx
+export default ParentRecordsList

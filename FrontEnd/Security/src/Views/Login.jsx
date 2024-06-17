@@ -22,7 +22,7 @@ const LoginForm = () => {
         const sendDataToLogin = async () => {
             try {
                 const dataToSend = {
-                    mobile: data.Mobile,
+                    email: data.Email,
                     password: data.Password
                 }
 
@@ -38,7 +38,7 @@ const LoginForm = () => {
                     Cookies.set('token', response.data.token, { expires: 1, secure: true, sameSite: 'strict' })
                     navigate('/dashboard')
                 }
-                else if(response.status === 400){
+                else if (response.status === 400) {
                     alert('Invalid Credentials')
                 }
                 else {
@@ -51,11 +51,15 @@ const LoginForm = () => {
         sendDataToLogin()
     }
 
-    register('Mobile', {
-        required: { value: true, message: 'Mobile number is required' },
-        pattern: { value: /^[0-9]*$/, message: 'Mobile number must be a 10 digit number' },
-        minLength: { value: 10, message: 'Mobile number must be a 10 digit number' },
-        maxLength: { value: 10, message: 'Mobile number must be a 10 digit number' },
+    // register('Mobile', {
+    //     required: { value: true, message: 'Mobile number is required' },
+    //     pattern: { value: /^[0-9]*$/, message: 'Mobile number must be a 10 digit number' },
+    //     minLength: { value: 10, message: 'Mobile number must be a 10 digit number' },
+    //     maxLength: { value: 10, message: 'Mobile number must be a 10 digit number' },
+    // })
+
+    register('Email', {
+        required: { value: true, message: 'Email is required' },
     })
 
     register('Password', {
@@ -78,14 +82,16 @@ const LoginForm = () => {
                         <h1 className='text-2xl font-bold'>Security Login</h1>
                         <p className='text-gray-500'>Please fill your detail to access your account.</p>
 
-                        {/* Mobile and password input fields */}
+                        {/* email input field */}
                         <InputField
-                            placeholder='Enter Mobile Number'
-                            label='Mobile'
-                            type='text'
+                            placeholder='Enter Email'
+                            label='Email'
+                            type='email'
                             register={register}
-                            error={errors.Mobile?.message}
+                            error={errors.Email?.message}
                         />
+
+                        {/* password input field */}
                         <InputField
                             placeholder='Enter Password'
                             label='Password'

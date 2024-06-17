@@ -195,7 +195,7 @@ const VisitorRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/data/getVisitorsLogs`)
+        fetch(`${BACKEND_URL}/security/getVisitorsLogs`)
             .then((resp) => resp.json())
             .then((data) => setRowData(data));
     }, []);

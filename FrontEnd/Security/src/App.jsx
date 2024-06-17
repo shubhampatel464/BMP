@@ -17,6 +17,7 @@ import ParentEntry from './Views/ParentVisit/ParentEntry';
 import VisiorPassForTwo from './Components/VisitorPassForTwo';
 import ParentTempPass from './Views/ParentVisit/ParentTempPass';
 import ResetPasssword from './Views/ResetPassword';
+import ParentRecords from './Views/Records/Parent';
 
 // react router 
 
@@ -49,6 +50,7 @@ function App() {
                 <Route path='/records/student' element={<StudentRecords />}  ></Route>
                 <Route path='/records/visitor' element={<VisitorRecords />}  ></Route>
                 <Route path='/records/staff' element={<StaffRecords />}  ></Route>
+                <Route path='/records/parent' element={<ParentRecords />}  ></Route>
 
                 {/* not found */}
                 <Route path="*" element={<h1>Not Found</h1>} />

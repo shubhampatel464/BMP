@@ -26,7 +26,7 @@ const RecordsDashBoard = () => {
                         </div>
 
                         <div className='flex flex-col gap-10 justify-between items-center h-full m-10'>
-                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer' onClick={() => navigate('/visitors')} >
+                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer' onClick={() => navigate('/records/parent')} >
                                 <h1 className='text-xl font-bold'>Parent</h1>
                             </div>
                             <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer' onClick={() => navigate('/records/student')}>

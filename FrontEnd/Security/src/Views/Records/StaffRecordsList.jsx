@@ -184,7 +184,7 @@ const StaffRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/data/getStaffLogs`)
+        fetch(`${BACKEND_URL}/security/getStaffLogs`)
             .then((resp) => resp.json())
             .then((data) => setRowData(data));
     }, []);

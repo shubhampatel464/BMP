@@ -126,7 +126,7 @@ const CurrentList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/data/getCurrentVisitors`)
+        fetch(`${BACKEND_URL}/security/getCurrentVisitors`)
             .then((resp) => resp.json())
             .then((data) => setRowData(data));
     }, []);
