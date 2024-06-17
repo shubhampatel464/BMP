@@ -32,6 +32,8 @@ router.get('/getStaff',auth, require('../../controllers/IT-Admin/getUsers').getS
 
 router.get('/getFaculty_adminBlock',auth, require('../../controllers/IT-Admin/getUsers').getFaculty_adminBlock);
 
+router.get('/getStudentData',auth, require('../../controllers/IT-Admin/getStudentData'));
+
 
 
 
