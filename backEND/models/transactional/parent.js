@@ -28,8 +28,7 @@ const parentSchema = new mongoose.Schema({
         required: true
     },
     entry_time:{
-        type: Date,
-        default: Date.now
+        type: String,
     },
     entry_photo1:{
         type: String

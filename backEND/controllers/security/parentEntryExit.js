@@ -18,8 +18,8 @@ const parentEntryExit = async (req, res) => {
 
             // Already inside campus
 
-            var current_date = new Date();
-            current_date = new Date(current_date.getTime() + 5.5 * 3600 * 1000);
+            const current_time = new Date();
+            const current_date = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
                     
             const exit_photo1 = await uploadFile(photo1.tempFilePath, "parent");
             var exit_photo2 = "";
@@ -62,8 +62,8 @@ const parentEntryExit = async (req, res) => {
 
             const data = await parent.findOne({ uuid: uuid });
 
-            var current_date = new Date();
-            current_date = new Date(current_date.getTime() + 5.5 * 3600 * 1000);
+            const current_time = new Date();
+            const current_date = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
             const parent_t = new parent_transactional({
                 uuid: uuid,

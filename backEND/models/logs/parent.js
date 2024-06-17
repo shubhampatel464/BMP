@@ -28,8 +28,7 @@ const parentLogsSchema = new mongoose.Schema({
         required: true
     },
     entry_time:{
-        type: Date,
-        default: Date.now
+        type: String
     },
     entry_photo1:{
         type: String
@@ -38,8 +37,7 @@ const parentLogsSchema = new mongoose.Schema({
         type: String
     },
     exit_time:{
-        type: Date,
-        default: Date.now
+        type: String
     },
     exit_photo1:{
         type: String

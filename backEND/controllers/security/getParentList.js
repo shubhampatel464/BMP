@@ -14,9 +14,9 @@ const getParentList = async (req, res) => {
                 $lt: startOfTomorrow
             }
         });
-        res.status(200).json(parents);
+        res.status(200).send(parents);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).send({ message: error.message });
     }
 }
 

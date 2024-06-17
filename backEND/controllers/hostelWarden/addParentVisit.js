@@ -7,14 +7,18 @@ const addParentVisit = async (req, res) => {
     try {
         
         const { name1,name2,student_id,mobile,arrival_date,purpose } = req.body;
+        
         const _uuid = `${uuid.v4()}parent`;
+
+        console.log(arrival_date);
+        console.log(new Date(arrival_date));
         
         const visit = new parent({
             name1,
             name2,
             student_id : Number(student_id),
             mobile : Number(mobile),
-            arrival_date:Date(arrival_date),
+            arrival_date: new Date(arrival_date),
             purpose,
             uuid : _uuid
         });
