@@ -30,6 +30,8 @@ router.get('/getSecurityManager',auth, require('../../controllers/IT-Admin/getUs
 
 router.get('/getStaff',auth, require('../../controllers/IT-Admin/getUsers').getStaff);
 
+router.get('/getFaculty_adminBlock',auth, require('../../controllers/IT-Admin/getUsers').getFaculty_adminBlock);
+
 
 
 
