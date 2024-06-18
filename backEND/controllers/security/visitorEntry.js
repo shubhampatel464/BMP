@@ -13,7 +13,12 @@ const visitorEntryExit = async (req, res) => {
 
     try {
 
-        if (req.body.hasOwnProperty('uuid')) {
+        const body = req.body;
+
+        console.log(body.hasOwnProperty('uuid'));
+        
+
+        if (body.hasOwnProperty('uuid')) {
             const uuid = req.body.uuid;
 
             const file = req.files.photo;
@@ -40,7 +45,7 @@ const visitorEntryExit = async (req, res) => {
                 const newTransaction = new visitor_transactional({
                     uuid: uuid,
                     name: visitor.name,
-                    mobile: visitor.phone,
+                    mobile: visitor.mobile,
                     purpose: visitor.purpose,
                     photo_exit: photoUrl,
                     entry_time: istDateTime,

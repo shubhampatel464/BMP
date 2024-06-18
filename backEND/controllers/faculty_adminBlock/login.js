@@ -1,4 +1,4 @@
-const faculty_adminBlock = require('../../models/faculty_adminBlock/faculty_adminBlock');
+const faculty_adminBlock = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -21,7 +21,7 @@ const login = async (req, res) => {
             return res.status(400).send({message: "Invalid credentials"});
         }
 
-        const jwtSign = jwt.sign({uuid: user.uuid,name : user.name}, process.env.JWT_SECRET);
+        const jwtSign = jwt.sign({uuid: user.uuid}, process.env.JWT_SECRET);
 
         res.status(200).send({user,token: jwtSign});
 

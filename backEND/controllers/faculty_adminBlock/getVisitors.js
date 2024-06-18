@@ -1,4 +1,4 @@
-const visitor = require('../../models/visitor/visitor');
+const visitor = require('../../models/static/visitor/visitor');
 
 
 const getVisitors = async (req, res) => {

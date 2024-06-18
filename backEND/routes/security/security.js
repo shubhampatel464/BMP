@@ -28,6 +28,8 @@ router.post('/parentEntryExit', require('../../controllers/security/parentEntryE
 
 router.get('/getParentList', require('../../controllers/security/getParentList'));
 
+router.get('/getVisitorList', require('../../controllers/security/getVisitorList'));
+
 router.get('/getCurrentVisitors',require('../../controllers/dataTables/getCurrentVisitors'));
 
 router.get('/getStudentLogs', require('../../controllers/dataTables/getStudentLogs'));

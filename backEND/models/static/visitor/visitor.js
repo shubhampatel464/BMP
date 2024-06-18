@@ -9,7 +9,7 @@ const visitorSchema = new mognoose.Schema({
         type:String,
         required:true
     },
-    phone:{
+    mobile:{
         type:String,
         required:true
     },
@@ -29,3 +29,7 @@ const visitorSchema = new mognoose.Schema({
         type:String
     }
 });
+
+const visitor = mognoose.model('visitor', visitorSchema);
+
+module.exports = visitor;
