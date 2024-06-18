@@ -11,11 +11,12 @@ const visitorExit = async (req, res) => {
         const uuid = req.body.uuid;
         const photo = req.files.photo;
 
-        console.log(req.body)
-        console.log(req.files)
+        const data = await visitor_transactional.findOne({ uuid: uuid });
 
-        // upload photo to blob
-        const photoUrl = await fileUpload(photo.tempFilePath, "visitor");
+        if (!data) {
+            res.status(404).send({ message: 'INVALID UUID FOR VISITOR' });
+            return;
+        }
 
         const current_time = new Date();
         const options = {
@@ -29,15 +30,12 @@ const visitorExit = async (req, res) => {
             hour12: true
         };
         const istDateTime = current_time.toLocaleString("en-IN", options);
+        
+        // upload photo to blob
+        const photoUrl = await fileUpload(photo.tempFilePath, "visitor");
+
 
         // save to logs
-        const data = await visitor_transactional.findOne({ uuid: uuid });
-
-        if (!data) {
-            res.status(404).send({ message: 'INVALID UUID FOR VISITOR' });
-            return;
-        }
-
         const logs = new visitor_logs({
             uuid: uuid,
             name: data.name,
@@ -46,7 +44,8 @@ const visitorExit = async (req, res) => {
             entry_time: data.entry_time,
             photo_entry: data.photo_entry,
             photo_exit: photoUrl,
-            exit_time: istDateTime
+            exit_time: istDateTime,
+            scheduled_by: data.scheduled_by
         });
 
         const save = await logs.save();

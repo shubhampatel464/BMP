@@ -7,3 +7,5 @@ cron.schedule('55 16 * * *', require('./attendence/monthlyUpdate'));
 cron.schedule('5 0 * * *', require('./lateReport/lateReport'));
 
 cron.schedule('5 0 * * *', require('./parent/deleteParent'));
+
+cron.schedule('5 0 * * *', require('./visitor/visitor'));

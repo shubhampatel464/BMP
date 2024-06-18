@@ -56,6 +56,7 @@ app.use('/staff',require('./routes/staff/staff'));
 app.use('/reset',require('./routes/resetPassword/resetPassword'));
 app.use('/itAdmin',require('./routes/IT-Admin/itAdmin'));
 app.use('/registrar',require('./routes/registrar/registrar'));
+app.use('/faculty_adminBlock',require('./routes/faculty_adminBlock/faculty_adminBlock'));
 
 
 

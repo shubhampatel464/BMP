@@ -28,6 +28,9 @@ const visitorSchema = new mongoose.Schema({
     },
     photo_exit:{
         type: String
+    },
+    scheduled_by:{
+        type: String
     }
 });
 
