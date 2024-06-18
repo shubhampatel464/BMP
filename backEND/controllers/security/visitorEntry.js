@@ -1,5 +1,8 @@
 const visitor = require('../../models/static/visitor/visitor');
 const visitor_transactional = require('../../models/transactional/visitor');
+
+const faculty_adminBlock = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
+
 const filesUpload = require('../../blob/azureBlob');
 
 
@@ -32,6 +35,8 @@ const visitorEntryExit = async (req, res) => {
                 };
                 const istDateTime = exit_time.toLocaleString("en-IN", options);
 
+                const faculty_adminBlockName = (await faculty_adminBlock.findOne({ uuid: visitor.scheduled_by })).name;
+
                 const newTransaction = new visitor_transactional({
                     uuid: uuid,
                     name: visitor.name,
@@ -39,7 +44,7 @@ const visitorEntryExit = async (req, res) => {
                     purpose: visitor.purpose,
                     photo_exit: photoUrl,
                     entry_time: istDateTime,
-                    scheduled_by: visitor.scheduled_by
+                    scheduled_by: faculty_adminBlockName
                 });
 
                 const save = await newTransaction.save();

@@ -6,7 +6,7 @@ const addVisitor = async (req, res) => {
     
     try {
         
-        const scheduled_by = req.user.name;
+        const scheduled_by = req.user.uuid;
         const {name, email, phone, purpose, arrival_date} = req.body;
 
         const newVisitor = new visitor({
