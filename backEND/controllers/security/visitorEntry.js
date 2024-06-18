@@ -13,20 +13,17 @@ const visitorEntryExit = async (req, res) => {
 
     try {
 
-        const body = req.body;
-
-        console.log(body.hasOwnProperty('uuid'));
-        
-
+        const body = {...req.body};
+       
         if (body.hasOwnProperty('uuid')) {
             const uuid = req.body.uuid;
 
             const file = req.files.photo;
             const photoUrl = await filesUpload(file.tempFilePath, "visitor");
 
-            const visitor = await visitor.findOne({ uuid: uuid });
+            const visitorData = await visitor.findOne({ uuid: uuid });
 
-            if (visitor) {
+            if (visitorData) {
                 const exit_time = new Date();
                 const options = {
                     timeZone: "Asia/Kolkata",
@@ -40,14 +37,14 @@ const visitorEntryExit = async (req, res) => {
                 };
                 const istDateTime = exit_time.toLocaleString("en-IN", options);
 
-                const faculty_adminBlockName = (await faculty_adminBlock.findOne({ uuid: visitor.scheduled_by })).name;
+                const faculty_adminBlockName = (await faculty_adminBlock.findOne({ uuid: visitorData.scheduled_by })).name;
 
                 const newTransaction = new visitor_transactional({
                     uuid: uuid,
-                    name: visitor.name,
-                    mobile: visitor.mobile,
-                    purpose: visitor.purpose,
-                    photo_exit: photoUrl,
+                    name: visitorData.name,
+                    mobile: visitorData.mobile,
+                    purpose: visitorData.purpose,
+                    photo_entry: photoUrl,
                     entry_time: istDateTime,
                     scheduled_by: faculty_adminBlockName
                 });

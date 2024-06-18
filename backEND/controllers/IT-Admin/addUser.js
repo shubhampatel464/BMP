@@ -67,7 +67,7 @@ const addUser = async (req, res) => {
                 email: req.body.email,
                 password: req.body.email,
                 mobile: req.body.mobile,
-                uuid : `uuid.v4()faculty_adminBlock`
+                uuid : `${uuid.v4()}faculty_adminBlock`
             });
 
             await newFaculty.save();
