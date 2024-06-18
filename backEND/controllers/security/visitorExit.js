@@ -5,7 +5,7 @@ const fileUpload = require('../../blob/azureBlob');
 
 
 const visitorExit = async (req, res) => {
-    
+
     try {
 
         const uuid = req.body.uuid;
@@ -18,14 +18,23 @@ const visitorExit = async (req, res) => {
         const photoUrl = await fileUpload(photo.tempFilePath, "visitor");
 
         const current_time = new Date();
-        const istDateTime = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-        
+        const options = {
+            timeZone: "Asia/Kolkata",
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        };
+        const istDateTime = current_time.toLocaleString("en-IN", options);
 
         // save to logs
         const data = await visitor_transactional.findOne({ uuid: uuid });
 
-        if(!data){
-            res.status(404).send({ message: 'INVALID UUID FOR VISITOR'});
+        if (!data) {
+            res.status(404).send({ message: 'INVALID UUID FOR VISITOR' });
             return;
         }
 
@@ -45,7 +54,7 @@ const visitorExit = async (req, res) => {
         // delete from transactional
         const deleteData = await visitor_transactional.deleteOne({ uuid: uuid });
         const resData = {
-            entry : false
+            entry: false
         }
         res.status(200).send(resData);
 

@@ -82,7 +82,7 @@ const AddParentVisit = () => {
             const res = await postRequest('hostelWarden/addParentVisit', dataToSend)
             // console.log(res)
 
-            if (res.status == 201) {
+            if (res.status == 200) {
                 alert('Parent Visit added successfully')
                 reset()
             }

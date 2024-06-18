@@ -14,7 +14,18 @@ const studentEntryExit = async (req, res) => {
         const match = await student_transactional.findOne({ uuid: uuid });
 
         const current_time = new Date();
-        const istDateTime = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+        const options = {
+            timeZone: "Asia/Kolkata",
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        };
+        const istDateTime = current_time.toLocaleString("en-IN", options);
+
 
         if (match) {
             // save photo to blob 
@@ -34,7 +45,7 @@ const studentEntryExit = async (req, res) => {
                 entry_time: istDateTime,
                 exit_time: match.exit_time
             });
-            
+
             const saveLogs = await logs.save();
 
             // delete from transactional
@@ -46,7 +57,7 @@ const studentEntryExit = async (req, res) => {
             // Check if the current time is before 12:00 AM
             if (!(now.getHours() < 24 && now.getHours() >= 0) && data.isLongLeave == false) {
                 resData.late = true;
-            } 
+            }
 
             const deleteData = await student_transactional.deleteOne({ uuid: uuid });
 

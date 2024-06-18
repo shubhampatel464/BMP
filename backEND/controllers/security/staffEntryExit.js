@@ -10,7 +10,18 @@ const staff_attendence = require('../../models/attendence/staff');
 const docsUpload = require('../../blob/azureBlob');
 
 const current_time = new Date();
-const istDateTime = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+const options = {
+    timeZone: "Asia/Kolkata",
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+};
+const istDateTime = current_time.toLocaleString("en-IN", options);
+
 
 
 // // Creating a new date object
@@ -36,7 +47,18 @@ const staffEntryExit = async (req, res) => {
         const match = await staff_transactional.findOne({ uuid: uuid });
 
         const current_time = new Date();
-        const istDateTime = current_time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+        const options = {
+            timeZone: "Asia/Kolkata",
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        };
+        const istDateTime = current_time.toLocaleString("en-IN", options);
+
 
         if (match) {
             // upload photo to blob
@@ -49,7 +71,7 @@ const staffEntryExit = async (req, res) => {
             // save to logs
             // const data = await staff_transactional.findOne({ uuid: uuid });
 
-            
+
             const logs = new staff_logs({
                 uuid: uuid,
                 name: match.name,
@@ -59,16 +81,16 @@ const staffEntryExit = async (req, res) => {
                 entry_time: match.entry_time,
                 exit_time: istDateTime
             });
-            
+
             const saveLogs = await logs.save();
-            
+
             // delete from transactional
             const deleteData = await staff_transactional.deleteOne({ uuid: uuid });
-            
+
             const resData = {
                 entry: false
             };
-            
+
             res.status(200).send(resData);
 
         }
@@ -95,12 +117,12 @@ const staffEntryExit = async (req, res) => {
             // attendence update
 
             const todaysDate = currentDate.date;
-            
+
             const updateFields = {};
             updateFields[`attendence.day${todaysDate}`] = 1;
 
-            const updateData = await staff_attendence.updateOne({ uuid: uuid },{$set : updateFields});
-            
+            const updateData = await staff_attendence.updateOne({ uuid: uuid }, { $set: updateFields });
+
             const resData = {
                 entry: true
             };
