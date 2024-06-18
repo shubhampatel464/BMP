@@ -23,6 +23,9 @@ const visitorSchema = new mongoose.Schema({
     exit_time: {
         type: String
     },
+    scheduled_by: {
+        type: String
+    },
     photo_entry:{
         type: String
     },

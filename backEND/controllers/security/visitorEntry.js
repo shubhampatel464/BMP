@@ -9,6 +9,17 @@ const visitorEntryExit = async (req, res) => {
 
     try {
 
+        if(req.body.hasOwnProperty('uuid')){
+            const uuid = req.body.uuid;
+            
+            const file = req.files.photo;
+            const photoUrl = await filesUpload(file.tempFilePath, "visitor");
+
+            
+
+        }
+
+
         const current_time = new Date();
         const options = {
             timeZone: "Asia/Kolkata",
