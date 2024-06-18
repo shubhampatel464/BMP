@@ -275,5 +275,3 @@ const VisitorRecordList = () => {
 };
 
 export default VisitorRecordList
-
-// Path: FrontEnd/Security/src/Views/Visitors/index.jsx

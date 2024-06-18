@@ -274,4 +274,3 @@ const StudentRecordList = () => {
 
 export default StudentRecordList
 
-// Path: FrontEnd/Security/src/Views/Visitors/index.jsx

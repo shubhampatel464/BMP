@@ -261,5 +261,3 @@ const StaffRecordList = () => {
 };
 
 export default StaffRecordList
-
-// Path: FrontEnd/Security/src/Views/Visitors/index.jsx
