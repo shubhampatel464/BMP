@@ -1,4 +1,5 @@
 const visitor = require('../../models/static/visitor/visitor');
+const faculty_adminBlock = require('../../models/static/faculty_adminBlock/faculty_adminBlock');
 
 const getVisitorList = async (req, res) => {
     try {
@@ -14,6 +15,11 @@ const getVisitorList = async (req, res) => {
                 $lt: startOfTomorrow
             }
         });
+
+        for(const visitor of visitors){
+            const faculty_adminBlockData = await faculty_adminBlock.findOne({uuid: visitor.scheduled_by});
+            visitor.scheduled_by = faculty_adminBlockData.name;
+        }
 
         res.status(200).send(visitors);
 
