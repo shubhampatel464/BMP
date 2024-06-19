@@ -18,6 +18,7 @@ const securitySchema = new mongoose.Schema({
     },
     uuid: {
         type: String,
+        unique: true
     },
     startTime:{
         type: Date

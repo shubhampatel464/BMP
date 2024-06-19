@@ -18,8 +18,15 @@ const addStudent = async (req, res) => {
             uuid: `${uuid.v4()}student`,
         });
     
-        await newStudent.save();
-        res.status(200).send({ message: "Student added successfully" });
+        try {
+            await newStudent.save();
+            res.status(200).send({ message: "Student added successfully" });
+        } catch (error) {
+            if(error.name == 'MongoServerError' && error.code == 11000){
+                res.status(409).send({message: "Duplicate key error", duplicateKey: Object.keys(error.keyPattern)[0]});
+                return;
+            }                  
+        }
 
     } catch (error) {
         console.log("This is error from ./controllers/IT-Admin/addStudent.js");

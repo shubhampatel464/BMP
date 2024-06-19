@@ -8,7 +8,8 @@ const facultySchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -16,11 +17,13 @@ const facultySchema = new mongoose.Schema({
     },
     mobile :{
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     uuid: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
 });
 

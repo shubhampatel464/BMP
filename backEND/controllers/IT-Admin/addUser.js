@@ -15,10 +15,10 @@ const uuid = require('uuid');
 const addUser = async (req, res) => {
 
     try {
-    
+
         const role = req.body.role;
 
-        if(role == "staff"){
+        if (role == "staff") {
 
             const _uuid = uuid.v4();
             const newStaff = new staff({
@@ -27,93 +27,125 @@ const addUser = async (req, res) => {
                 password: req.body.mobile,
                 mobile: req.body.mobile,
                 department: req.body.department,
-                uuid : `${_uuid}staff`
+                uuid: `${_uuid}staff`
             });
 
-            await newStaff.save();
+            try {
+                await newStaff.save();
 
-            if(req.body.department == "security"){
-                const newSecurity = new security({
-                    name: req.body.name,
-                    email: req.body.email,
-                    password: req.body.mobile,
-                    mobile: req.body.mobile,
-                    uuid : `${_uuid}staff`
-                });
+                if (req.body.department == "security") {
+                    const newSecurity = new security({
+                        name: req.body.name,
+                        email: req.body.email,
+                        password: req.body.mobile,
+                        mobile: req.body.mobile,
+                        uuid: `${_uuid}staff`
+                    });
+    
+                    await newSecurity.save();
+                }
+                res.status(200).send({ message: "Staff added successfully" });
 
-                await newSecurity.save();
+            } catch (error) {
+                if(error.name == 'MongoServerError' && error.code == 11000){
+                    res.status(409).send({message: "Duplicate key error", duplicateKey: Object.keys(error.keyPattern)[0]});
+                    return;
+                }                  
             }
-            res.status(200).send({message: "Staff added successfully"});
 
         }
-        else if(role == "hostelWarden"){
+        else if (role == "hostelWarden") {
 
             const newHostelWarden = new hostelWarden({
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.mobile,
                 mobile: req.body.mobile,
-                uuid : `${uuid.v4()}hostelWarden`
+                uuid: `${uuid.v4()}hostelWarden`
             });
 
-            await newHostelWarden.save();
-            res.status(200).send({message: "Hostel Warden added successfully"});
-
+            try {
+                await newHostelWarden.save();
+                res.status(200).send({ message: "Hostel Warden added successfully" });
+            } catch (error) {
+                if (error.name == 'MongoServerError' && error.code == 11000) {
+                    res.status(409).send({ message: "Duplicate key error", duplicateKey: Object.keys(error.keyPattern)[0] });
+                    return;
+                }
+            }
         }
-        else if(role == "faculty_adminBlock"){
+        else if (role == "faculty_adminBlock") {
 
             const newFaculty = new faculty_adminBlock({
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.email,
                 mobile: req.body.mobile,
-                uuid : `${uuid.v4()}faculty_adminBlock`
+                uuid: `${uuid.v4()}faculty_adminBlock`
             });
 
-            await newFaculty.save();
-            res.status(200).send({message: "Faculty added successfully"});
-
+            try {
+                await newFaculty.save();
+                res.status(200).send({ message: "Faculty added successfully" });
+            } catch (error) {
+                if (error.name == 'MongoServerError' && error.code == 11000) {
+                    res.status(409).send({ message: "Duplicate key error", duplicateKey: Object.keys(error.keyPattern)[0] });
+                    return;
+                }
+            }
         }
-        else if(role == "registrar"){
+        else if (role == "registrar") {
 
             const newRegistrar = new registrar({
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.email,
-                uuid : `${uuid.v4()}registrar`
+                uuid: `${uuid.v4()}registrar`
             });
 
-            await newRegistrar.save();
-            res.status(200).send({message: "Registrar added successfully"});
+            try {
+                await newRegistrar.save();
+                res.status(200).send({ message: "Registrar added successfully" });
+            } catch (error) {
+                if(error.name == 'MongoServerError' && error.code == 11000){
+                    res.status(409).send({message: "Duplicate key error", duplicateKey: Object.keys(error.keyPattern)[0]});
+                    return;
+                }                  
+            }
+
 
         }
-        else if(role == "securityManager"){
+        else if (role == "securityManager") {
 
             const newSecurityManager = new security_manager({
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.mobile,
                 mobile: req.body.mobile,
-                uuid : `${uuid.v4()}securityManager`
+                uuid: `${uuid.v4()}securityManager`
             });
 
-            await newSecurityManager.save();
-            res.status(200).send({message: "Security Manager added successfully"});
+            try {
+                await newSecurityManager.save();
+                res.status(200).send({ message: "Security Manager added successfully" });
+            } catch (error) {
+                if(error.name == 'MongoServerError' && error.code == 11000){
+                    res.status(409).send({message: "Duplicate key error", duplicateKey: Object.keys(error.keyPattern)[0]});
+                    return;
+                }                  
+            }
+
 
         }
-        else{
-            res.status(500).send({message: "Invalid data"});
+        else {
+            res.status(500).send({ message: "Invalid data" });
         }
-        
-
-
-
 
     } catch (error) {
         console.log("This is error from ./controllers/IT-Admin/addUser.js");
         console.log(error);
         res.status(500).send({ message: "Internal Server Error" });
-        
+
     }
 
 }
