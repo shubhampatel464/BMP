@@ -45,6 +45,9 @@ const AddStaff = () => {
                 alert('Session Expired');
                 navigate('/login');
             }
+            else if(reponse.status === 409){
+                alert(`Duplicate key error: ${reponse.data.duplicateKey} already exists`);
+            }
             else{
                 alert('Error Occured');
             }
