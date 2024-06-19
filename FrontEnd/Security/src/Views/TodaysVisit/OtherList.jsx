@@ -7,53 +7,30 @@ import React, {
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import { BACKEND_URL } from "../Services/Helpers";
-import Cookies from 'js-cookie';
+import { BACKEND_URL } from "../../Services/Helpers";
+import { useNavigate } from "react-router-dom";
+
+// {
+//     "_id": "6672d7423394f9b4fc20d1d5",
+//     "uuid": "8ee287e8-f6d1-477f-afa2-af5eba270d4cvisitor",
+//     "name": "Jainil_Rushi",
+//     "mobile": "9924590036",
+//     "email": "shubhampatel1293@gmail.com",
+//     "arrival_date": "2024-06-19T00:00:00.000Z",
+//     "purpose": "Meeting",
+//     "scheduled_by": "5a553b28-490e-44ae-9496-18d6692ad60dfaculty_adminBlock",
+//     "__v": 0
+// }
 
 
-
-
-
-// [
-//     {
-//         "_id": "6660a1bab4d9b6089f9454e1",
-//         "uuid": "f906268e-c5ab-4b0f-82c1-f74a62269f9bvisitor",
-//         "name": "shubham ",
-//         "mobile": "9898989898",
-//         "purpose": "To meet dean",
-//         "entry_time": "5/6/2024, 11:04:20 pm",
-//         "exit_time": "5/6/2024, 11:04:50 pm",
-//         "photo_entry": "https://btsri.blob.core.windows.net/visitor//tmp/tmp-1-1717608860009",
-//         "photo_exit": "https://btsri.blob.core.windows.net/visitor//tmp/tmp-2-1717608889345",
-//         "__v": 0
-//     }
-// ]
-
-const getValue = (inputSelector) => {
-    var text = document.querySelector(inputSelector).value;
-    switch (text) {
-        case "none":
-            return;
-        case "tab":
-            return "\t";
-        default:
-            return text;
-    }
-};
-
-const getParams = () => {
-    return {
-        columnSeparator: getValue("#columnSeparator"),
-    };
-};
-
-
-const VisitorRecordList = () => {
+const OthersListGrid = () => {
 
     const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
     const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
     const [rowData, setRowData] = useState();
     const gridRef = useRef();
+
+    const navigate = useNavigate();
 
     const [columnDefs, setColumnDefs] = useState([
         {
@@ -69,51 +46,37 @@ const VisitorRecordList = () => {
             sortable: true,
         },
         {
+            headerName:"Email",
+            field:"email",
+            filter:"agTextColumnFilter",
+            sortable:true,
+        },
+        {
             headerName: "Purpose",
             field: "purpose",
             filter: "agTextColumnFilter",
             sortable: true,
         },
         {
-            headerName: "Email",
-            field: "email",
+            headerName: "Scheduled By",
+            field: "scheduled_by",
             filter: "agTextColumnFilter",
             sortable: true,
         },
         {
-            headerName: "Arrival date",
-            field: "arrival_date",
-            filter: "agDateColumnFilter",
-            sortable: true,
-            filterParams: {
-                // provide comparator function, which is used to compare dates (not times)
-                comparator: function (filterLocalDateAtMidnight, cellValue) {
-                    // In the example application, dates are stored as dd/mm/yyyy, hh:mm:ss am/pm format
-                    // We create a Date object for comparison against the filter date
-                    const dateAsString = cellValue.split(",")[0]  // remove time part;
-                    const dateParts = dateAsString.split("/");
-                    const cellDate = new Date(
-                        Number(dateParts[2]),
-                        Number(dateParts[1]) - 1,
-                        Number(dateParts[0]),
-                    );
-
-                    if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-                        return 0;
-                    }
-                    if (cellDate < filterLocalDateAtMidnight) {
-                        return -1;
-                    }
-                    if (cellDate > filterLocalDateAtMidnight) {
-                        return 1;
-                    }
-                    return 0;
-                },
-            },
+            headerName: "Add visit",
+            field: "uuid",
             cellRenderer: function (params) {
-                const date = params.data.arrival_date
-                return new Date(date).toLocaleDateString()
-            }
+                return (
+                    // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
+                    <span className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto outline-none cursor-pointer" onClick={() => {
+                        navigate("/other-visit-entry", { state: { otherVisitorData : params.data } })
+                    }}>
+                        Add Visit
+                    </span>
+                    // {/* </button> */}
+                )
+            },
         },
     ]);
 
@@ -128,15 +91,9 @@ const VisitorRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/faculty_adminBlock/getVisitors`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": Cookies.get('token'),
-            },
-        })
+        fetch(`${BACKEND_URL}/security/getVisitorList`)
             .then((resp) => resp.json())
-            .then((data) => setRowData(data.visitors));
+            .then((data) => setRowData(data));
     }, []);
 
     function convertToCsv(rowData, columnDefs) {
@@ -147,7 +104,7 @@ const VisitorRecordList = () => {
         const keys = columnDefs.map(column => column.field);
 
         // Create CSV header row
-        const headerRow = "Name,Mobile,Email,Purpose,Arrival Date,Scheduled By";
+        const headerRow = "Name,Mobile,Email,Purpose,Scheduled By";
         // console.log(headerRow)
 
         // Create CSV data rows
@@ -159,18 +116,15 @@ const VisitorRecordList = () => {
         return csv;
     }
 
-
-
     const onBtnExport = useCallback(() => {
         const rowData = gridRef.current.api.getModel().rowsToDisplay.map(row => row.data);
 
         const orderedColumnDefs = [
             { headerName: "Name", field: "name" },
             { headerName: "Mobile", field: "mobile" },
-            { headerName: 'Email', field: 'email' },
-            { headerName: 'Purpose', field: 'purpose' },
-            { headerName: 'Arrival Date', field: 'arrival_date' },
-            { headerName: 'Scheduled By', field: 'scheduled_by' }
+            { headerName: "Email", field: "email" },
+            { headerName: "Purpose", field: "purpose" },
+            { headerName: "Scheduled By", field: "scheduled_by" },
         ];
 
         const csv = convertToCsv(rowData, orderedColumnDefs);
@@ -212,6 +166,4 @@ const VisitorRecordList = () => {
     );
 };
 
-export default VisitorRecordList
-
-// Path: FrontEnd/Security/src/Views/Visitors/index.jsx
+export default OthersListGrid

@@ -12,12 +12,13 @@ import TempPass from './Views/Visitors/TempPass';
 import StudentRecords from './Views/Records/Student';
 import VisitorRecords from './Views/Records/Visitors';
 import StaffRecords from './Views/Records/Staff';
-import ParentListForToday from './Views/ParentVisit';
-import ParentEntry from './Views/ParentVisit/ParentEntry';
-import VisiorPassForTwo from './Components/VisitorPassForTwo';
-import ParentTempPass from './Views/ParentVisit/ParentTempPass';
+import VisitsForToday from './Views/TodaysVisit';
+import ParentEntry from './Views/TodaysVisit/ParentEntry';
+import ParentTempPass from './Views/TodaysVisit/ParentTempPass';
 import ResetPasssword from './Views/ResetPassword';
 import ParentRecords from './Views/Records/Parent';
+import OtherEntry from './Views/TodaysVisit/OtherEntry';
+import OtherTempPass from './Views/TodaysVisit/OtherTmpPass';
 
 // react router 
 
@@ -40,10 +41,15 @@ function App() {
                 <Route path='/visitor-pass' element={<TempPass />} />
 
                 {/* parent */}
-                <Route path='/parent/list-today' element={<ParentListForToday />} />
+                <Route path='/parent/list-today' element={<VisitsForToday />} />
                 <Route path='/parent/entry' element={<ParentEntry />} />
                 <Route path='/parent/exit' element={<ParentEntry />} />
                 <Route path='/parent-pass' element={<ParentTempPass />} />
+
+                {/* scheduled visits by admin Block / Faculty */}
+                <Route path='/other-visit-list-today' element={<VisitsForToday />} />
+                <Route path='/other-visit-entry' element={<OtherEntry />} />
+                <Route path='/other-visit-pass' element={<OtherTempPass />} />
 
                 {/* records */}
                 <Route path='/records' element={<RecordsDashBoard />} />

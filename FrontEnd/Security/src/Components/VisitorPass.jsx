@@ -28,6 +28,8 @@ const VisitorPass = React.forwardRef(({ data }, ref) => {
                         <p><span>Name:</span> {data.name}</p>
                         <p><span>Entry Time : </span>{data.entryTime}</p>
                         <p><span>Mobile: </span> {data.mobile}</p>
+                        {data.email && <p><span>Email:</span> {data.email}</p>}
+                        {data.sheduled_by && <p><span>Scheduled By:</span> {data.sheduled_by}</p>}
                         <p><span>Purpose:</span> {data.purpose}</p>
                     </div>
                     <div className="visitor-photo">
@@ -50,17 +52,6 @@ const VisitorPass = React.forwardRef(({ data }, ref) => {
 
 const VisiorPass = ({visitorData}) => {
     const componentRef = useRef();
-
-    // const visitorData = {
-    //     date: '21/01/2012',
-    //     name: 'Dharmel Parmar',
-    //     purpose: 'For VMS Installation ffsdfdfds dsfdsfds',
-    //     entryTime: '10:00 AM',
-    //     mobile: '1234567890',
-    //     qrCodeValue: 'https://example.com',
-    //     validityFrom: '21/01/2012',
-    //     validityTo: '22/01/2012',
-    // };
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
