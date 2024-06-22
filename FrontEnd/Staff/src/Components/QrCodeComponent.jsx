@@ -15,14 +15,14 @@ const QrCodeComponent = ({ value ="www.reactjs.com" }) => {
             fgColor={"#000000"}
             level={"L"}
             includeMargin={false}
-            imageSettings={{
-                src: Logo,
-                x: undefined,
-                y: undefined,
-                height:50,
-                width:50,
-                excavate: true,
-            }}
+            // imageSettings={{
+            //     src: Logo,
+            //     x: undefined,
+            //     y: undefined,
+            //     height:50,
+            //     width:50,
+            //     excavate: true,
+            // }}
         />
     )
 }
