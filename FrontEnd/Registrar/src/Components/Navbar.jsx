@@ -1,8 +1,9 @@
 import Logo from './../Assets/Logo.png'
 import Cookies from 'js-cookie'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export const Navbar = () => {
+export const Navbar = ({ signout = true }) => {
     // const history = useHistory()
     const navigate = useNavigate()
     return (
@@ -17,15 +18,21 @@ export const Navbar = () => {
                     <h1 className='text-xl text-blue6 font-bold'>DAIICT</h1>
                 </div>
 
-                <div className='flex items-center space-x-4' onClick={
-                    () => {
-                        Cookies.remove('token')
-                        window.location.reload()
-                        navigate('/login')
-                    }
-                } >
-                    <p className='text-blue6 font-medium cursor-pointer'>Sign Out</p>
-                </div>
+                {
+                    signout &&
+                    <div className='flex items-center space-x-4' onClick={
+                        () => {
+                            Cookies.remove('token')
+                            window.location.reload()
+                            navigate('/login')
+                        }
+                    }>
+
+                        <p className='text-blue6 font-medium cursor-pointer'>Sign Out</p>
+                    </div>
+                }
+
+
             </nav >
         </>
     )

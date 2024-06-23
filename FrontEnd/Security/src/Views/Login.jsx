@@ -68,7 +68,7 @@ const LoginForm = () => {
 
     return (
         <>
-            <Navbar />
+            <Navbar signout={false} />
 
             {/* flex div with login and image  */}
             <div className='flex justify-evenly w-screen items-center h-screen'>
