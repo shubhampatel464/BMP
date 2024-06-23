@@ -17,7 +17,7 @@ const login = async (req, res) => {
         if (!isMatch) {
             return res.status(401).send("Invalid Password");
         }
-        const token = jwt.sign({ _id: user._id.toString(), email:user.email }, process.env.JWT_SECRET);
+        const token = jwt.sign({ _id: user._id.toString(), email:user.email, uuid:user.uuid}, process.env.JWT_SECRET);
         res.status(200).send({ user,token });
     }
     catch (error) {
