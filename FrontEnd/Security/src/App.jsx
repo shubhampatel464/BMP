@@ -19,45 +19,59 @@ import ResetPasssword from './Views/ResetPassword';
 import ParentRecords from './Views/Records/Parent';
 import OtherEntry from './Views/TodaysVisit/OtherEntry';
 import OtherTempPass from './Views/TodaysVisit/OtherTmpPass';
+import Cookies from 'js-cookie'
+import { Navigate, Outlet } from 'react-router-dom'
 
 // react router 
+
+const PrivateRoutes = () => {
+    const token = Cookies.get('token')
+    if (token) {
+        return <Outlet />
+    }
+    else {
+        return <Navigate to='/login' />
+    }
+}
 
 function App() {
     return (
         <div className="App h-screen">
             <Routes>
-                {/* QR-code scanner for entry and exit */}
+
                 <Route path="/" element={<LoginForm />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path='/reset-password' element={<ResetPasssword />} />
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/qr-code' element={<QrCode />} />
-                <Route path='/qr-reader' element={<QrScan />} />
-                <Route path='/face-detection' element={<FaceScan />} />
 
-                {/* general visitors */}
-                <Route path='/add-visitor' element={<Visitors />} />
-                <Route path='/current-visitor-list' element={<Visitors />} />
-                <Route path='/visitor-pass' element={<TempPass />} />
+                <Route element={<PrivateRoutes />}>
+                    <Route path='/dashboard' element={<Dashboard />} />
+                    <Route path='/qr-code' element={<QrCode />} />
+                    <Route path='/qr-reader' element={<QrScan />} />
+                    <Route path='/face-detection' element={<FaceScan />} />
 
-                {/* parent */}
-                <Route path='/parent/list-today' element={<VisitsForToday />} />
-                <Route path='/parent/entry' element={<ParentEntry />} />
-                <Route path='/parent/exit' element={<ParentEntry />} />
-                <Route path='/parent-pass' element={<ParentTempPass />} />
+                    {/* general visitors */}
+                    <Route path='/add-visitor' element={<Visitors />} />
+                    <Route path='/current-visitor-list' element={<Visitors />} />
+                    <Route path='/visitor-pass' element={<TempPass />} />
 
-                {/* scheduled visits by admin Block / Faculty */}
-                <Route path='/other-visit-list-today' element={<VisitsForToday />} />
-                <Route path='/other-visit-entry' element={<OtherEntry />} />
-                <Route path='/other-visit-pass' element={<OtherTempPass />} />
+                    {/* parent */}
+                    <Route path='/parent/list-today' element={<VisitsForToday />} />
+                    <Route path='/parent/entry' element={<ParentEntry />} />
+                    <Route path='/parent/exit' element={<ParentEntry />} />
+                    <Route path='/parent-pass' element={<ParentTempPass />} />
 
-                {/* records */}
-                <Route path='/records' element={<RecordsDashBoard />} />
-                <Route path='/records/student' element={<StudentRecords />}  ></Route>
-                <Route path='/records/visitor' element={<VisitorRecords />}  ></Route>
-                <Route path='/records/staff' element={<StaffRecords />}  ></Route>
-                <Route path='/records/parent' element={<ParentRecords />}  ></Route>
+                    {/* scheduled visits by admin Block / Faculty */}
+                    <Route path='/other-visit-list-today' element={<VisitsForToday />} />
+                    <Route path='/other-visit-entry' element={<OtherEntry />} />
+                    <Route path='/other-visit-pass' element={<OtherTempPass />} />
 
+                    {/* records */}
+                    <Route path='/records' element={<RecordsDashBoard />} />
+                    <Route path='/records/student' element={<StudentRecords />}  ></Route>
+                    <Route path='/records/visitor' element={<VisitorRecords />}  ></Route>
+                    <Route path='/records/staff' element={<StaffRecords />}  ></Route>
+                    <Route path='/records/parent' element={<ParentRecords />}  ></Route>
+                </Route>
                 {/* not found */}
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>

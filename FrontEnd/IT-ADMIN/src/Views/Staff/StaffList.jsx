@@ -47,6 +47,12 @@ const StaffList = () => {
     const gridRef = useRef();
 
     const deleteWarden = async (uuid) => {
+
+        const confirmDelete = window.confirm('Are you sure you want to delete this staff?')
+        if (!confirmDelete) {
+            return
+        }
+
         const response = await postRequestWithToken('itAdmin/deleteUser', {
             uuid: uuid,
             role: 'staff'

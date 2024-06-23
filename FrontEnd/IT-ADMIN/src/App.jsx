@@ -15,7 +15,7 @@ import AddUser from './Views/OtherUsers/AddUser';
 
 const PrivateRoutes = () => {
     // const token = Cookies.get('token') || "";
-    const token = "faas"
+    const token = Cookies.get('token')
     if (token) {
         return <Outlet />
     }

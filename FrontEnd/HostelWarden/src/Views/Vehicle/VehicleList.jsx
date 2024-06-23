@@ -60,20 +60,20 @@ const VechicleList = () => {
             filter: "agTextColumnFilter",
             sortable: true,
         },
-        {
-            headerName: "Delete",
-            field: "student_id",
-            // filter: "agDateColumnFilter",
-            // sortable: true,
-            cellRenderer: function (params) {
-                const sid = params.data.student_id
-                return (
-                    <button onClick={() => deleteVehicle(sid)} className="bg-red-500 hover:bg-red-400 text-white h-[40px] py-0 px-8 rounded-3xl" >
-                        Delete
-                    </button>
-                )
-            }
-        },
+        // {
+        //     headerName: "Delete",
+        //     field: "student_id",
+        //     // filter: "agDateColumnFilter",
+        //     // sortable: true,
+        //     cellRenderer: function (params) {
+        //         const sid = params.data.student_id
+        //         return (
+        //             <button onClick={() => deleteVehicle(sid)} className="bg-red-500 hover:bg-red-400 text-white h-[40px] py-0 px-8 rounded-3xl" >
+        //                 Delete
+        //             </button>
+        //         )
+        //     }
+        // },
     ]);
 
     const defaultColDef = useMemo(() => {
