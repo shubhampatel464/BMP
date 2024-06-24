@@ -50,7 +50,9 @@ const parentEntryExit = async (req, res) => {
                 name2: match.name2,
                 mobile: match.mobile,
                 arrival_date: match.arrival_date,
-                purpose: match.purpose
+                purpose: match.purpose,
+                exit_authorised_by: req.user.name,
+                entry_authorised_by: match.entry_authorised_by
             });
 
             const parent_log = await parent_l.save();
@@ -96,6 +98,7 @@ const parentEntryExit = async (req, res) => {
                 entry_time: current_date,
                 entry_photo1: arrival_photo1,
                 entry_photo2: arrival_photo2,
+                entry_authorised_by: req.user.name
             });
 
             const save = await parent_t.save();

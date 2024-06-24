@@ -46,7 +46,8 @@ const visitorEntryExit = async (req, res) => {
                     purpose: visitorData.purpose,
                     photo_entry: photoUrl,
                     entry_time: istDateTime,
-                    scheduled_by: faculty_adminBlockName
+                    scheduled_by: faculty_adminBlockName,
+                    entry_authorised_by: req.user.name
                 });
 
                 const save = await newTransaction.save();
@@ -92,7 +93,8 @@ const visitorEntryExit = async (req, res) => {
                 mobile: mobile,
                 purpose: purpose,
                 photo_entry: photoUrl,
-                entry_time: entry_time
+                entry_time: entry_time,
+                entry_authorised_by: req.user.name
             });
 
             const save = await new_visitor.save();

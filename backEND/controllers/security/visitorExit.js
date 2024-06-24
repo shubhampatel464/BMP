@@ -45,7 +45,9 @@ const visitorExit = async (req, res) => {
             photo_entry: data.photo_entry,
             photo_exit: photoUrl,
             exit_time: istDateTime,
-            scheduled_by: data.scheduled_by
+            scheduled_by: data.scheduled_by,
+            exit_authorised_by: req.user.name,
+            entry_authorised_by: data.entry_authorised_by
         });
 
         const save = await logs.save();

@@ -79,7 +79,9 @@ const staffEntryExit = async (req, res) => {
                 photo_exit: photoUrl,
                 photo_entry: match.photo_entry,
                 entry_time: match.entry_time,
-                exit_time: istDateTime
+                exit_time: istDateTime,
+                exit_authorised_by: req.user.name,
+                entry_authorised_by: match.entry_authorised_by
             });
 
             const saveLogs = await logs.save();
@@ -107,9 +109,8 @@ const staffEntryExit = async (req, res) => {
                 mobile: staffData.mobile,
                 uuid: uuid,
                 photo_entry: photoUrl,
-                photo_exit: "",
                 entry_time: istDateTime,
-                exit_time: ""
+                entry_authorised_by: req.user.name
             });
 
             const saveData = await data.save();

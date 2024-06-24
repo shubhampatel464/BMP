@@ -12,16 +12,10 @@ const staffSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    photo_exit:{
-        type: String
-    },
     photo_entry:{
         type: String
     },
     entry_time:{
-        type: String
-    },
-    exit_time:{
         type: String
     },
     entry_authorised_by:{
