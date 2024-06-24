@@ -14,7 +14,7 @@ const sendReport = async (buffer,month) => {
                 contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
             }
         ],
-        template: 'blank',
+        template: 'attendence',
         context: {
             text: 'This email contains your attendance report.',
         }

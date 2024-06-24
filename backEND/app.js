@@ -59,8 +59,6 @@ app.use('/registrar', require('./routes/registrar/registrar'));
 app.use('/faculty_adminBlock', require('./routes/faculty_adminBlock/faculty_adminBlock'));
 
 
-require('./triggers/attendence/monthlyUpdate')();
-
 
 
 app.listen(port, () => {
