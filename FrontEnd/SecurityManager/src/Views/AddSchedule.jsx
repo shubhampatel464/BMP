@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../Components/Button';
 import { Navbar } from '../Components/Navbar';
 import { StickyFooterMobile } from '../Components/StickyFooterMobile';
+import { postRequestWithToken, getRequestWithToken } from '../Services/Api';
+import { useNavigate } from 'react-router-dom';
 
-const guardsList = [
-    { id: "qasdasa", name: "Guard 1" },
-    { id: "qasdweqwasd", name: "Guard 2" },
-    { id: "qasdweaasaswasd", name: "Guard 3" },
-    { id: "qaswewdasd", name: "Guard 4" },
-    { id: "qasdwewasd", name: "Guard 5" },
-    { id: "qasdweweasd", name: "Guard 6" },
-    { id: "qasdjknjnjkqewqasd", name: "Guard 7" },
-    { id: "qasdqweqwasd", name: "Guard 8" },
-    { id: "qaswqewqdasd", name: "Guard 9" },
-    { id: "qasdqwsseqwasd", name: "Guard 10" },
-    { id: "qasqweqdasd", name: "Guard 11" },
-];
+// const guardsList = [
+//     { id: "qasdasa", name: "Guard 1" },
+//     { id: "qasdweqwasd", name: "Guard 2" },
+//     { id: "qasdweaasaswasd", name: "Guard 3" },
+//     { id: "qaswewdasd", name: "Guard 4" },
+//     { id: "qasdwewasd", name: "Guard 5" },
+//     { id: "qasdweweasd", name: "Guard 6" },
+//     { id: "qasdjknjnjkqewqasd", name: "Guard 7" },
+//     { id: "qasdqweqwasd", name: "Guard 8" },
+//     { id: "qaswqewqdasd", name: "Guard 9" },
+//     { id: "qasdqwsseqwasd", name: "Guard 10" },
+//     { id: "qasqweqdasd", name: "Guard 11" },
+// ];
 
 const GuardScheduler = () => {
     const [guards, setGuards] = useState([]);
@@ -23,7 +25,11 @@ const GuardScheduler = () => {
     const [shift2, setShift2] = useState(["", "", ""]);
     const [shift3, setShift3] = useState(["", "", ""]);
 
-    const [date, setDate] = useState(new Date());
+    // console.log(shift1, shift2, shift3)
+
+    const [date, setDate] = useState(null);
+
+    const navigate = useNavigate();
 
     const handleDateChange = (date) => {
         setDate(date);
@@ -35,14 +41,27 @@ const GuardScheduler = () => {
     }, []);
 
     const fetchGuards = async () => {
-        setGuards(guardsList);
-        // try {
-        //     const response = await fetch('/api/guards'); // Adjust the API endpoint as needed
-        //     const data = await response.json();
-        //     setGuards(data);
-        // } catch (error) {
-        //     console.error('Error fetching guards:', error);
-        // }
+        // setGuards(guardsList);
+        try {
+            const response = await getRequestWithToken("securityManager/getAllSecurities");
+
+            if (response.status === 200) {
+                const data = response.data.map(guard => ({
+                    id: guard.uuid,
+                    name: guard.name
+                }));
+                setGuards(data);
+            }
+            else {
+                alert("Failed to fetch guards. Please Try Again.")
+                navigate('/dashboard')
+                console.error("Failed to fetch guards. Please Try Again.");
+            }
+        } catch (error) {
+            alert('Failed to fetch guards. Please Try Again.');
+            navigate('/dashboard')
+            console.error('Error fetching guards:', error);
+        }
     };
 
     const onGuardChange = (event, shift, index) => {
@@ -72,47 +91,55 @@ const GuardScheduler = () => {
         const schedule = {
             shift1: shift1,
             shift2: shift2,
-            shift3: shift3
+            shift3: shift3,
+            date: date
         };
 
-        console.log(schedule);
+        // console.log(schedule);
 
-        // try {
-        //     const response = await fetch('/api/schedule', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(schedule)
-        //     });
-        //     if (response.ok) {
-        //         alert('Schedule submitted successfully');
-        //     } else {
-        //         alert('Failed to submit schedule');
-        //     }
-        // } catch (error) {
-        //     console.error('Error submitting schedule:', error);
-        // }
+        try {
+            const response = await postRequestWithToken("securityManager/addShift", schedule);
+            if (response.status == 200) {
+                alert('Schedule submitted successfully');
+                setShift1(["", "", ""]);
+                setShift2(["", "", ""]);
+                setShift3(["", "", ""]);
+                navigate('/dashboard');
+            }
+            else if (response.status == 403) {
+                alert("The date you selected is already scheduled. Please select another date.")
+                setDate(null);
+            }
+            else if (response.status == 401) {
+                alert('Please login to access this page');
+                navigate('/login');
+            }
+            else {
+                alert('Failed to submit schedule');
+            }
+        } catch (error) {
+            console.error('Error submitting schedule:', error);
+        }
     };
 
-    // same guard can not be selected again in same shift but can be selected in different shift.
+    // same guard can not be selected again in any shift
     const getGuardOptionsForShift = (shift, guardIndex) => {
-        // guard options for shift 1
-        if (shift === 'shift1') {
-            const options = guards.filter(guard => !shift1.includes(guard.id) || shift1.indexOf(guard.id) === guardIndex);
-            return options;
+        const options = guards.filter(guard => {
+            if (shift === 'shift1') {
+                return (guard.id == shift1[guardIndex] || !shift1.includes(guard.id)) && !shift2.includes(guard.id) && !shift3.includes(guard.id);
+            }
+            if (shift === 'shift2') {
+                return (guard.id == shift2[guardIndex] || !shift2.includes(guard.id)) && !shift1.includes(guard.id) && !shift3.includes(guard.id);
+            }
+            if (shift === 'shift3') {
+                return (guard.id == shift3[guardIndex] || !shift3.includes(guard.id)) && !shift1.includes(guard.id) && !shift2.includes(guard.id);
+            }
         }
-        // guard options for shift 2
-        if (shift === 'shift2') {
-            const options = guards.filter(guard => !shift2.includes(guard.id) || shift2.indexOf(guard.id) === guardIndex);
-            return options;
-        }
+        );
 
-        // guard options for shift 3
-        if (shift === 'shift3') {
-            const options = guards.filter(guard => !shift3.includes(guard.id) || shift3.indexOf(guard.id) === guardIndex);
-            return options;
-        }
+        // console.log(options)
+
+        return options;
     };
 
 

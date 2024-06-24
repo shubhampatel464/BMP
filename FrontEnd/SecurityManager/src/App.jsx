@@ -30,12 +30,12 @@ function App() {
                 <Route path="/login" element={<LoginForm />} />
                 <Route path='/reset-password' element={<ResetPasssword />} />
 
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/add-schedule' element={<GuardScheduler />} />
-                <Route path='/view-schedule' element={<ScheduleHome />} />
-                <Route path='/past-schedule' element={<ScheduleHome />} />
 
                 <Route element={<PrivateRoutes />}>
+                    <Route path='/dashboard' element={<Dashboard />} />
+                    <Route path='/add-schedule' element={<GuardScheduler />} />
+                    <Route path='/view-schedule' element={<ScheduleHome />} />
+                    <Route path='/past-schedule' element={<ScheduleHome />} />
                 </Route>
                 {/* not found */}
                 <Route path="*" element={<h1>Not Found</h1>} />

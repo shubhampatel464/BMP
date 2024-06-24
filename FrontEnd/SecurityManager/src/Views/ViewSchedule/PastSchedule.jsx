@@ -9,19 +9,66 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
 import { useNavigate } from "react-router-dom";
+import { getRequest, getRequestWithToken } from "../../Services/Api";
 
-// {
-//     "_id": "6672d7423394f9b4fc20d1d5",
-//     "uuid": "8ee287e8-f6d1-477f-afa2-af5eba270d4cvisitor",
-//     "name": "Jainil_Rushi",
-//     "mobile": "9924590036",
-//     "email": "shubhampatel1293@gmail.com",
-//     "arrival_date": "2024-06-19T00:00:00.000Z",
-//     "purpose": "Meeting",
-//     "scheduled_by": "5a553b28-490e-44ae-9496-18d6692ad60dfaculty_adminBlock",
-//     "__v": 0
-// }
-
+// [
+//     {
+//         "_id": "6679de2628badae58c369a3b",
+//         "date": "27/06/2024",
+//         "shift1": [
+//             {
+//                 "name": "Security 1",
+//                 "mobile": 762205112,
+//                 "_id": "6679c14427b9860ad21c54c4"
+//             },
+//             {
+//                 "name": "Security 2",
+//                 "mobile": 7632105112,
+//                 "_id": "6679c15027b9860ad21c54cb"
+//             },
+//             {
+//                 "name": "Security4",
+//                 "mobile": 8832113112,
+//                 "_id": "6679c16527b9860ad21c54d9"
+//             }
+//         ],
+//         "shift2": [
+//             {
+//                 "name": "Security3",
+//                 "mobile": 7632113112,
+//                 "_id": "6679c15d27b9860ad21c54d2"
+//             },
+//             {
+//                 "name": "Security5",
+//                 "mobile": 8802113112,
+//                 "_id": "6679c17027b9860ad21c54e0"
+//             },
+//             {
+//                 "name": "Security7",
+//                 "mobile": 9902113989,
+//                 "_id": "6679c18a27b9860ad21c54ec"
+//             }
+//         ],
+//         "shift3": [
+//             {
+//                 "name": "Shubham",
+//                 "mobile": 7622051655,
+//                 "_id": "6672e53dc7d001453a1f981c"
+//             },
+//             {
+//                 "name": "Shubham",
+//                 "mobile": 7622051111,
+//                 "_id": "6672e54ac7d001453a1f9822"
+//             },
+//             {
+//                 "name": "Security8",
+//                 "mobile": 9909913989,
+//                 "_id": "6679c19527b9860ad21c54f3"
+//             }
+//         ],
+//         "__v": 0
+//     }
+// ]
 
 const PastScheduleList = () => {
 
@@ -34,49 +81,76 @@ const PastScheduleList = () => {
 
     const [columnDefs, setColumnDefs] = useState([
         {
-            headerName: "Name",
-            field: "name",
+            headerName: "Date",
             filter: "agTextColumnFilter",
             sortable: true,
+            cellRenderer: (params) => {
+                return params.data.date;
+            }
         },
         {
-            headerName: "Mobile",
-            field: "mobile",
+            headerName: "Shift 1",
+            field: "name1",
             filter: "agTextColumnFilter",
             sortable: true,
-        },
-        {
-            headerName:"Email",
-            field:"email",
-            filter:"agTextColumnFilter",
-            sortable:true,
-        },
-        {
-            headerName: "Purpose",
-            field: "purpose",
-            filter: "agTextColumnFilter",
-            sortable: true,
-        },
-        {
-            headerName: "Scheduled By",
-            field: "scheduled_by",
-            filter: "agTextColumnFilter",
-            sortable: true,
-        },
-        {
-            headerName: "Add visit",
-            field: "uuid",
-            cellRenderer: function (params) {
+            cellRenderer: (params) => {
                 return (
-                    // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
-                    <span className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto outline-none cursor-pointer" onClick={() => {
-                        navigate("/other-visit-entry", { state: { otherVisitorData : params.data } })
-                    }}>
-                        Add Visit
-                    </span>
-                    // {/* </button> */}
+                    <div className="flex flex-col gap-0 text-black justify-between">
+
+                        {params.data.shift1.map((shift) => {
+                            return (
+                                <div className="block p-0 h-8">
+                                    {shift.name} ,
+                                </div>
+                            );
+                        }
+                        )}
+                    </div>
                 )
-            },
+            }
+
+        },
+        {
+            headerName: "Shift 2",
+            field: "name2",
+            filter: "agTextColumnFilter",
+            sortable: true,
+            cellRenderer: (params) => {
+                return (
+                    <div className="flex flex-col gap-0 text-black justify-between">
+
+                        {params.data.shift2.map((shift) => {
+                            return (
+                                <div className="block p-0 h-8">
+                                    {shift.name} ,
+                                </div>
+                            );
+                        }
+                        )}
+                    </div>
+                )
+            }
+        },
+        {
+            headerName: "Shift 3",
+            field: "name3",
+            filter: "agTextColumnFilter",
+            sortable: true,
+            cellRenderer: (params) => {
+                return (
+                    <div className="flex flex-col gap-0 text-black justify-between">
+
+                        {params.data.shift3.map((shift) => {
+                            return (
+                                <div className="block p-0 h-8">
+                                    {shift.name} ,
+                                </div>
+                            );
+                        }
+                        )}
+                    </div>
+                )
+            }
         },
     ]);
 
@@ -91,62 +165,33 @@ const PastScheduleList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/security/getVisitorList`)
-            .then((resp) => resp.json())
-            .then((data) => setRowData(data));
-    }, []);
+        getRequestWithToken(`securityManager/getShiftLogs`)
+            .then((resp) => {
+                if (resp.status === 401) {
+                    alert('Session expired. Please login again');
+                    navigate('/login');
+                }
+                return resp.data
+            })
+            .then((data) => {
 
-    function convertToCsv(rowData, columnDefs) {
-        // Extract column headers
-        const columnHeaders = columnDefs.map(column => column.headerName);
+                console.log(data);
+                // const rowData = [
+                // ];
 
-        // Extract keys in the order they appear in columnDefs
-        const keys = columnDefs.map(column => column.field);
+                // for (let i = 0; i < data.length; i++) {
 
-        // Create CSV header row
-        const headerRow = "Name,Mobile,Email,Purpose,Scheduled By";
-        // console.log(headerRow)
+                // };
 
-        // Create CSV data rows
-        const dataRows = rowData.map(row => keys.map(key => row[key]).join(','));
-
-        // Combine header row and data rows
-        const csv = [headerRow, ...dataRows].join('\n');
-
-        return csv;
-    }
-
-    const onBtnExport = useCallback(() => {
-        const rowData = gridRef.current.api.getModel().rowsToDisplay.map(row => row.data);
-
-        const orderedColumnDefs = [
-            { headerName: "Name", field: "name" },
-            { headerName: "Mobile", field: "mobile" },
-            { headerName: "Email", field: "email" },
-            { headerName: "Purpose", field: "purpose" },
-            { headerName: "Scheduled By", field: "scheduled_by" },
-        ];
-
-        const csv = convertToCsv(rowData, orderedColumnDefs);
-
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const link = document.createElement('a');
-        if (link.download !== undefined) {
-            const url = URL.createObjectURL(blob);
-            link.setAttribute('href', url);
-            link.setAttribute('download', 'export.csv');
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+                // console.log(rowData);
+                setRowData(data);
+            });
     }, []);
 
 
     return (
         <>
             <div className="w-screen h-screen p-8" >
-                <button onClick={onBtnExport} className='bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded mb-6' >Download CSV export file</button>
 
                 <div
                     style={gridStyle}
@@ -159,6 +204,7 @@ const PastScheduleList = () => {
                         defaultColDef={defaultColDef}
                         onGridReady={onGridReady}
                         suppressExcelExport={true}
+                        rowHeight={100}
                     />
                 </div>
             </div>
