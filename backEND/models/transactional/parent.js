@@ -35,7 +35,10 @@ const parentSchema = new mongoose.Schema({
     },
     entry_photo2:{
         type: String
-    }
+    },
+    entry_authorised_by:{
+        type: String
+    },
 });
 
 module.exports = mongoose.model('Parent_Transactional', parentSchema);

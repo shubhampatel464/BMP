@@ -6,41 +6,42 @@ const addShift = async (req, res) => {
 
     try {
 
-        const current_time = new Date();
-        const options = {
-            timeZone: "Asia/Kolkata",
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-        };
-        const istDateTime = current_time.toLocaleString("en-IN", options);
+        const jsFrontendDate = new Date(req.body.date);
 
-        const check = await shiftLogs.findOne({date: istDateTime});
+        // Extract day, month, and year from the JavaScript Date object
+        const day = jsFrontendDate.getDate();
+        const month = jsFrontendDate.getMonth() + 1; // Months are zero-indexed, so add 1
+        const year = jsFrontendDate.getFullYear();
 
-        if(check){
-            return res.status(400).json({message: "Shifts already added for today"});
+        // Format database date as "25/06/2024"
+        const databaseDate = `${day}/${month}/${year}`;
+
+        const check = await shiftLogs.findOne({ date: databaseDate });
+
+        if (check) {
+            return res.status(403).send({ message: "Shifts already added for today" });
         }
 
 
 
-        const clear = await security.updateMany({}, {shift: -1});
+        const clear = await security.updateMany({}, { shift: -1 });
 
 
-        const { shift1 , shift2 , shift3 } = req.body;
+        const { shift1, shift2, shift3 } = req.body;
 
-        for(shift in shift1){
+        for (shift in shift1) {
             const uuid = shift1[shift];
-            const update = await security.findOneAndUpdate({uuid: uuid}, {shift: 1});
+            const update = await security.findOneAndUpdate({ uuid: uuid }, { shift: 1 });
         }
 
-        for(shift in shift2){
+        for (shift in shift2) {
             const uuid = shift2[shift];
-            const update = await security.findOneAndUpdate({uuid: uuid}, {shift: 2});
+            const update = await security.findOneAndUpdate({ uuid: uuid }, { shift: 2 });
         }
 
-        for(shift in shift3){
+        for (shift in shift3) {
             const uuid = shift3[shift];
-            const update = await security.findOneAndUpdate({uuid: uuid}, {shift: 3});
+            const update = await security.findOneAndUpdate({ uuid: uuid }, { shift: 3 });
         }
 
         const pipe = [
@@ -65,33 +66,33 @@ const addShift = async (req, res) => {
             shift1: [],
             shift2: [],
             shift3: [],
-            date : istDateTime
+            date: databaseDate
         };
 
-        for(guard in data){
-            if(data[guard].shift === 1){
+        for (guard in data) {
+            if (data[guard].shift === 1) {
                 shiftLog.shift1.push(data[guard]);
             }
-            else if(data[guard].shift === 2){
+            else if (data[guard].shift === 2) {
                 shiftLog.shift2.push(data[guard]);
             }
-            else if(data[guard].shift === 3){
+            else if (data[guard].shift === 3) {
                 shiftLog.shift3.push(data[guard]);
             }
         }
 
-        console.log(shiftLog);
+        // console.log(shiftLog);
 
         const log = new shiftLogs(shiftLog);
         const save = await log.save();
 
-        res.status(200).json({message: "Shifts added successfully"});
+        res.status(200).json({ message: "Shifts added successfully" });
 
 
     } catch (error) {
         console.log("This is error from ./backEND/controllers/securityManager/addShift.js");
         console.log(error);
-        res.status(500).json({message: "Internal Server Error"});
+        res.status(500).json({ message: "Internal Server Error" });
     }
 
 }

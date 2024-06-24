@@ -30,7 +30,10 @@ const studentSchema = new mongoose.Schema({
     },
     reason:{
         type: String
-    }
+    },
+    exit_authorised_by:{
+        type: String
+    },
 });
 
 const student = mongoose.model('student_transactional', studentSchema);

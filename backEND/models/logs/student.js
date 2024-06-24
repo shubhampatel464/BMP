@@ -23,7 +23,10 @@ const studentSchema = new mongoose.Schema({
     exit_time:{
         type: String
     },
-    scheduled_by:{
+    entry_authorised_by:{
+        type: String
+    },
+    exit_authorised_by:{
         type: String
     }
 });

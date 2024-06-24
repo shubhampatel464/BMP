@@ -31,7 +31,10 @@ const visitorSchema = new mongoose.Schema({
     },
     photo_exit:{
         type: String
-    }
+    },
+    entry_authorised_by:{
+        type: String
+    },
 });
 
 module.exports = mongoose.model('visitor_transactional', visitorSchema);

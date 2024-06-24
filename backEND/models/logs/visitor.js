@@ -31,7 +31,13 @@ const visitorSchema = new mongoose.Schema({
     },
     scheduled_by:{
         type: String
-    }
+    },
+    entry_authorised_by:{
+        type: String
+    },
+    exit_authorised_by:{
+        type: String
+    },
 });
 
 module.exports = mongoose.model('visitor_logs', visitorSchema);

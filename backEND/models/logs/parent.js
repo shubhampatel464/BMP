@@ -44,7 +44,13 @@ const parentLogsSchema = new mongoose.Schema({
     },
     exit_photo2:{
         type: String
-    }
+    },
+    entry_authorised_by:{
+        type: String
+    },
+    exit_authorised_by:{
+        type: String
+    },
 });
 
 module.exports = mongoose.model('Parent_logs', parentLogsSchema);

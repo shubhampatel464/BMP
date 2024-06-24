@@ -21,6 +21,12 @@ const staffSchema = new mongoose.Schema({
     },
     exit_time:{
         type: String
+    },
+    entry_authorised_by:{
+        type: String
+    },
+    exit_authorised_by:{
+        type: String
     }
 });
 
