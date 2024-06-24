@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const shift = require('../../securityShiftsLogs/shift');
 
 const securitySchema = new mongoose.Schema({
     name: {
@@ -20,11 +21,9 @@ const securitySchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    startTime:{
-        type: Date
-    },
-    endTime:{
-        type: Date
+    shift: {
+        type: Number,
+        default: 0
     }
 });
 

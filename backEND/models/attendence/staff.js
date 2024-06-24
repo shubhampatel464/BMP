@@ -16,131 +16,225 @@ const attendenceSchema = new mongoose.Schema({
     attendence: {
         type: {
             day1: {
-                type: Date,
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day2: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day3: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day4: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day5: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day6: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day7: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day8: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day9: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day10: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day11: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day12: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day13: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day14: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day15: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day16: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day17: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day18: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day19: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day20: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day21: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day22: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day23: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day24: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day25: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day26: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day27: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day28: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day29: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day30: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             },
             day31: {
-                type: Date,                
+                type:{
+                    time : Date,
+                    late : Boolean,
+                }
             }
         },
         default: {
-            day1: new Date(0),
-            day2: new Date(0),
-            day3: new Date(0),
-            day4: new Date(0),
-            day5: new Date(0),
-            day6: new Date(0),
-            day7: new Date(0),
-            day8: new Date(0),
-            day9: new Date(0),
-            day10: new Date(0),
-            day11: new Date(0),
-            day12: new Date(0),
-            day13: new Date(0),
-            day14: new Date(0),
-            day15: new Date(0),
-            day16: new Date(0),
-            day17: new Date(0),
-            day18: new Date(0),
-            day19: new Date(0),
-            day20: new Date(0),
-            day21: new Date(0),
-            day22: new Date(0),
-            day23: new Date(0),
-            day24: new Date(0),
-            day25: new Date(0),
-            day26: new Date(0),
-            day27: new Date(0),
-            day28: new Date(0),
-            day29: new Date(0),
-            day30: new Date(0),
-            day31: new Date(0)
+            day1: {time:new Date(0),late:false},
+            day2: {time:new Date(0),late:false},
+            day3: {time:new Date(0),late:false},
+            day4: {time:new Date(0),late:false},
+            day5: {time:new Date(0),late:false},
+            day6: {time:new Date(0),late:false},
+            day7: {time:new Date(0),late:false},
+            day8: {time:new Date(0),late:false},
+            day9: {time:new Date(0),late:false},
+            day10: {time:new Date(0),late:false},
+            day11: {time:new Date(0),late:false},
+            day12: {time:new Date(0),late:false},
+            day13: {time:new Date(0),late:false},
+            day14: {time:new Date(0),late:false},
+            day15: {time:new Date(0),late:false},
+            day16: {time:new Date(0),late:false},
+            day17: {time:new Date(0),late:false},
+            day18: {time:new Date(0),late:false},
+            day19: {time:new Date(0),late:false},
+            day20: {time:new Date(0),late:false},
+            day21: {time:new Date(0),late:false},
+            day22: {time:new Date(0),late:false},
+            day23: {time:new Date(0),late:false},
+            day24: {time:new Date(0),late:false},
+            day25: {time:new Date(0),late:false},
+            day26: {time:new Date(0),late:false},
+            day27: {time:new Date(0),late:false},
+            day28: {time:new Date(0),late:false},
+            day29: {time:new Date(0),late:false},
+            day30: {time:new Date(0),late:false},
+            day31: {time:new Date(0),late:false}
+
         }
     }
 });
