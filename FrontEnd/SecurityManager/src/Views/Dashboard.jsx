@@ -18,10 +18,10 @@ const Dashboard = () => {
                     <div className='flex flex-wrap justify-center items-center h-1/2 w-screen '>
 
                         <div className='flex flex-col gap-10 justify-between items-center h-full m-10'>
-                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() => navigate('/schedule-visit')}>
+                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() => navigate('/add-schedule')}>
                                 <h1 className='text-xl font-bold'>Schedule Visit</h1>
                             </div>
-                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() => navigate('/parent/list-today')} >
+                            <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() => navigate('/view-schedule')} >
                                 <h1 className='text-xl font-bold'>Schedule Record</h1>
                             </div>
                         </div>

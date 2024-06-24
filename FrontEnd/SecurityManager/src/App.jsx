@@ -6,6 +6,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import ResetPasssword from './Views/ResetPassword';
 import Dashboard from './Views/Dashboard';
 import GuardScheduler from './Views/AddSchedule';
+import ScheduleHome from './Views/ViewSchedule';
 
 // react router 
 
@@ -30,7 +31,10 @@ function App() {
                 <Route path='/reset-password' element={<ResetPasssword />} />
 
                 <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/schedule-visit' element={<GuardScheduler />} />
+                <Route path='/add-schedule' element={<GuardScheduler />} />
+                <Route path='/view-schedule' element={<ScheduleHome />} />
+                <Route path='/past-schedule' element={<ScheduleHome />} />
+
                 <Route element={<PrivateRoutes />}>
                 </Route>
                 {/* not found */}
