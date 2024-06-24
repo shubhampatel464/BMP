@@ -28,7 +28,10 @@ const studentSchema = new mongoose.Schema({
     },
     exit_authorised_by:{
         type: String
-    }
+    },
+    uuid:{
+        type: String
+    },
 });
 
 const student = mongoose.model('student_logs', studentSchema);

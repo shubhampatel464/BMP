@@ -79,7 +79,9 @@ const staffEntryExit = async (req, res) => {
                 photo_exit: photoUrl,
                 photo_entry: match.photo_entry,
                 entry_time: match.entry_time,
-                exit_time: istDateTime
+                exit_time: istDateTime,
+                exit_authorised_by: req.user.name,
+                entry_authorised_by: match.entry_authorised_by
             });
 
             const saveLogs = await logs.save();
@@ -107,9 +109,8 @@ const staffEntryExit = async (req, res) => {
                 mobile: staffData.mobile,
                 uuid: uuid,
                 photo_entry: photoUrl,
-                photo_exit: "",
                 entry_time: istDateTime,
-                exit_time: ""
+                entry_authorised_by: req.user.name
             });
 
             const saveData = await data.save();
@@ -126,14 +127,28 @@ const staffEntryExit = async (req, res) => {
             const updateFields = {};
             updateFields[`attendence.day${todaysDate}.time`] = new Date();
 
+            // Last time is 9:30 AM
             if(department != "Security"){
                 if(currentDate.hours > 9 || (currentDate.hours == 9 && currentDate.mins > 30)){
                     updateFields[`attendence.day${todaysDate}.late`] = true;
                 }
-                const updateData = await staff_attendence.updateOne({ uuid: uuid }, { $set: updateFields });
             }
             else{
-                
+                if(staffData.shift == 1){
+                    if(currentDate.hours > 7 || (currentDate.hours == 7 && currentDate.mins > 20)){
+                        updateFields[`attendence.day${todaysDate}.late`] = true;
+                    }
+                }
+                else if(staffData.shift == 2){
+                    if(currentDate.hours > 15 || (currentDate.hours == 15 && currentDate.mins > 20)){
+                        updateFields[`attendence.day${todaysDate}.late`] = true;
+                    }
+                }
+                else if(staffData.shift == 3){
+                    if(currentDate.hours > 23 || (currentDate.hours == 23 && currentDate.mins > 20)){
+                        updateFields[`attendence.day${todaysDate}.late`] = true;
+                    }
+                }
             }
 
             updateFields[`attendence.day${todaysDate}.late`] = new Date();

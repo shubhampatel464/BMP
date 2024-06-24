@@ -43,7 +43,10 @@ const studentEntryExit = async (req, res) => {
                 isLongLeave: match.isLongLeave,
                 reason: match.reason,
                 entry_time: istDateTime,
-                exit_time: match.exit_time
+                exit_time: match.exit_time,
+                uuid: match.uuid,
+                entry_authorised_by: req.user.name,
+                exit_authorised_by: match.exit_authorised_by
             });
 
             const saveLogs = await logs.save();
@@ -82,7 +85,9 @@ const studentEntryExit = async (req, res) => {
                 photo_exit: photoUrl,
                 exit_time: istDateTime,
                 isLongLeave: req.body.isLongLeave,
-                reason: req.body.reason
+                reason: req.body.reason,
+                entry_time: studentData.entry_time,
+                exit_authorised_by: req.user.name
             });
 
             const saveData = await data.save();

@@ -61,6 +61,11 @@ app.use('/securityManager', require('./routes/securityManager/securityManager'))
 
 
 
+require("./triggers/attendence/monthlyUpdate")();
+
+// require('./models/attendence/staff');
+
+
 
 app.listen(port, () => {
     console.log(`Server is Listening on port ${port}`);
