@@ -6,6 +6,10 @@ const registrar = require('../../models/static/registrar/registrar');
 const security_manager = require('../../models/static/securityManager/securityManager');
 
 
+// To add attendence Object
+const attendence = require('../../models/attendence/staff');
+
+
 const uuid = require('uuid');
 
 // For stafff -> password same as phone number
@@ -29,6 +33,12 @@ const addUser = async (req, res) => {
                 department: req.body.department,
                 uuid: `${_uuid}staff`
             });
+
+            const newAttendence = new attendence({
+                uuid: `${_uuid}staff`  
+            });
+
+            newAttendence.save();
 
             try {
                 await newStaff.save();
@@ -59,7 +69,7 @@ const addUser = async (req, res) => {
             const newHostelWarden = new hostelWarden({
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.mobile,
+                password: req.body.email,
                 mobile: req.body.mobile,
                 uuid: `${uuid.v4()}hostelWarden`
             });
@@ -120,7 +130,7 @@ const addUser = async (req, res) => {
             const newSecurityManager = new security_manager({
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.mobile,
+                password: req.body.email,
                 mobile: req.body.mobile,
                 uuid: `${uuid.v4()}securityManager`
             });

@@ -116,16 +116,20 @@ const staffEntryExit = async (req, res) => {
 
             // attendence update
 
+
+
+
+
+
             const todaysDate = currentDate.date;
-
             const updateFields = {};
-            updateFields[`attendence.day${todaysDate}`] = 1;
-
+            updateFields[`attendence.day${todaysDate}`] = new Date();
             const updateData = await staff_attendence.updateOne({ uuid: uuid }, { $set: updateFields });
 
             const resData = {
                 entry: true
             };
+
             // response to client
             res.status(200).send(resData);
 
@@ -140,5 +144,7 @@ const staffEntryExit = async (req, res) => {
     }
 
 }
+
+
 
 module.exports = staffEntryExit;

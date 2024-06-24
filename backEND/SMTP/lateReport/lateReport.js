@@ -11,7 +11,7 @@ const sendReport = async (data, date) => {
             from: 'DAIICT-MainGate',
             to: process.env.LATE_EMAIL,
             subject: `Late Students`,
-            template: 'late',
+            template: 'blank',
             context :{
                 users: data,
                 text:`This report is generated at ${date} IST. The following students are still not reported on campus.`

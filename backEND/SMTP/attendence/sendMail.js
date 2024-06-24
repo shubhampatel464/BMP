@@ -7,14 +7,17 @@ const sendReport = async (buffer,month) => {
         from: 'DAIICT-MainGate',
         to: process.env.ATTENDENCE_EMAIL,
         subject: `Attendance Report for ${month}`,
-        text: 'This email contains your attendance report.',
         attachments: [
             {
                 filename: 'Attendance_Report.xlsx',
                 content: buffer,
                 contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
             }
-        ]
+        ],
+        template: 'blank',
+        context: {
+            text: 'This email contains your attendance report.',
+        }
     };
 
     const s = await mailTransporter.sendMail(mailDetails, function (err, data) {

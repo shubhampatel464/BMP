@@ -5,6 +5,9 @@ const faculty_adminBlock = require('../../models/static/faculty_adminBlock/facul
 const registrar = require('../../models/static/registrar/registrar');
 const security_manager = require('../../models/static/securityManager/securityManager');
 
+// for deleting attendence object
+const attendence = require('../../models/attendence/staff');
+
 
 const deleteUser = async (req, res) => {
 
@@ -21,6 +24,8 @@ const deleteUser = async (req, res) => {
                 if(staffData.department == "security"){
                     await security.deleteOne({ uuid: req.body.uuid });
                 }
+
+                await attendence.deleteOne({ uuid: req.body.uuid });
 
                 await staff.deleteOne({ uuid: req.body.uuid });
                 res.status(200).send({ message: "Staff deleted successfully" });
