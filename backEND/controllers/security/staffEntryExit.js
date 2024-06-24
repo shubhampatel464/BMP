@@ -118,12 +118,25 @@ const staffEntryExit = async (req, res) => {
 
 
 
+            const department = staffData.department;
 
 
 
             const todaysDate = currentDate.date;
             const updateFields = {};
-            updateFields[`attendence.day${todaysDate}`] = new Date();
+            updateFields[`attendence.day${todaysDate}.time`] = new Date();
+
+            if(department != "Security"){
+                if(currentDate.hours > 9 || (currentDate.hours == 9 && currentDate.mins > 30)){
+                    updateFields[`attendence.day${todaysDate}.late`] = true;
+                }
+                const updateData = await staff_attendence.updateOne({ uuid: uuid }, { $set: updateFields });
+            }
+            else{
+                
+            }
+
+            updateFields[`attendence.day${todaysDate}.late`] = new Date();
             const updateData = await staff_attendence.updateOne({ uuid: uuid }, { $set: updateFields });
 
             const resData = {
