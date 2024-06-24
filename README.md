@@ -20,6 +20,8 @@ It is a web application used to manage the entry and exit of the visitors in the
 
 
 ## Folder Structure
+#### 📁 [backEND](./backEND/)
+#### 📁 [FrontEnd](./FrontEnd/)
 
 
 
@@ -27,4 +29,5 @@ It is a web application used to manage the entry and exit of the visitors in the
 
 
 
+## Extra Notes
 DATE IN ATTENDENCE COLLECTION IS IN GMT DATE
