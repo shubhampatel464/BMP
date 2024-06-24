@@ -9,8 +9,15 @@ const addShift = async (req, res) => {
         const jsFrontendDate = new Date(req.body.date);
 
         // Extract day, month, and year from the JavaScript Date object
-        const day = jsFrontendDate.getDate();
-        const month = jsFrontendDate.getMonth() + 1; // Months are zero-indexed, so add 1
+        let day = jsFrontendDate.getDate();
+        let month = jsFrontendDate.getMonth() + 1; // Months are zero-indexed, so add 1
+
+        if(day < 10){
+            day = `0${day}`;
+        }
+        if(month < 10){
+            month = `0${month}`;
+        }
         const year = jsFrontendDate.getFullYear();
 
         // Format database date as "25/06/2024"
@@ -81,7 +88,7 @@ const addShift = async (req, res) => {
             }
         }
 
-        // console.log(shiftLog);
+        console.log(shiftLog);
 
         const log = new shiftLogs(shiftLog);
         const save = await log.save();
