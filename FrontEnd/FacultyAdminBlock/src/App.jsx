@@ -1,7 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { Route, Routes } from 'react-router-dom';
 import Login from './Views/Login';
-import { UserProvider } from './Services/AuthContext'
 import Cookies from 'js-cookie'
 import ResetPasssword from './Views/ResetPasssword';
 import Dashboard from './Views/Dashboard';
@@ -25,7 +24,6 @@ function App() {
 
     return (
         <>
-            <UserProvider>
                 <div className="App h-screen">
                     <Routes>
                         <Route path='/' element={<Login />} />
@@ -45,7 +43,6 @@ function App() {
                         } />
                     </Routes>
                 </div>
-            </UserProvider>
         </>
     )
 }
