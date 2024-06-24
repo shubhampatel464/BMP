@@ -23,24 +23,13 @@ const convertUTCToISTTimeString = (utcDate) => {
     return utcDate.toLocaleTimeString('en-IN', istOptions);
 };
 
-const isTimeBefore9AM = (istTimeString) => {
-    const [hours, minutes] = istTimeString.split(':');
-    const istHours = parseInt(hours, 10);
-    const istMinutes = parseInt(minutes, 10);
-  
-    if (istHours < 9 || (istHours === 9 && istMinutes === 0)) {
-      return true; // Time is before 9:00 AM
-    } else {
-      return false; // Time is at or after 9:00 AM
-    }
-};
 
 const updateAttendence = async () => {
     try {
 
         // SEND EMAIL OF ATTENDENCE TO ADMIN
 
-        const data = await staff_attendence.find({}).exec();
+        const data = await staff_attendence.find({});
 
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet('Attendance Data');
@@ -77,22 +66,29 @@ const updateAttendence = async () => {
             const row = worksheet.addRow(rowValues);
 
             row.eachCell((cell, colNumber) => {
+
+                // console.log(cell.value);
+
                 if (colNumber > 3) { // Skipping name, mobile, and department columns
-                  if (cell.value instanceof Date && cell.value.getTime() === new Date(0).getTime()) {
-                    console.log(cell.value.getTime());
+                  if (cell.value.time instanceof Date && cell.value.time.getTime() === new Date(0).getTime()) {
+                    // console.log(cell.value.getTime());
                     cell.value = 'Absent';
+                    // console.log(cell.value); 
                     cell.font = { bold: true, color: { argb: 'FF0000' } }; // Red and bold
                   } 
-                  else if (cell.value instanceof Date) {
-                    const istDate = convertUTCToISTTimeString(cell.value);
-                    // console.log(istDate);
+                  else if (cell.value.late == true) {
+                    const istDate = convertUTCToISTTimeString(cell.value.time);
                     cell.value = istDate 
-                    if (!isTimeBefore9AM(istDate)) {
-                      cell.font = { bold: true, color: { argb: '0000FF' } }; // Blue and bold
-                    }
+                    // console.log(istDate);
+                    cell.font = { bold: true, color: { argb: '0000FF' } }; // Blue and bold
+                  }
+                  else{
+                    cell.value = convertUTCToISTTimeString(cell.value.time);
+                    // console.log(cell.value);
                   }
                 }
             });
+            // console.log(row);
         }
 
 
@@ -110,15 +106,15 @@ const updateAttendence = async () => {
 
         // const data = await staff_attendence.find({}).exec();
 
-        data.forEach(async (element) => {
-            const attendence = new staff_attendence({
-                uuid: element.uuid,                
-            });
+        // data.forEach(async (element) => {
+        //     const attendence = new staff_attendence({
+        //         uuid: element.uuid,                
+        //     });
 
-            await staff_attendence.deleteOne({ uuid: element.uuid });
+        //     await staff_attendence.deleteOne({ uuid: element.uuid });
 
-            await attendence.save();
-        });
+        //     await attendence.save();
+        // });
 
 
     }

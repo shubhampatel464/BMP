@@ -127,14 +127,28 @@ const staffEntryExit = async (req, res) => {
             const updateFields = {};
             updateFields[`attendence.day${todaysDate}.time`] = new Date();
 
+            // Last time is 9:30 AM
             if(department != "Security"){
                 if(currentDate.hours > 9 || (currentDate.hours == 9 && currentDate.mins > 30)){
                     updateFields[`attendence.day${todaysDate}.late`] = true;
                 }
-                const updateData = await staff_attendence.updateOne({ uuid: uuid }, { $set: updateFields });
             }
             else{
-                
+                if(staffData.shift == 1){
+                    if(currentDate.hours > 7 || (currentDate.hours == 7 && currentDate.mins > 20)){
+                        updateFields[`attendence.day${todaysDate}.late`] = true;
+                    }
+                }
+                else if(staffData.shift == 2){
+                    if(currentDate.hours > 15 || (currentDate.hours == 15 && currentDate.mins > 20)){
+                        updateFields[`attendence.day${todaysDate}.late`] = true;
+                    }
+                }
+                else if(staffData.shift == 3){
+                    if(currentDate.hours > 23 || (currentDate.hours == 23 && currentDate.mins > 20)){
+                        updateFields[`attendence.day${todaysDate}.late`] = true;
+                    }
+                }
             }
 
             updateFields[`attendence.day${todaysDate}.late`] = new Date();
