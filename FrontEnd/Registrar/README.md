@@ -83,7 +83,8 @@ App.jsx is the main entry point, setting up routing and providing authentication
 ## State Management Solution and Overview:
 
 ### Routing Mechanism:
-React Router: `react-router-dom` is used for client-side routing. The main routes are defined in `App.jsx` using `Routes` and `Route` components.
+React Router: 
+`react-router-dom` is used for client-side routing. The main routes are defined in `App.jsx` using `Routes` and `Route` components.
 
 ### Styling Approach:
 Tailwind CSS: Utilized for styling the web-app, as indicated by the dependency in `package.json`.
