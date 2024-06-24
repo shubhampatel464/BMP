@@ -27,28 +27,26 @@ function App() {
 
     return (
         <>
-            <UserProvider>
-                <div className="App h-screen">
-                    <Routes>
-                        <Route path='/' element={<Login />} />
-                        <Route path='/login' element={<Login />} />
-                        <Route element={<PrivateRoutes />}>
-                            <Route path='/dashboard' element={<RecordsDashBoard />} />
-                            <Route path='/records/student' element={<StudentRecords />}  ></Route>
-                            <Route path='/records/visitor' element={<VisitorRecords />}  ></Route>
-                            <Route path='/records/staff' element={<StaffRecords />}  ></Route>
-                            <Route path='/records/parent' element={<ParentRecords />}  ></Route>
-                        </Route>
-                        <Route path='/reset-password' element={<ResetPasssword />} />
-                        <Route path='*' element={
-                            <>
-                                <h1>404 Not Found</h1>
-                                <button className='bg-blue-500 text-white p-2 rounded-md' onClick={() => window.location.href = '/login'}>Go to Login</button>
-                            </>
-                        } />
-                    </Routes>
-                </div>
-            </UserProvider>
+            <div className="App h-screen">
+                <Routes>
+                    <Route path='/' element={<Login />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route element={<PrivateRoutes />}>
+                        <Route path='/dashboard' element={<RecordsDashBoard />} />
+                        <Route path='/records/student' element={<StudentRecords />}  ></Route>
+                        <Route path='/records/visitor' element={<VisitorRecords />}  ></Route>
+                        <Route path='/records/staff' element={<StaffRecords />}  ></Route>
+                        <Route path='/records/parent' element={<ParentRecords />}  ></Route>
+                    </Route>
+                    <Route path='/reset-password' element={<ResetPasssword />} />
+                    <Route path='*' element={
+                        <>
+                            <h1>404 Not Found</h1>
+                            <button className='bg-blue-500 text-white p-2 rounded-md' onClick={() => window.location.href = '/login'}>Go to Login</button>
+                        </>
+                    } />
+                </Routes>
+            </div>
         </>
     )
 }

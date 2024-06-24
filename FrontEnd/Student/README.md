@@ -56,8 +56,6 @@ Contains the core components used in webApp such as Button, InputField, Navbar, 
 ### Services: 
 Includes service files like API for handling authentication.
 App.jsx: The main component that sets up routing and root component.
-### package.json: 
-Defines the project dependencies, scripts, and metadata.
 
 ## Critical Directories and Files:
 #### App.jsx: 
