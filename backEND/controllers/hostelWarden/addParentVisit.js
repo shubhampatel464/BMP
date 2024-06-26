@@ -10,8 +10,8 @@ const addParentVisit = async (req, res) => {
         
         const _uuid = `${uuid.v4()}parent`;
 
-        console.log(arrival_date);
-        console.log(new Date(arrival_date));
+        // console.log(arrival_date);
+        // console.log(new Date(arrival_date));
         
         const visit = new parent({
             name1,

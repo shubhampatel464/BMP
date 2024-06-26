@@ -15,11 +15,6 @@ const UserData = [
         value: 'registrar'
     },
     {
-        id: 4,
-        Role: 'Faculty',
-        value: 'faculty'
-    },
-    {
         id: 5,
         Role: 'Security Manager',
         value: 'securityManager'

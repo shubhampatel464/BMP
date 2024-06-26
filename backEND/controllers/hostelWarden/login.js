@@ -8,7 +8,7 @@ const login = async (req, res) => {
     try {
 
         const { email, password } = req.body;
-        console.log(email, password);
+        // console.log(email, password);
         const user = await hostelWardenSchema.findOne({ email });
 
         if (!user) {

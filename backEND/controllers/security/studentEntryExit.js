@@ -78,6 +78,8 @@ const studentEntryExit = async (req, res) => {
             // save photo to blob
             const photoUrl = await docsUpload(photo.tempFilePath, "student");
 
+            
+
             const data = new student_transactional({
                 name: studentData.name,
                 student_id: studentData.student_id,

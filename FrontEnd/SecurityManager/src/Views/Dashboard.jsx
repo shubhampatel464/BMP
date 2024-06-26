@@ -11,7 +11,7 @@ const Dashboard = () => {
         <>
             <Navbar />
             <div className='flex flex-col justify-evenly items-center w-screen py-6 '>
-                <h1 className='text-5xl font-bold text-blue5 '>Security</h1>
+                <h1 className='text-5xl font-bold text-blue5 '>Security Manager</h1>
 
                 {/* total 4 tiles, 2 tiles in 1st row and 2 tiles in 2nd row */}
                 <div className='flex flex-col justify-center items-center h-full w-screen'>
@@ -19,7 +19,7 @@ const Dashboard = () => {
 
                         <div className='flex flex-col gap-10 justify-between items-center h-full m-10'>
                             <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() => navigate('/add-schedule')}>
-                                <h1 className='text-xl font-bold'>Schedule Visit</h1>
+                                <h1 className='text-xl font-bold'>Schedule Duties</h1>
                             </div>
                             <div className='flex flex-col justify-center items-center w-[290px] h-1/2 rounded-lg shadow-xl py-20 px-5 cursor-pointer	' onClick={() => navigate('/view-schedule')} >
                                 <h1 className='text-xl font-bold'>Schedule Record</h1>

@@ -23,7 +23,7 @@ const securitySchema = new mongoose.Schema({
     },
     shift: {
         type: Number,
-        default: 0
+        default: -1
     }
 });
 

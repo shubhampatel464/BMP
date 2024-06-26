@@ -22,7 +22,7 @@ const departmentData = [
     {
         id: 5,
         name: 'Security Guard',
-        value: 'security-guard',
+        value: 'security',
     },
     {
         id: 6,

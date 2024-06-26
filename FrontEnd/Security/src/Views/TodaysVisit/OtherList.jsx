@@ -9,6 +9,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
 import { useNavigate } from "react-router-dom";
+import { getRequestWithToken } from "../../Services/Api";
 
 // {
 //     "_id": "6672d7423394f9b4fc20d1d5",
@@ -91,8 +92,14 @@ const OthersListGrid = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/security/getVisitorList`)
-            .then((resp) => resp.json())
+        getRequestWithToken(`security/getVisitorList`)
+            .then((resp) => {
+                if (resp.status === 401) {
+                    alert('Session expired. Please login again');
+                    navigate('/login');
+                }
+                return resp.data
+            })
             .then((data) => setRowData(data));
     }, []);
 

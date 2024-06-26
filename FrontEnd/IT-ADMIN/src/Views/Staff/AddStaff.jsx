@@ -116,7 +116,7 @@ const AddStaff = () => {
                     {errors.Department && <p className='text-red-500 text-xs mt-1'>{errors.Department.message}</p>}
                     
 
-                    <Button type='submit'> Add Student </Button>
+                    <Button type='submit'> Add Staff </Button>
                 </form>
             </div>
             <StickyFooterMobile />

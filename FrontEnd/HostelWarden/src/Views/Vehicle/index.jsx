@@ -148,7 +148,7 @@ const Vehicle = () => {
                                     error={errors.VehicleNumber?.message}
                                 />
 
-                                <Button type='submit'> Add Visitor </Button>
+                                <Button type='submit'> Add Vehicle </Button>
                             </form>
                         </div>
                     </TabPanel>

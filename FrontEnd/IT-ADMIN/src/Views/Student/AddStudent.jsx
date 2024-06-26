@@ -54,7 +54,7 @@ const AddStudent = () => {
             if (res.status == 200) {
                 alert('Student added successfully.')
                 reset()
-                navigate('/dashboard')
+                // navigate('/dashboard')
             }
             else if(reponse.status === 409){
                 alert(`Duplicate key error: ${reponse.data.duplicateKey} already exists`);

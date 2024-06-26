@@ -32,7 +32,7 @@ const login = async (req, res) => {
         const shift = user.shift;
 
         if (shift == -1) {
-            return res.status(401).send("Your account is disabled");
+            return res.status(406).send("Your account is disabled");
         }
         let shiftTime;
         if (shift == 1) {
@@ -42,6 +42,8 @@ const login = async (req, res) => {
         } else if (shift == 3) {
             shiftTime = shiftTimings.shift3;
         }
+
+        // console.log(loginTime, shiftTime.start, shiftTime.end);
 
         if (!isTimeInRange(loginTime, shiftTime.start, shiftTime.end)) {
             res.status(402).send({message:'Login time is not within the shift time limits'});
@@ -66,6 +68,9 @@ const login = async (req, res) => {
 
 
 const isTimeInRange = (time, start, end) => {
+
+    // console.log(time, start, end);
+
     const [startHour, startMinute] = start.split(':').map(Number);
     const [endHour, endMinute] = end.split(':').map(Number);
     const [timeHour, timeMinute] = time.split(':').map(Number);

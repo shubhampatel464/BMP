@@ -9,7 +9,7 @@ const MyVisitorRecords = () => {
             <Navbar />
                 {/* heading */}
                 <div className="flex justify-center items-center mt-10">
-                    <h1 className="text-3xl font-bold">General Visitor Records</h1>
+                    <h1 className="text-3xl font-bold">Visitor's List</h1>
                 </div>
                 <VisitorRecordList />
             <StickyFooterMobile />

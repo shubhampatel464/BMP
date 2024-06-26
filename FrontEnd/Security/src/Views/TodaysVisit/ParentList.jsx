@@ -9,7 +9,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
 import { useNavigate } from "react-router-dom";
-
+import { getRequestWithToken } from "../../Services/Api";
 
 // [
 //     {
@@ -94,9 +94,15 @@ const ParentListGrid = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/security/getParentList`)
-            .then((resp) => resp.json())
-            .then((data) => setRowData(data));
+        getRequestWithToken(`security/getParentList`)
+        .then((resp) => {
+            if (resp.status === 401) {
+                alert('Session expired. Please login again');
+                navigate('/login');
+            }
+            return resp.data
+        })
+        .then((data) => setRowData(data));
     }, []);
 
     function convertToCsv(rowData, columnDefs) {

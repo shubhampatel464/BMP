@@ -5,7 +5,7 @@ import { StickyFooterMobile } from '../../Components/StickyFooterMobile'
 import WebcamDemo from '../../Components/FaceDetection'
 import { Button } from '../../Components/Button'
 import { base64ToFile } from '../../Services/Helpers'
-import { postRequest } from '../../Services/Api'
+import { postRequest, postRequestWithToken } from '../../Services/Api'
 
 // {
 //         "_id": "666aca82ad4fd664fbb0c9bc",
@@ -64,7 +64,7 @@ const OtherEntry = () => {
             formData.append('photo', file1);
             formData.append('uuid', otherVisitorsData.uuid);
 
-            const response = await postRequest('security/visitorEntry', formData, {
+            const response = await postRequestWithToken('security/visitorEntry', formData, {
                 'Content-Type': 'multipart/form-data'
             }, {})
             // console.log(response.data.uuid)

@@ -38,7 +38,10 @@ const LoginForm = () => {
                     Cookies.set('token', response.data.token, { expires: 1, secure: true, sameSite: 'strict' })
                     navigate('/dashboard')
                 }
-                else if (response.status === 400) {
+                else if (response.status === 406 || response.status === 402) {
+                    alert('Your account is disabled till your next shift');
+                }
+                else if (response.status === 404 || response.status === 401) {
                     alert('Invalid Credentials')
                 }
                 else {

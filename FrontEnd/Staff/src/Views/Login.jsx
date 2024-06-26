@@ -24,7 +24,7 @@ const LoginForm = () => {
         const sendDataToLogin = async () => {
             try {
                 const dataToSend = {
-                    mobile: data.Mobile,
+                    email: data.Email,
                     password: data.Password
                 }
 
@@ -53,8 +53,8 @@ const LoginForm = () => {
     }
 
     // Registering the fields with react-hook-form
-    register('Mobile', {    
-        required: { value: true, message: 'Mobile is required' },
+    register('Email', {    
+        required: { value: true, message: 'Email is required' },
     })
 
     register('Password', {
@@ -79,11 +79,11 @@ const LoginForm = () => {
 
                         {/* Mobile and password input fields */}
                         <InputField
-                            placeholder='Enter Mobile'
-                            label='Mobile'
-                            type='text'
+                            placeholder='Enter Email'
+                            label='Email'
+                            type='email'
                             register={register}
-                            error={errors.Mobile?.message}
+                            error={errors.Email?.message}
                         />
                         
                         <InputField

@@ -60,25 +60,25 @@ const FaceScan = () => {
                 let response;
 
                 if (uuid.endsWith('student')) {
-                    response = await postRequest(`security/studentEntryExit`, formData, {
+                    response = await postRequestWithToken(`security/studentEntryExit`, formData, {
                         'Content-Type': 'multipart/form-data'
                     }, {})
                 }
                 else if(uuid.endsWith('staff')){
-                    response = await postRequest(`security/staffEntryExit`, formData, {
+                    response = await postRequestWithToken(`security/staffEntryExit`, formData, {
                         'Content-Type': 'multipart/form-data'
                     }, {})
                 }
                 else if(uuid.endsWith('visitor')) {
-                    response = await postRequest(`security/visitorExit`, formData, {
+                    response = await postRequestWithToken(`security/visitorExit`, formData, {
                         'Content-Type': 'multipart/form-data'
                     }, {})
                 }
-                // else if(uuid.endsWith('parent')) {
-                //     response = await postRequest(`security/parentEntryExit`, formData, {
-                //         'Content-Type': 'multipart/form-data'
-                //     }, {})
-                // }
+                else if(uuid.endsWith('parent')) {
+                    response = await postRequestWithToken(`security/parentEntryExit`, formData, {
+                        'Content-Type': 'multipart/form-data'
+                    }, {})
+                }
                 else {
                     alert('Something Went Wrong. Please try again.');
                     navigate('/qr-reader')

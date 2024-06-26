@@ -17,9 +17,15 @@ const getData = async (req, res) => {
         const index_visitor = uuid.endsWith("visitor");
         const index_parent = uuid.endsWith("parent");
 
+        // console.log(index_student);
+
         if(index_student){
             const data2 = await student_transactional.findOne({uuid: uuid});
             const data = await student.findOne({uuid: uuid});
+
+            // console.log(data);
+            // console.log(uuid);
+
             if(data){
                 const resData = {
                     entry : false

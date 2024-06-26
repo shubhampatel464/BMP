@@ -38,12 +38,15 @@ const addUser = async (req, res) => {
                 uuid: `${_uuid}staff`  
             });
 
-            newAttendence.save();
-
+            
             try {
+
                 await newStaff.save();
+                
+                await newAttendence.save();
 
                 if (req.body.department == "security") {
+
                     const newSecurity = new security({
                         name: req.body.name,
                         email: req.body.email,
@@ -54,6 +57,7 @@ const addUser = async (req, res) => {
     
                     await newSecurity.save();
                 }
+
                 res.status(200).send({ message: "Staff added successfully" });
 
             } catch (error) {

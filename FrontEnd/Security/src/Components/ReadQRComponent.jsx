@@ -7,7 +7,7 @@ import "./QrStyles.css";
 // Qr Scanner
 import QrScanner from "qr-scanner";
 import QrFrame from "./../Assets/qr-frame.svg";
-import { getRequest } from "../Services/Api";
+import { getRequest, getRequestWithToken } from "../Services/Api";
 
 const QrReader = () => {
     // QR States
@@ -16,40 +16,46 @@ const QrReader = () => {
     const videoEl = useRef(null);
     const qrBoxEl = useRef(null);
     const [qrOn, setQrOn] = useState(true);
+    const [flag, setFlag] = useState(true);
 
     // Result
     const [scannedResult, setScannedResult] = useState("");
 
     // Success
     const onScanSuccess = async (result) => {
-        // console.log(result);
 
-        const response = await getRequest(`security/getData?uuid=${result?.data}`);
-        // console.log(response)
+        scanner.current.stop();
+        const response = await getRequestWithToken(`security/getData?uuid=${result?.data}`);
+        console.log(response)
         if (response.status === 200) {
             const sending = {
-                uuid : result?.data,
+                uuid: result?.data,
             }
-            if(response.data.hasOwnProperty('entry')){ 
+            if (response.data.hasOwnProperty('entry')) {
                 sending.entry = response?.data?.entry;
             }
 
-            if(response.data.hasOwnProperty('isParent')){
+            if (response.data.hasOwnProperty('isParent')) {
                 sending.isParent = response?.data?.isParent;
 
                 sending.parentdata = response?.data?.data;
-                
+
                 // console.log(sending)
                 navigate('/parent/exit', { state: sending });
 
             }
-            else{
-                navigate("/face-detection", { state: sending});
+            else {
+                navigate("/face-detection", { state: sending });
             }
         }
         else {
+
             alert("Invalid QR Code");
+            scanner.current.start();
         }
+
+
+
     };
 
     // Fail
@@ -58,6 +64,12 @@ const QrReader = () => {
         // navigate("/dashboard");
         return;
     };
+
+    if (flag) {
+
+
+    }
+
 
     useEffect(() => {
         if (videoEl?.current && !scanner.current) {

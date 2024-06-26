@@ -5,6 +5,16 @@ import FaceDetection from '@mediapipe/face_detection';
 import { Camera } from '@mediapipe/camera_utils';
 
 const WebcamDemo = ({ setFaceDetected, SetFaceCount, setImgSrc }) => {
+
+    // add time delay of 2 sec before capturing the image
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            capture();
+        }, 8000);
+        return () => clearTimeout(timer);
+    }, []);
+
+
     const { webcamRef, boundingBox, isLoading, detected, facesDetected } = useFaceDetection({
         faceDetectionOptions: {
             model: 'short',

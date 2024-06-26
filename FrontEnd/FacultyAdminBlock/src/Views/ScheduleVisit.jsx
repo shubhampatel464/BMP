@@ -41,8 +41,8 @@ const ScheduleVisit = () => {
 
             if (reponse.status === 200) {
                 alert('Visit Added Successfully');
-                navigate('/dashboard')
                 reset();
+                // navigate('/dashboard')
             }
             else if (reponse.status === 401) {
                 alert('Session Expired');

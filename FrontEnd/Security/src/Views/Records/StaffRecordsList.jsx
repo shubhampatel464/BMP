@@ -8,7 +8,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
-
+import { getRequestWithToken } from "../../Services/Api";
 // [
     // {
     //     "_id": "6663036eff94869cd7915b52",
@@ -184,9 +184,15 @@ const StaffRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/security/getStaffLogs`)
-            .then((resp) => resp.json())
-            .then((data) => setRowData(data));
+        getRequestWithToken(`security/getStaffLogs`)
+        .then((resp) => {
+            if (resp.status === 401) {
+                alert('Session expired. Please login again');
+                navigate('/login');
+            }
+            return resp.data
+        })
+        .then((data) => setRowData(data));
     }, []);
 
     function convertToCsv(rowData, columnDefs) {

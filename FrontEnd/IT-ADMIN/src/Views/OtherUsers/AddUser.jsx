@@ -51,8 +51,8 @@ const AddUser = () => {
 
             if(reponse.status === 200){
                 alert('User Added Successfully');
-                navigate('/security-admin')
                 reset();
+                // navigate('/security-admin')
             }
             else if(reponse.status === 401){
                 alert('Session Expired');

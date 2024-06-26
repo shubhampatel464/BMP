@@ -8,7 +8,7 @@ import { InputField } from '../../Components/InputField';
 import { Button } from '../../Components/Button';
 import { useNavigate } from 'react-router-dom';
 import WebcamDemo from '../../Components/FaceDetection';
-import { postRequest } from '../../Services/Api';
+import { postRequest, postRequestWithToken } from '../../Services/Api';
 import { base64ToFile } from '../../Services/Helpers';
 import CurrentList from './CurrentList';
 import { useLocation, Link } from 'react-router-dom';
@@ -119,7 +119,7 @@ const Visitors = () => {
 
             // console.log(formData)
 
-            const response = await postRequest('security/visitorEntry', formData, {
+            const response = await postRequestWithToken('security/visitorEntry', formData, {
                 'Content-Type': 'multipart/form-data'
             }, {})
             // console.log(response)

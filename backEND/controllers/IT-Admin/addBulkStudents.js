@@ -26,8 +26,8 @@ const addBulkStudents = async (req, res) => {
             const missingFields = requiredFields.filter(field => !availableFields.includes(field));
         
             if (missingFields.length > 0) {
-                console.error('Missing required fields:', missingFields);
-                return res.status(400).json({ error: 'Missing required fields', missingFields });
+                // console.error('Missing required fields:', missingFields);
+                return res.status(400).send({ error: 'Missing required fields', missingFields });
             }
             else {
                 for (const student of xlData) {
@@ -55,7 +55,7 @@ const addBulkStudents = async (req, res) => {
                 }
             }
         } else {
-            return res.status(400).json({ error: 'Excel file is empty or has no data' });
+            return res.status(405).json({ error: 'Excel file is empty or has no data' });
         }       
 
 

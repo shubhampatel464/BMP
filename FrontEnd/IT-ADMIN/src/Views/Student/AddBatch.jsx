@@ -47,7 +47,13 @@ const AddBatch = () => {
                 navigate('/dashboard')
             }
             else if (res.status == 402) {
-                alert('There is some problem in Excel file. Please check and try again.')
+                alert('There is some problem in data. Please check and try again.')
+            }
+            else if (res.status == 400) {
+                alert('The Given excel file is in invalid format.')
+            }
+            else if (res.status == 405) {
+                alert('Excel file is empty.')
             }
             else {
                 alert('Failed to add Batch. Please try again.')

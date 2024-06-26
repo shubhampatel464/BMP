@@ -147,6 +147,7 @@ const AddParentVisit = () => {
                             label='ArrivalDate'
                             type='date'
                             register={register}
+                            min={new Date().toISOString().split('T')[0]}
                             error={errors.ArrivalDate?.message}
                         />
 

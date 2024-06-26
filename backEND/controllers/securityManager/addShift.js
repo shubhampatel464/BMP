@@ -88,7 +88,7 @@ const addShift = async (req, res) => {
             }
         }
 
-        console.log(shiftLog);
+        // console.log(shiftLog);
 
         const log = new shiftLogs(shiftLog);
         const save = await log.save();

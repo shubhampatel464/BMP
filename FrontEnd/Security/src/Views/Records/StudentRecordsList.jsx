@@ -8,6 +8,8 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
+import { useNavigate } from "react-router-dom";
+import { getRequestWithToken } from "../../Services/Api";
 
 
 
@@ -109,6 +111,7 @@ const StudentRecordList = () => {
                 // Format the date into dd/mm/yyyy, hh:mm:ss am/pm format
                 const formattedDate = `${pad(date.getMonth() + 1)}/${pad(date.getDate())}/${date.getFullYear()}, ${pad(date.getHours() % 12 || 12)}:${pad(date.getMinutes())}:${pad(date.getSeconds())} ${date.getHours() < 12 ? 'am' : 'pm'}`;
                 return formattedDate;
+                return date;
             }
 
         },
@@ -193,9 +196,15 @@ const StudentRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/security/getStudentLogs`)
-            .then((resp) => resp.json())
-            .then((data) => setRowData(data));
+        getRequestWithToken(`security/getStudentLogs`)
+        .then((resp) => {
+            if (resp.status === 401) {
+                alert('Session expired. Please login again');
+                navigate('/login');
+            }
+            return resp.data
+        })
+        .then((data) => setRowData(data));
     }, []);
 
     function convertToCsv(rowData, columnDefs) {
