@@ -1,4 +1,4 @@
-const shiftLogs = require('../../models/securityShiftsLogs/shift');
+const shiftLogs = require('../../models/securityShifts/shiftLogs');
 
 const getShiftLogs = async (req, res) => {
     

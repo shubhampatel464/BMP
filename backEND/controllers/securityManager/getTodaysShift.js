@@ -1,4 +1,4 @@
-const { $where } = require('../../models/securityShiftsLogs/shift');
+const { $where } = require('../../models/securityShifts/currentShift');
 const security = require('../../models/static/security/security');
 
 const getTodaysShift = async (req, res) => {

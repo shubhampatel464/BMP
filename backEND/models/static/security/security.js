@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const shift = require('../../securityShiftsLogs/shift');
 
 const securitySchema = new mongoose.Schema({
     name: {

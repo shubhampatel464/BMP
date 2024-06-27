@@ -5,6 +5,8 @@ const staff = require('../../models/static/staff/staff');
 const staff_transactional = require('../../models/transactional/staff');
 const staff_logs = require('../../models/logs/staff');
 const staff_attendence = require('../../models/attendence/staff');
+const security = require('../../models/static/security/security');
+const shift = require('../../models/securityShifts/currentShift');
 
 
 const docsUpload = require('../../blob/azureBlob');
@@ -134,24 +136,29 @@ const staffEntryExit = async (req, res) => {
                 }
             }
             else{
-                if(staffData.shift == 1){
-                    if(currentDate.hours > 7 || (currentDate.hours == 7 && currentDate.mins > 20)){
+                
+                const shiftData = await shift.findOne({});
+                const usersShift = shiftData.shift1.includes(uuid) ? '1' : shiftData.shift2.includes(uuid) ? '2' : shiftData.shift3.includes(uuid) ? '3' : null;
+
+                if(usersShift == '1'){
+                    if(currentDate.hours > 7 || (currentDate.hours == 7 && currentDate.mins > 30)){
                         updateFields[`attendence.day${todaysDate}.late`] = true;
                     }
                 }
-                else if(staffData.shift == 2){
-                    if(currentDate.hours > 15 || (currentDate.hours == 15 && currentDate.mins > 20)){
+                else if(usersShift == '2'){
+                    if(currentDate.hours > 15 || (currentDate.hours == 15 && currentDate.mins > 30)){
                         updateFields[`attendence.day${todaysDate}.late`] = true;
                     }
                 }
-                else if(staffData.shift == 3){
-                    if(currentDate.hours > 23 || (currentDate.hours == 23 && currentDate.mins > 20)){
+                else if(usersShift == '3'){
+                    if(currentDate.hours > 23 || (currentDate.hours == 23 && currentDate.mins > 30)){
                         updateFields[`attendence.day${todaysDate}.late`] = true;
                     }
                 }
+
             }
 
-            updateFields[`attendence.day${todaysDate}.late`] = new Date();
+            updateFields[`attendence.day${todaysDate}.time`] = new Date();
             const updateData = await staff_attendence.updateOne({ uuid: uuid }, { $set: updateFields });
 
             const resData = {

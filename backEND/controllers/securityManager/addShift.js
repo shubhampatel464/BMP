@@ -1,10 +1,13 @@
 const security = require('../../models/static/security/security');
-const shiftLogs = require('../../models/securityShiftsLogs/shift');
+const shiftLogs = require('../../models/securityShifts/shiftLogs');
+const currentShift = require('../../models/securityShifts/currentShift');
 
 
 const addShift = async (req, res) => {
 
     try {
+
+        await currentShift.deleteMany({});
 
         const jsFrontendDate = new Date(req.body.date);
 
@@ -23,75 +26,91 @@ const addShift = async (req, res) => {
         // Format database date as "25/06/2024"
         const databaseDate = `${day}/${month}/${year}`;
 
-        const check = await shiftLogs.findOne({ date: databaseDate });
+        const check = await currentShift.findOne({ date: databaseDate });
 
-        if (check) {
-            return res.status(403).send({ message: "Shifts already added for today" });
-        }
-
-
-
-        const clear = await security.updateMany({}, { shift: -1 });
+        // if (check) {
+        //     return res.status(403).send({ message: "Shifts already added for today" });
+        // }
 
 
         const { shift1, shift2, shift3 } = req.body;
 
-        for (shift in shift1) {
-            const uuid = shift1[shift];
-            const update = await security.findOneAndUpdate({ uuid: uuid }, { shift: 1 });
-        }
+        const newShift = new currentShift({
+            date: databaseDate,
+            shift1 : [],
+            shift2 : [],
+            shift3 : []
+        });
 
-        for (shift in shift2) {
-            const uuid = shift2[shift];
-            const update = await security.findOneAndUpdate({ uuid: uuid }, { shift: 2 });
-        }
-
-        for (shift in shift3) {
-            const uuid = shift3[shift];
-            const update = await security.findOneAndUpdate({ uuid: uuid }, { shift: 3 });
-        }
+        const newShiftLog = ({
+            date: databaseDate,
+            shift1: [],
+            shift2: [],
+            shift3: []
+        });
 
         const pipe = [
-            {
-                $match: {
-                    shift: { $ne: -1 }
-                }
-            },
             {
                 $project: {
                     uuid: 1,
                     mobile: 1,
                     name: 1,
-                    shift: 1
                 }
             }
         ]
 
         const data = await security.aggregate(pipe);
 
-        const shiftLog = {
-            shift1: [],
-            shift2: [],
-            shift3: [],
-            date: databaseDate
-        };
+        // console.log(data);
 
-        for (guard in data) {
-            if (data[guard].shift === 1) {
-                shiftLog.shift1.push(data[guard]);
-            }
-            else if (data[guard].shift === 2) {
-                shiftLog.shift2.push(data[guard]);
-            }
-            else if (data[guard].shift === 3) {
-                shiftLog.shift3.push(data[guard]);
-            }
+        for (shift in shift1) {
+            const uuid = shift1[shift];
+            newShift.shift1.push(uuid);
+            newShiftLog.shift1.push(data.find(guard => guard.uuid === uuid));           
         }
 
-        // console.log(shiftLog);
+        for (shift in shift2) {
+            const uuid = shift2[shift];
+            newShift.shift2.push(uuid);
+            newShiftLog.shift2.push(data.find(guard => guard.uuid === uuid));
+        }
 
-        const log = new shiftLogs(shiftLog);
-        const save = await log.save();
+        for (shift in shift3) {
+            const uuid = shift3[shift];
+            newShift.shift3.push(uuid);
+            newShiftLog.shift3.push(data.find(guard => guard.uuid === uuid));
+        }
+
+        // console.log(newShift);
+        // console.log(newShiftLog);
+
+        await newShift.save();
+        const shiftLog = new shiftLogs(newShiftLog);
+        await shiftLog.save();
+
+
+        
+
+        // const shiftLog = {
+        //     shift1: [],
+        //     shift2: [],
+        //     shift3: [],
+        //     date: databaseDate
+        // };
+
+        // for (guard in data) {
+        //     if (data[guard].shift === 1) {
+        //         shiftLog.shift1.push(data[guard]);
+        //     }
+        //     else if (data[guard].shift === 2) {
+        //         shiftLog.shift2.push(data[guard]);
+        //     }
+        //     else if (data[guard].shift === 3) {
+        //         shiftLog.shift3.push(data[guard]);
+        //     }
+        // }
+
+        
 
         res.status(200).json({ message: "Shifts added successfully" });
 

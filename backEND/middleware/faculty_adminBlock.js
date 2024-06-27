@@ -9,6 +9,11 @@ const auth = async (req, res,next) => {
         // console.log(req.headers)
         const token = req.headers.authorization;
         const data = await jwt.verify(token, process.env.JWT_SECRET);
+        if(data.uuid.endsWith('faculty_adminBlock') === false){
+            return res.status(401).send({
+                message: 'Auth failed'
+            });
+        }
         // console.log(data);
         req.user = data;
         next();

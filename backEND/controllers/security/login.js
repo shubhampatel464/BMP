@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const security = require('../../models/static/security/security');
+const currentShift = require('../../models/securityShifts/currentShift');
 
 
 const login = async (req, res) => {
@@ -29,27 +30,16 @@ const login = async (req, res) => {
             return res.status(404).send("User not found");
         }
 
-        const shift = user.shift;
+        const curShifts = await currentShift.findOne({});
 
-        if (shift == -1) {
-            return res.status(406).send("Your account is disabled");
-        }
-        let shiftTime;
-        if (shift == 1) {
-            shiftTime = shiftTimings.shift1;
-        } else if (shift == 2) {
-            shiftTime = shiftTimings.shift2;
-        } else if (shift == 3) {
-            shiftTime = shiftTimings.shift3;
-        }
+        const usersShift = curShifts.shift1.includes(user.uuid) ? '1' : curShifts.shift2.includes(user.uuid) ? '2' : curShifts.shift3.includes(user.uuid) ? '3' : null;
 
-        // console.log(loginTime, shiftTime.start, shiftTime.end);
+        const shiftTime = shiftTimings[`shift${usersShift}`];
 
         if (!isTimeInRange(loginTime, shiftTime.start, shiftTime.end)) {
             res.status(402).send({message:'Login time is not within the shift time limits'});
             return;
         }
-
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
