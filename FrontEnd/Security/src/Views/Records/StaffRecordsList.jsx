@@ -92,15 +92,15 @@ const StaffRecordList = () => {
                     return 0;
                 },
             },
-            cellRenderer: function (params) {
-                const date = new Date(params.data.exit_time);
+            // cellRenderer: function (params) {
+            //     const date = new Date(params.data.exit_time);
 
-                const pad = (num) => (num < 10 ? '0' + num : num);
+            //     const pad = (num) => (num < 10 ? '0' + num : num);
 
-                // Format the date into dd/mm/yyyy, hh:mm:ss am/pm format
-                const formattedDate = `${pad(date.getMonth() + 1)}/${pad(date.getDate())}/${date.getFullYear()}, ${pad(date.getHours() % 12 || 12)}:${pad(date.getMinutes())}:${pad(date.getSeconds())} ${date.getHours() < 12 ? 'am' : 'pm'}`;
-                return formattedDate;
-            }
+            //     // Format the date into dd/mm/yyyy, hh:mm:ss am/pm format
+            //     const formattedDate = `${pad(date.getMonth() + 1)}/${pad(date.getDate())}/${date.getFullYear()}, ${pad(date.getHours() % 12 || 12)}:${pad(date.getMinutes())}:${pad(date.getSeconds())} ${date.getHours() < 12 ? 'am' : 'pm'}`;
+            //     return formattedDate;
+            // }
 
         },
         {
@@ -134,15 +134,15 @@ const StaffRecordList = () => {
                     return 0;
                 },
             },
-            cellRenderer: function (params) {
-                const date = new Date(params.data.entry_time);
+            // cellRenderer: function (params) {
+            //     const date = new Date(params.data.entry_time);
 
-                const pad = (num) => (num < 10 ? '0' + num : num);
+            //     const pad = (num) => (num < 10 ? '0' + num : num);
 
-                // Format the date into dd/mm/yyyy, hh:mm:ss am/pm format
-                const formattedDate = `${pad(date.getMonth() + 1)}/${pad(date.getDate())}/${date.getFullYear()}, ${pad(date.getHours() % 12 || 12)}:${pad(date.getMinutes())}:${pad(date.getSeconds())} ${date.getHours() < 12 ? 'am' : 'pm'}`;
-                return formattedDate;
-            }
+            //     // Format the date into dd/mm/yyyy, hh:mm:ss am/pm format
+            //     const formattedDate = `${pad(date.getMonth() + 1)}/${pad(date.getDate())}/${date.getFullYear()}, ${pad(date.getHours() % 12 || 12)}:${pad(date.getMinutes())}:${pad(date.getSeconds())} ${date.getHours() < 12 ? 'am' : 'pm'}`;
+            //     return formattedDate;
+            // }
 
         },
         {

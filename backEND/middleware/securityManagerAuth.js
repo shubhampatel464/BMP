@@ -7,7 +7,7 @@ const auth = async (req, res,next) => {
         // console.log(req.headers)
         const token = req.headers.authorization;
         const data = await jwt.verify(token, process.env.JWT_SECRET);
-        if(data.uuid.endsWith('securityManager') === false){
+        if(data.user.uuid.endsWith('securityManager') === false){
             return res.status(401).send({
                 message: 'Auth failed'
             });
