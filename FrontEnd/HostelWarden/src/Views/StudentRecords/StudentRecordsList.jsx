@@ -8,6 +8,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
+import { getRequestWithToken } from "../../Services/Api";
 
 
 
@@ -193,8 +194,14 @@ const StudentRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/hostelWarden/getStudentLogs`)
-            .then((resp) => resp.json())
+        getRequestWithToken(`${BACKEND_URL}/hostelWarden/getStudentLogs`)
+            .then((resp) => {
+                if(resp.status === 401){
+                    alert('Please login to access this page');
+                    window.location.href = `/login`;
+                }
+                return resp.json();
+            })
             .then((data) => setRowData(data));
     }, []);
 

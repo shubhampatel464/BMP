@@ -45,7 +45,6 @@ function App() {
 
                 <Route element={<PrivateRoutes />}>
                     <Route path='/dashboard' element={<Dashboard />} />
-                    <Route path='/qr-code' element={<QrCode />} />
                     <Route path='/qr-reader' element={<QrScan />} />
                     <Route path='/face-detection' element={<FaceScan />} />
 

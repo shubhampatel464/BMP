@@ -8,7 +8,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
 import { Link } from "react-router-dom";
-import { postRequest } from "../../Services/Api";
+import { getRequestWithToken, postRequestWithToken } from "../../Services/Api";
 
 // [
 //     {
@@ -27,7 +27,7 @@ const VechicleList = () => {
 
     const deleteVehicle = async (student_id) => {
         // console.log(student_id)
-        const response = await postRequest('hostelWarden/removeVehicle', { student_id: student_id })
+        const response = await postRequestWithToken('hostelWarden/removeVehicle', { student_id: student_id })
 
         // console.log(response)
         if (response.status == 200) {
@@ -87,8 +87,14 @@ const VechicleList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/hostelWarden/getVehicle`)
-            .then((resp) => resp.json())
+        getRequestWithToken(`${BACKEND_URL}/hostelWarden/getVehicle`)
+            .then((resp) => {
+                if (resp.status === 401) {
+                    alert('Session expired. Please login again')
+                    window.location.href = '/login'
+                }
+                return resp.json();
+            })
             .then((data) => setRowData(data));
     }, []);
 

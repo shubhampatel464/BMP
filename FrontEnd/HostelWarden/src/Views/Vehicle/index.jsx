@@ -6,7 +6,7 @@ import { StickyFooterMobile } from '../../Components/StickyFooterMobile';
 import { useForm } from 'react-hook-form';
 import { InputField } from '../../Components/InputField';
 import { Button } from '../../Components/Button';
-import { getRequest, postRequest } from '../../Services/Api';
+import { getRequest, getRequestWithToken, postRequest, postRequestWithToken } from '../../Services/Api';
 import { useLocation, Link } from 'react-router-dom';
 import VechicleList from './VehicleList';
 
@@ -36,7 +36,7 @@ const Vehicle = () => {
 
     const verifyStudent = async (studentID) => {
         try {
-            const res = await getRequest('hostelWarden/getStudentData?student_id=' + studentID, {})
+            const res = await getRequestWithToken('hostelWarden/getStudentData?student_id=' + studentID, {})
             // console.log(res)
             if (res.status == 200) {
                 return res.data.studentData
@@ -77,7 +77,7 @@ const Vehicle = () => {
                 vehicle: data.VehicleNumber
             }
 
-            const res = await postRequest('hostelWarden/addVehicle', dataToSend)
+            const res = await postRequestWithToken('hostelWarden/addVehicle', dataToSend)
             // console.log(res)
 
             if (res.status == 200) {

@@ -135,7 +135,13 @@ const VisitorRecordList = () => {
                 "Authorization": Cookies.get('token'),
             },
         })
-            .then((resp) => resp.json())
+            .then((resp) => {
+                if(resp.status === 401){
+                    alert('Session expired. Please login again')
+                    window.location.href = '/login'
+                }
+                return resp.json();
+            })
             .then((data) => setRowData(data.visitors));
     }, []);
 

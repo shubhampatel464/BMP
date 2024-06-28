@@ -15,7 +15,7 @@ export const postRequest = async (endpoint, data, headers = {}, params = {}) => 
 };
 
 export const postRequestWithToken = async (endpoint, data, headers = {}, params = {}) => {
-    const token = user?.token;
+    const token = Cookies.get('token');
     if (!token) {
         throw new Error('No token found');
     }
@@ -38,8 +38,8 @@ export const getRequest = async (endpoint, params = {}) => {
     }
 }
 
-export const getRequestWithLogin = async (endpoint, params = {}) => {
-    const token = user?.token;
+export const getRequestWithToken = async (endpoint, params = {}) => {
+    const token = Cookies.get('token');
     if (!token) {
         alert('Please login to access this page');
         window.location.href = `/home`;
