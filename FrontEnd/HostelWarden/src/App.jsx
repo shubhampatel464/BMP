@@ -12,8 +12,8 @@ import ResetPasssword from './Views/ResetPassword';
 
 
 const PrivateRoutes = () => {
-    // const token = Cookies.get('token') || "";
-    const token = "faas"
+    const token = Cookies.get('token') || "";
+    // const token = "faas"
     if (token) {
         return <Outlet />
     }
