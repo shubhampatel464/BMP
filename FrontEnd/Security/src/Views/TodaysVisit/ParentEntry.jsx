@@ -5,7 +5,7 @@ import { StickyFooterMobile } from '../../Components/StickyFooterMobile'
 import WebcamDemo from '../../Components/FaceDetection'
 import { Button } from '../../Components/Button'
 import { base64ToFile } from '../../Services/Helpers'
-import { postRequest, postRequestWithToken } from '../../Services/Api'
+import {  postRequestWithToken } from '../../Services/Api'
 
 // {
 //         "_id": "666aca82ad4fd664fbb0c9bc",
@@ -133,7 +133,7 @@ const ParentEntry = () => {
                 // console.log(formData)
 
                 try {
-                    const response = await postRequest('security/parentEntryExit', formData, {
+                    const response = await postRequestWithToken('security/parentEntryExit', formData, {
                         'Content-Type': 'multipart/form-data'
                     }, {})
                     // console.log(response)
