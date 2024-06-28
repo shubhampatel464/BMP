@@ -13,6 +13,10 @@ const ProfileCard = () => {
     useEffect(() => {
         getRequestWithToken('staff/getData')
             .then((res) => {
+                if (res.status === 401) {
+                    alert('Session expired. Please login again.');
+                    navigate('/login');
+                }
                 setData(res.data);
                 setLoading(false);
             })

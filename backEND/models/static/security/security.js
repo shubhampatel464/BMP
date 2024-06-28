@@ -19,10 +19,6 @@ const securitySchema = new mongoose.Schema({
     uuid: {
         type: String,
         unique: true
-    },
-    shift: {
-        type: Number,
-        default: -1
     }
 });
 

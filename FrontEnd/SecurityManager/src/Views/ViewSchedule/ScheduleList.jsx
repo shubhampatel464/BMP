@@ -148,7 +148,7 @@ const ScheduleList = () => {
             })
             .then((data) => {
 
-                console.log(data);
+                // console.log(data);
                 const rowData = [
                     { shift: "Shift 1 (07:00 AM - 3:00 PM)", name1: "", name2: "", name3: "" },
                     { shift: "Shift 2 (3:00 PM - 11:00 PM)", name1: "", name2: "", name3: "" },

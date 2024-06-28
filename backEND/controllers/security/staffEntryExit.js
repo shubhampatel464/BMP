@@ -11,18 +11,6 @@ const shift = require('../../models/securityShifts/currentShift');
 
 const docsUpload = require('../../blob/azureBlob');
 
-const current_time = new Date();
-const options = {
-    timeZone: "Asia/Kolkata",
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true
-};
-const istDateTime = current_time.toLocaleString("en-IN", options);
 
 
 
@@ -119,46 +107,78 @@ const staffEntryExit = async (req, res) => {
 
             // attendence update
 
-
-
             const department = staffData.department;
 
-
-
-            const todaysDate = currentDate.date;
             const updateFields = {};
-            updateFields[`attendence.day${todaysDate}.time`] = new Date();
 
             // Last time is 9:30 AM
-            if(department != "Security"){
-                if(currentDate.hours > 9 || (currentDate.hours == 9 && currentDate.mins > 30)){
+            if (department != "security") {
+                const todaysDate = currentDate.date;
+                updateFields[`attendence.day${todaysDate}.time`] = new Date();
+                if (currentDate.hours > 9 || (currentDate.hours == 9 && currentDate.mins > 30)) {
                     updateFields[`attendence.day${todaysDate}.late`] = true;
                 }
             }
-            else{
-                
+            else {
                 const shiftData = await shift.findOne({});
                 const usersShift = shiftData.shift1.includes(uuid) ? '1' : shiftData.shift2.includes(uuid) ? '2' : shiftData.shift3.includes(uuid) ? '3' : null;
 
-                if(usersShift == '1'){
-                    if(currentDate.hours > 7 || (currentDate.hours == 7 && currentDate.mins > 30)){
+                const todaysDate = currentDate.date;
+                if (currentDate.hours > 0 && currentDate.hours < 8) {
+                    // consedering date
+                    if (todaysDate > 1) {
+                        todaysDate = todaysDate - 1;
+                    }
+                    else {
+                        // consedering month
+                        const month = currentDate.month;
+                        if (month == 'May' || month == 'July' || month == 'October' || month == 'December') {
+                            todaysDate = 30;
+                        }
+                        else if (month == 'February' || month == 'April' || month == 'June' || month == 'August' || month == 'September' || month == 'November') {
+                            todaysDate = 31;
+                        }
+                        else if (month == 'March') {
+                            if (currentDate.year % 4 == 0) {
+                                todaysDate = 29;
+                            }
+                            else {
+                                todaysDate = 28;
+                            }
+                        }
+                        else if (month == 'January') {
+                            todaysDate = 31;
+                        }
+
+                    }
+                }
+
+                updateFields[`attendence.day${todaysDate}.time`] = new Date();
+
+                // console.log(usersShift);
+
+                if (usersShift == '1') {
+                    if (currentDate.hours > 7 || (currentDate.hours == 7 && currentDate.mins > 30)) {
                         updateFields[`attendence.day${todaysDate}.late`] = true;
                     }
                 }
-                else if(usersShift == '2'){
-                    if(currentDate.hours > 15 || (currentDate.hours == 15 && currentDate.mins > 30)){
+                else if (usersShift == '2') {
+                    if (currentDate.hours > 15 || (currentDate.hours == 15 && currentDate.mins > 30)) {
                         updateFields[`attendence.day${todaysDate}.late`] = true;
                     }
                 }
-                else if(usersShift == '3'){
-                    if(currentDate.hours > 23 || (currentDate.hours == 23 && currentDate.mins > 30)){
+                else if (usersShift == '3') {
+                    console.log("Shift 3");
+                    if ((currentDate.hours > 23) || (currentDate.hours == 23 && currentDate.mins > 30) || (currentDate.hours > 0) || (currentDate.hours == 0 && currentDate.mins >= 0)) {
+                        console.log("Late");
                         updateFields[`attendence.day${todaysDate}.late`] = true;
                     }
                 }
 
             }
 
-            updateFields[`attendence.day${todaysDate}.time`] = new Date();
+            // console.log(updateFields);
+            // 
             const updateData = await staff_attendence.updateOne({ uuid: uuid }, { $set: updateFields });
 
             const resData = {

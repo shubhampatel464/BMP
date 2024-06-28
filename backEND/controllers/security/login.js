@@ -15,9 +15,12 @@ const login = async (req, res) => {
         const options = {
             timeZone: "Asia/Kolkata",
             hour: '2-digit',
-            minute: '2-digit'
+            minute: '2-digit',
+            hourCycle: 'h23' // Add this line to get 24-hour format
         };
         const loginTime = current_time.toLocaleString("en-IN", options).match(/\d{1,2}:\d{2}/)[0];
+
+        console.log(loginTime);
 
         const shiftTimings = {
             shift1: { start: '07:00', end: '15:00' },
@@ -26,6 +29,7 @@ const login = async (req, res) => {
         };
 
         const user = await security.findOne({ email: email });
+
         if (!user) {
             return res.status(404).send("User not found");
         }
@@ -34,14 +38,23 @@ const login = async (req, res) => {
 
         const usersShift = curShifts.shift1.includes(user.uuid) ? '1' : curShifts.shift2.includes(user.uuid) ? '2' : curShifts.shift3.includes(user.uuid) ? '3' : null;
 
+        if (!usersShift) {
+            res.status(402).send({message:'Your account has been disabled till the next shift starts.'});
+            return;
+        }
+
         const shiftTime = shiftTimings[`shift${usersShift}`];
 
+        // console.log(shiftTime);
+
         if (!isTimeInRange(loginTime, shiftTime.start, shiftTime.end)) {
-            res.status(402).send({message:'Login time is not within the shift time limits'});
+            res.status(402).send({message:'Your account has been disabled till the next shift starts.'});
             return;
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
+
+
         if (!isMatch) {
             return res.status(401).send("Invalid Password");
         }
