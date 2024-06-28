@@ -8,6 +8,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
+import { getRequestWithToken } from "../../../../HostelWarden/src/Services/Api";
 
 
 
@@ -195,8 +196,14 @@ const VisitorRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/registrar/getVisitorsLogs`)
-            .then((resp) => resp.json())
+        getRequestWithToken(`registrar/getVisitorsLogs`)
+            .then((resp) => {
+                if (resp.status === 401) {
+                    alert('Session expired. Please login again')
+                    window.location.href = '/login'
+                }
+                return resp.data;
+            })
             .then((data) => setRowData(data));
     }, []);
 

@@ -194,13 +194,13 @@ const StudentRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        getRequestWithToken(`${BACKEND_URL}/hostelWarden/getStudentLogs`)
+        getRequestWithToken(`hostelWarden/getStudentLogs`)
             .then((resp) => {
                 if(resp.status === 401){
                     alert('Please login to access this page');
                     window.location.href = `/login`;
                 }
-                return resp.json();
+                return resp.data;
             })
             .then((data) => setRowData(data));
     }, []);

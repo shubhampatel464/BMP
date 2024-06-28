@@ -87,13 +87,13 @@ const VechicleList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        getRequestWithToken(`${BACKEND_URL}/hostelWarden/getVehicle`)
+        getRequestWithToken(`hostelWarden/getVehicle`)
             .then((resp) => {
                 if (resp.status === 401) {
                     alert('Session expired. Please login again')
                     window.location.href = '/login'
                 }
-                return resp.json();
+                return resp.data;
             })
             .then((data) => setRowData(data));
     }, []);

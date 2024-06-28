@@ -115,7 +115,7 @@ const FacultyAdminBlockList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/itAdmin/getFaculty_adminBlock`, {
+        fetch(`itAdmin/getFaculty_adminBlock`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

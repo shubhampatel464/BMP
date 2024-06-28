@@ -140,7 +140,6 @@ const VisitorRecordList = () => {
                     alert('Session expired. Please login again')
                     window.location.href = '/login'
                 }
-                return resp.json();
             })
             .then((data) => setRowData(data.visitors));
     }, []);

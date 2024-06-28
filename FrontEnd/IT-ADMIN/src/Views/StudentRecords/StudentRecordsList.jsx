@@ -193,8 +193,8 @@ const StudentRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/data/getStudentLogs`)
-            .then((resp) => resp.json())
+        getRequestWith(`${BACKEND_URL}/data/getStudentLogs`)
+            .then((resp) => )
             .then((data) => setRowData(data));
     }, []);
 
