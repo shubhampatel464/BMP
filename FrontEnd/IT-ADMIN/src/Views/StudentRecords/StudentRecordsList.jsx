@@ -8,6 +8,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../../Services/Helpers";
+import { getRequestWithLogin } from "../../Services/Api";
 
 
 
@@ -193,8 +194,14 @@ const StudentRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        getRequestWith(`${BACKEND_URL}/data/getStudentLogs`)
-            .then((resp) => )
+        getRequestWithLogin(`${BACKEND_URL}/data/getStudentLogs`)
+            .then((resp) => {
+                if(resp.status === 401){
+                    alert("Session expired. Please login again.")
+                    window.location.href = "/login"
+                }
+                return resp.data
+            })
             .then((data) => setRowData(data));
     }, []);
 
