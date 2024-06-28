@@ -177,7 +177,8 @@ const StudentRecordList = () => {
                     <a href={`${params.data.photo_entry}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
                         View Photo
                     </a>
-                    // {/* </button> */}
+                 
+                 // {/* </button> */}
                 )
             },
         },
