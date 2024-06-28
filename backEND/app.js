@@ -61,9 +61,6 @@ app.use('/securityManager', require('./routes/securityManager/securityManager'))
 
 
 
-require("./triggers/attendence/monthlyUpdate")();
-
-// require('./models/attendence/staff');
 
 
 

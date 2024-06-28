@@ -9,17 +9,17 @@ const auth = require('../../middleware/hostelWardenAuth');
 
 router.post('/login', require('../../controllers/hostelWarden/login'));
 
-router.post('/addVehicle', require('../../controllers/hostelWarden/addVehicle'));
+router.post('/addVehicle',auth, require('../../controllers/hostelWarden/addVehicle'));
 
-router.post('/removeVehicle', require('../../controllers/hostelWarden/removeVehicle'));
+router.post('/removeVehicle', auth,require('../../controllers/hostelWarden/removeVehicle'));
 
-router.get('/getVehicle', require('../../controllers/hostelWarden/getVehicle'));
+router.get('/getVehicle',auth, require('../../controllers/hostelWarden/getVehicle'));
 
-router.get('/getStudentData', require('../../controllers/hostelWarden/getStudentData'));
+router.get('/getStudentData',auth, require('../../controllers/hostelWarden/getStudentData'));
 
-router.post('/addParentVisit', require('../../controllers/hostelWarden/addParentVisit'));
+router.post('/addParentVisit',auth, require('../../controllers/hostelWarden/addParentVisit'));
 
-router.get('/getStudentLogs', require('../../controllers/dataTables/getStudentLogs'));
+router.get('/getStudentLogs', auth,require('../../controllers/dataTables/getStudentLogs'));
 
 
 

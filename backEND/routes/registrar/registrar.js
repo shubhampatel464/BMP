@@ -2,19 +2,19 @@ const express = require('express');
 
 const router = express.Router();
 
-
+const auth = require('../../middleware/registrarAuth');
 
 router.post('/login', require('../../controllers/registrar/login'));
 
-router.get('/getCurrentVisitors',require('../../controllers/dataTables/getCurrentVisitors'));
+router.get('/getCurrentVisitors',auth,require('../../controllers/dataTables/getCurrentVisitors'));
 
-router.get('/getStudentLogs', require('../../controllers/dataTables/getStudentLogs'));
+router.get('/getStudentLogs', auth,require('../../controllers/dataTables/getStudentLogs'));
 
-router.get('/getVisitorsLogs', require('../../controllers/dataTables/getVisitorsLogs'));
+router.get('/getVisitorsLogs',auth, require('../../controllers/dataTables/getVisitorsLogs'));
 
-router.get('/getStaffLogs', require('../../controllers/dataTables/getStaffLogs'));
+router.get('/getStaffLogs',auth, require('../../controllers/dataTables/getStaffLogs'));
 
-router.get('/getParentLogs', require('../../controllers/dataTables/getParentLogs'));
+router.get('/getParentLogs', auth,require('../../controllers/dataTables/getParentLogs'));
 
 
 module.exports = router;
