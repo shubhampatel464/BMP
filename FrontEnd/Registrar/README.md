@@ -34,7 +34,6 @@
             └── StickyFooterMobile.jsx
         └── 📁Services
             └── Api.js
-            └── AuthContext.jsx
             └── CommonRequest.js
             └── Helpers.js
         └── 📁Views
@@ -90,77 +89,53 @@ React Router:
 Tailwind CSS: Utilized for styling the web-app, as indicated by the dependency in `package.json`.
 
 ### APIs and Services Used:
-#### axios: 
-For making HTTP requests.
-#### js-cookie: 
-For handling cookies, specifically for storing authentication tokens.
-#### qrcode.react: 
-For generating QR codes in the web-app.
-#### ag-grid-react: 
-For displaying and managing data in a grid format.
-#### react-hook-form: 
-For managing form state and validation.
+#### `axios`: For making HTTP requests.
+#### `js-cookie`: For handling cookies, specifically for storing authentication tokens.
+#### `qrcode.react`: For generating QR codes in the web-app.
+#### `ag-grid-react`: For displaying and managing data in a grid format.
+#### `react-hook-form`: For managing form state and validation.
 
 # Component Structure:
 ## Component Hierarchy and Key Components:
 
-#### App.jsx: 
-The root component.
+#### **App.jsx**: The root component.
 
-### Routes:
-#### Login: 
-Public route for the login page.
+## Routes:
+#### **Login** : Public route for the login page.
 
-#### PrivateRoutes: 
-Wrapper for routes that require authentication.
+#### **PrivateRoutes**: Wrapper for routes that require authentication.
 
-#### RecordsDashBoard: 
-Protected route for displaying records dashboard.
+#### **RecordsDashBoard**: Protected route for displaying records dashboard.
 
-#### StudentRecords: 
-Protected route for displaying student records.
+#### **StudentRecords**: Protected route for displaying student records.
 
-#### VisitorRecords: 
-Protected route for displaying visitor records.
+#### **VisitorRecords**: Protected route for displaying visitor records.
 
-#### StaffRecords: 
-Protected route for displaying staff records.
+#### **StaffRecords**: Protected route for displaying staff records.
 
-#### ParentRecords: 
-Protected route for displaying parent records.
+#### **ParentRecords**: Protected route for displaying parent records.
 
-#### ResetPassword: 
-Public route for resetting passwords.
+#### **ResetPassword**: Public route for resetting passwords.
 
 ## Reusable Components and Their Usage:
 
-### PrivateRoutes: 
-A component used to protect routes that require authentication. It checks for a token in cookies and either renders the requested component or redirects to the login page.
+#### **PrivateRoutes**: A component used to protect routes that require authentication. It checks for a token in cookies and either renders the requested component or redirects to the login page.
 
-### Button:
-A reusable button component that can be customized with different styles and text.
+#### **Button**: A reusable button component that can be customized with different styles and text.
 
-### InputField:
-A reusable input field component that can be customized with different styles and placeholder text.
+#### **InputField**:A reusable input field component that can be customized with different styles and placeholder text.
 
-### Navbar:
-A reusable navigation bar component that can be customized with different styles and links.
+#### **Navbar**: A reusable navigation bar component that can be customized with different styles and links.
 
-### ProfileCard:
-A reusable profile card component that displays user information.
+#### **ProfileCard**: A reusable profile card component that displays user information.
 
-### QrCodeComponent:
-A reusable QR code component that generates QR codes based on the input data.
+#### **QrCodeComponent**: A reusable QR code component that generates QR codes based on the input data.
 
-### StickyFooterMobile:
-A reusable sticky footer component that is displayed at the bottom of the page on mobile devices.
+#### **StickyFooterMobile**: A reusable sticky footer component that is displayed at the bottom of the page on mobile devices.
 
 # Services and APIs:
 ## API Service:
 The API service is used to make HTTP requests to the backend server. It includes methods for handling authentication, fetching data, and sending data to the server.
-
-## AuthContext:
-Provides context and hooks for authentication within the application, managing user sessions and tokens.
 
 ## CommonRequest:
 The CommonRequest module includes common methods for making HTTP requests using axios. It includes methods for handling request headers, error handling, and response data.
@@ -173,44 +148,32 @@ The Helpers module includes helper functions for common tasks like parsing dates
 The Login view is the main entry point for the web-app. It includes a form for users to enter their credentials and submit them for authentication.
 
 ## Records:
-### StudentRecords:
-The StudentRecords view displays a list of student records and their details.
+### **StudentRecords**: The StudentRecords view displays a list of student records and their details.
 
-### VisitorRecords:
-The VisitorRecords view displays a list of visitor records and their details.
+### **VisitorRecords**: The VisitorRecords view displays a list of visitor records and their details.
 
-### StaffRecords:
-The StaffRecords view displays a list of staff records and their details.
+### **StaffRecords**: The StaffRecords view displays a list of staff records and their details.
 
-### ParentRecords:
-The ParentRecords view displays a list of parent records and their details.
+### **ParentRecords**: The ParentRecords view displays a list of parent records and their details.
 
-### RecordsDashBoard:
-The RecordsDashBoard view serves as a summary page that links to the various records views (Student, Visitor, Staff, Parent).
+### **RecordsDashBoard**: The RecordsDashBoard view serves as a summary page that links to the various records views (Student, Visitor, Staff, Parent).
 
-## ResetPassword:
-The ResetPassword view allows users to reset their passwords. It includes a form for entering a new password and submitting it for validation.
+### **ResetPassword**: The ResetPassword view allows users to reset their passwords. It includes a form for entering a new password and submitting it for validation.
 
 # Important Files and Code Sections:
 
 ## Key configuration files and their purposes
-### package.json:
-Contains the project dependencies, scripts, and metadata.
+### `package.json`: Contains the project dependencies, scripts, and metadata.
 
-### App.jsx:
-The main entry point for the React web-app. It sets up routing and provides authentication context.
+### `App.jsx`: The main entry point for the React web-app. It sets up routing and provides authentication context.
 
-### tailwind.config.js:
-The configuration file for Tailwind CSS. It includes settings for customizing the design system.
+### `tailwind.config.js`: The configuration file for Tailwind CSS. It includes settings for customizing the design system.
 
-### vite.config.js:
-The configuration file for Vite. It includes settings for customizing the build process.
+### `vite.config.js`: The configuration file for Vite. It includes settings for customizing the build process.
 
-### postcss.config.js:
-The configuration file for PostCSS. It includes settings for customizing the CSS processing.
+### `postcss.config.js`: The configuration file for PostCSS. It includes settings for customizing the CSS processing.
 
-### .eslintrc.cjs:
-The configuration file for ESLint. It includes settings for customizing the linting rules.
+### `.eslintrc.cjs`: The configuration file for ESLint. It includes settings for customizing the linting rules.
 
 ## Management and definition of environment variables
 [Helper.js](./src/Services/Helpers.js) includes environment variables and other common tasks.

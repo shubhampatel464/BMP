@@ -1,14 +1,13 @@
 <!-- analyze the project and Give me professional markdown file template with complete overview and folder structure and documents links -->
 
 # Project Title
-Gate Entry-Exit Management System
+Bookless-GateSystem System
 
 ## Overview
 It is a web application used to manage the entry and exit of the visitors in the organization. It is a simple and easy to use application that can be used by the security guards to manage the entry and exit of the visitors. The application is designed to be user-friendly and easy to use. It is a simple and easy to use application that can be used by the security guards to manage the entry and exit of the visitors. The application is designed to be user-friendly and easy to use.
 
 ## DOCUMENTS
 - [UserStories](https://docs.google.com/document/d/1BnwIvm1IeVc2Mx0BGaNPOSitWMWqSzl7jZWe9w-mNgc/edit?usp=drive_link)
-- [Project Timeline](https://docs.google.com/spreadsheets/d/1QikrTqDUWh9kQCsSMkloB8jMPWgqTqy0ItaOK5NfYyk/edit?usp=drive_link)
 
 ## Figma Design
 - [Hostel Warden](https://www.figma.com/design/iu1buiEJsrbfDEPXyy44e4/Hostel-Warden?t=tEp5l6UQhNu1MVEU-1)
@@ -20,14 +19,8 @@ It is a web application used to manage the entry and exit of the visitors in the
 
 
 ## Folder Structure
-#### 📁 [backEND](./backEND/)
-#### 📁 [FrontEnd](./FrontEnd/)
+- 📁 [backEND](./backEND/)
+- 📁 [FrontEnd](./FrontEnd/)
 
 
 
-
-
-
-
-## Extra Notes
-DATE IN ATTENDENCE COLLECTION IS IN GMT DATE

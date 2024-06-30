@@ -1,4 +1,4 @@
-# SecurityManager Backend
+# Bookless-GateSystem Backend
 
 ## Technologies Used
 - **Node.js**: JavaScript runtime for server-side development.
@@ -21,8 +21,8 @@
 ## Installation
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-repo/SecurityManager.git
-    cd SecurityManager/backEND
+    git clone https://github.com/BT-SRI-DAIICT-2024-002/SRI-002-GateSystem.git
+    cd backEND
     ```
 2. **Install dependencies:**
     ```bash
@@ -53,8 +53,9 @@
     npm start
     ```
 2. **Access the application:**
-    - The server will be running on `http://localhost:7000`.
-
+    - The server will be running on `http://127.0.0.1:7000`.
+    - update the CORS policy accordingly.
+    
 ## Folder Structure
 
 ### Routes

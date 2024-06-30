@@ -48,69 +48,52 @@
 ```
 
 ## Directory Structure:
-### Assets : 
-Contains the static files like images.
-### Views: 
-Contains the main views/components of the webApp such as QrCode, Login, Profile, and ResetPassword.
-### Components: 
-Contains the core components used in webApp such as Button, InputField, Navbar, ProfileCard, QrCodeComponent, StickyFooterMobile.
-### Services: 
-Includes service files like API for handling authentication.
-App.jsx: The main component that sets up routing and root component.
-### package.json: 
-Defines the project dependencies, scripts, and metadata.
+### **Assets** :  Contains the static files like images.
+### **Views**: Contains the main views/components of the webApp such as QrCode, Login, Profile, and ResetPassword.
+### **Components**: Contains the core components used in webApp such as Button, InputField, Navbar, ProfileCard, QrCodeComponent, StickyFooterMobile.
+### **Services**: Includes service files like API for handling authentication.
+`App.jsx`: The main component that sets up routing and root component.
+#### `package.json`: Defines the project dependencies, scripts, and metadata.
 
 ## Critical Directories and Files:
-#### App.jsx: 
-The main entry point for the React web-app.
-#### package.json: 
-Lists dependencies and scripts necessary for building and running the project.
-#### Views Directory: 
-Contains key component files for the different pages/views of the web-app.
-#### Services: 
-Contains all critical things like API-URL, etc.
+#### `App.jsx`:  The main entry point for the React web-app.
+#### `package.json`: Lists dependencies and scripts necessary for building and running the project.
+#### `Views Directory`: Contains key component files for the different pages/views of the web-app.
+#### `Services`: Contains all critical things like API-URL, etc.
 
 ## Main Entry Point of the Web-App:
-App.jsx is the main entry point, setting up routing and providing authentication context.
+`App.jsx` is the main entry point, setting up routing and providing authentication context.
 
 # Key Technologies and Libraries:
 ## State Management Solution and Overview:
 
-### Routing Mechanism:
-React Router: react-router-dom is used for client-side routing. The main routes are defined in App.jsx using Routes and Route components.
+### **Routing Mechanism**:
+**React Router**: react-router-dom is used for client-side routing. The main routes are defined in App.jsx using Routes and Route components.
 
-### Styling Approach:
-Tailwind CSS: Utilized for styling the web-app, as indicated by the dependency in package.json.
+### **Styling Approach**:
+**Tailwind CSS**: Utilized for styling the web-app, as indicated by the dependency in package.json.
 
 ### APIs and Services Used:
-#### axios: 
-For making HTTP requests.
-#### js-cookie: 
-For handling cookies, specifically for storing authentication tokens.
-#### qrcode.react: 
-For generating QR codes in the web-app.
+#### `axios`: For making HTTP requests.
+#### `js-cookie`: For handling cookies, specifically for storing authentication tokens.
+#### `qrcode.react`: For generating QR codes in the web-app.
 
 # Component Structure:
 ## Component Hierarchy and Key Components:
 
-#### App.jsx: 
+#### `App.jsx`: 
 The root component.
 
-### Routes:
-#### Login: 
-Public route for the login page.
+### **Routes**:
+#### **Login**: Public route for the login page.
 
-#### PrivateRoutes: 
-Wrapper for routes that require authentication.
+#### **PrivateRoutes**: Wrapper for routes that require authentication.
 
-#### QrCode: 
-Protected route for displaying QR codes.
+#### **QrCode**: Protected route for displaying QR codes.
 
-#### Profile: 
-Protected route for the user's profile.
+#### **Profile**: Protected route for the user's profile.
 
-#### ResetPassword: 
-Public route for resetting passwords.
+#### **ResetPassword**: Public route for resetting passwords.
 
 
 ## Reusable Components and Their Usage:
@@ -165,20 +148,20 @@ The ResetPassword view allows users to reset their passwords. It includes a form
 ### package.json:
 Contains the project dependencies, scripts, and metadata.
 
-### App.jsx:
+### `App.jsx`:
 The main entry point for the React web-app. It sets up routing and provides authentication context.
 
-### tailwind.config.js:
+### `tailwind.config.js`:
 The configuration file for Tailwind CSS. It includes settings for customizing the design system.
 
-### vite.config.js:
+### `vite.config.js`:
 The configuration file for Vite. It includes settings for customizing the build process.
 
-### postcss.config.js:
+### `postcss.config.js`:
 The configuration file for PostCSS. It includes settings for customizing the CSS processing.
 
-### .eslintrc.cjs:
+### `.eslintrc.cjs`:
 The configuration file for ESLint. It includes settings for customizing the linting rules.
 
 ## Management and definition of environment variables
-[Helper.js](./src/Services/Helpers.js) includes environment variables and other common tasks.
+[`Helper.js`](./src/Services/Helpers.js) includes environment variables and other common tasks.
