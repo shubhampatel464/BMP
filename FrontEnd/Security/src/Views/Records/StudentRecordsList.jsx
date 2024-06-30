@@ -159,6 +159,18 @@ const StudentRecordList = () => {
 
         },
         {
+            headerName: "Exit Authorised By",
+            field: "exit_authorised_by",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
+            headerName: "Entry Authorised By",
+            field: "entry_authorised_by",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
             headerName: "Exit Photo",
             field: "photo_exit",
             cellRenderer: function (params) {
@@ -216,7 +228,7 @@ const StudentRecordList = () => {
         const keys = columnDefs.map(column => column.field);
 
         // Create CSV header row
-        const headerRow = "Student ID,Long Leave ?,Purpose,Exit Date,Exit Time,Entry Date,EntryTime,Exit Photo,Entry Photo";
+        const headerRow = "Student ID,Long Leave ?,Purpose,Exit Date,Exit Time,Entry Date,EntryTime,Exit Authorised By,Entry Authorised By ,Exit Photo,Entry Photo";
         // console.log(headerRow)
 
         // Create CSV data rows
@@ -239,6 +251,8 @@ const StudentRecordList = () => {
             { headerName: "Purpose", field: "reason" },
             { headerName: "Exit Date & Time", field: "exit_time" },
             { headerName: "Entry Date & Time", field: "entry_time" },
+            { headerName: "Exit Authorised By", field: "exit_authorised_by" },
+            { headerName: "Entry Authorised By", field: "entry_authorised_by" },
             { headerName: "Exit Photo", field: "photo_exit" },
             { headerName: "Entry Photo", field: "photo_entry" }
         ];

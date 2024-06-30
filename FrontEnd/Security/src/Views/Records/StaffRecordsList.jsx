@@ -146,6 +146,18 @@ const StaffRecordList = () => {
 
         },
         {
+            headerName: "Exit Authorised By",
+            field: "exit_authorised_by",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
+            headerName: "Entry Authorised By",
+            field: "entry_authorised_by",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
             headerName: "Exit Photo",
             field: "photo_exit",
             cellRenderer: function (params) {
@@ -203,8 +215,8 @@ const StaffRecordList = () => {
         const keys = columnDefs.map(column => column.field);
 
         // Create CSV header row
-        const headerRow = "Name,Mobile,Exit Date,Exit Time,Entry Date,Entry Time,Exit Photo,Entry Photo";
-        // console.log(headerRow)
+        const headerRow = "Name,Mobile,Exit Date,Exit Time,Entry Date,Entry Time,Exit Authorised By ,Entry Authorised By ,Exit Photo , Entry Photo";
+        // console.log(headerRow) 
 
         // Create CSV data rows
         const dataRows = rowData.map(row => keys.map(key => row[key]).join(','));
@@ -223,6 +235,8 @@ const StaffRecordList = () => {
             { headerName: "Mobile", field: "mobile" },
             { headerName: "Exit Date & Time", field: "exit_time" },
             { headerName: "Entry Date & Time", field: "entry_time" },
+            { headerName: "Exit Authorised By", field: "exit_authorised_by" },
+            { headerName: "Entry Authorised By", field: "entry_authorised_by" },
             { headerName: "Exit Photo", field: "photo_exit" },
             { headerName: "Entry Photo", field: "photo_entry" },
         ];

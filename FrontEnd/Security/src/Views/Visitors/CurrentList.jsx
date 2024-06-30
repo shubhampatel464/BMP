@@ -102,6 +102,12 @@ const CurrentList = () => {
 
         },
         {
+            headerName: "Entry Authorised By",
+            field: "entry_authorised_by",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
             headerName: "Photo",
             field: "photo_entry",
             cellRenderer: function (params) {

@@ -169,6 +169,18 @@ const ParentRecordsList = () => {
 
         },
         {
+            headerName: "Exit Authorised By",
+            field: "exit_authorised_by",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
+            headerName: "Entry Authorised By",
+            field: "entry_authorised_by",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
             headerName: "Exit Photo1",
             field: "photo_exit",
             cellRenderer: function (params) {
@@ -253,7 +265,7 @@ const ParentRecordsList = () => {
         const keys = columnDefs.map(column => column.field);
 
         // Create CSV header row
-        const headerRow = 'student_id,name1,name2,mobile,purpose,exit_time,entry_time,photo_exit1,photo_exit2,entry_photo1,entry_photo2'
+        const headerRow = 'student_id,name1,name2,mobile,purpose,exit_date, exit_time,entry_date,entry_time,Exit Authorised By, Entry Authorised By, photo_exit1,photo_exit2,entry_photo1,entry_photo2'
         // console.log(headerRow)
 
         // Create CSV data rows
@@ -278,6 +290,8 @@ const ParentRecordsList = () => {
             { headerName: "Purpose", field: "purpose" },
             { headerName: "Exit Date & Time", field: "exit_time" },
             { headerName: "Entry Date & Time", field: "entry_time" },
+            { headerName: "Exit Authorised By", field: "exit_authorised_by" },
+            { headerName: "Entry Authorised By", field: "entry_authorised_by" },
             { headerName: "Exit Photo1", field: "exit_photo1" },
             { headerName: "Exit Photo2", field: "exit_photo2" },
             { headerName: "Entry Photo1", field: "entry_photo1" },
