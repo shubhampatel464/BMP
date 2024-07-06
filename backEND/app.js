@@ -45,8 +45,6 @@ const port = process.env.PORT || 7777;
 
 
 // Routes
-
-app.use('/test', require('./routes/test/test'));
 app.use('/student', require('./routes/student/student'));
 app.use('/security', require('./routes/security/security'));
 app.use('/hostelWarden', require('./routes/hostelWarden/hostelWarden'));

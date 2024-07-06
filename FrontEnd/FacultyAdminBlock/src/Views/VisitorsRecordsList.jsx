@@ -9,6 +9,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { BACKEND_URL } from "../Services/Helpers";
 import Cookies from 'js-cookie';
+import { getRequestWithLogin } from "../../../IT-ADMIN/src/Services/Api";
 
 
 
@@ -128,20 +129,20 @@ const VisitorRecordList = () => {
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch(`${BACKEND_URL}/faculty_adminBlock/getVisitors`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": Cookies.get('token'),
-            },
-        })
-            .then((resp) => {
-                if(resp.status === 401){
-                    alert('Session expired. Please login again')
-                    window.location.href = '/login'
-                }
-            })
-            .then((data) => setRowData(data.visitors));
+
+        const loadData = async () => {
+            const resp = await getRequestWithLogin(`faculty_adminBlock/getVisitors`)
+
+            // const data = await resp
+            if (resp.status === 401) {
+                alert('Session expired. Please login again')
+                window.location.href = '/login'
+            }
+            // console.log(resp.data.visitors)
+            setRowData(resp?.data?.visitors)
+        }
+
+        loadData()
     }, []);
 
     function convertToCsv(rowData, columnDefs) {
