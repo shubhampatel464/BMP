@@ -129,16 +129,16 @@ Main component responsible for routing and authentication handling.
 **Login.jsx** allows users to log in with their credentials.
 
 ## Dashboard
-**Dashboard.jsx** displays a summary of application data.
+**Dashboard.jsx** displays a dashboard containing all buttons for functionalities.
 
 ## ScheduleVisit
 **ScheduleVisit.jsx** allows users to schedule visits.
 
 ## Visitors
-**Visitors.jsx** manages visitors and allows adding, editing, and deleting visitor records.
+**Visitors.jsx** is the main component for List of Visitors.
 
 ## VisitorsRecordsList
-**VisitorsRecordsList.jsx** displays a list of visitor records.
+**VisitorsRecordsList.jsx** is a component which contains a list of visitor records.
 
 ## Profile
 **Profile.jsx** allows users to view and update their profile information.

@@ -47,25 +47,17 @@
     └── vite.config.js
 ```
 ## Directory Structure:
-### Assets : 
-Contains the static files like images.
-### Views: 
-Contains the main views/components of the webApp such as QrCode, Login, Profile, and ResetPassword.
-### Components: 
-Contains the core components used in webApp such as Button, InputField, Navbar, ProfileCard, QrCodeComponent, StickyFooterMobile.
-### Services: 
-Includes service files like API for handling authentication.
-App.jsx: The main component that sets up routing and root component.
+#### **Assets** : Contains the static files like images.
+#### **Views**: Contains the main views/components of the webApp such as QrCode, Login, Profile, and ResetPassword.
+#### **Components**: Contains the core components used in webApp such as Button, InputField, Navbar, ProfileCard, QrCodeComponent, StickyFooterMobile.
+#### **Services** : Includes service files like API for handling authentication.
+`App.jsx`: The main component that sets up routing and root component.
 
 ## Critical Directories and Files:
-#### App.jsx: 
-The main entry point for the React web-app.
-#### package.json: 
-Lists dependencies and scripts necessary for building and running the project.
-#### Views Directory: 
-Contains key component files for the different pages/views of the web-app.
-#### Services: 
-Contains all critical things like API-URL, etc.
+#### `App.jsx` :The main entry point for the React web-app.
+#### `package.json`: Lists dependencies and scripts necessary for building and running the project.
+#### **Views Directory**: Contains key component files for the different pages/views of the web-app.
+#### **Services**: Contains all critical things like API-URL, etc.
 
 ## Main Entry Point of the Application:
 App.jsx is the main entry point, setting up routing and providing authentication context.
@@ -148,7 +140,7 @@ The Helpers module includes helper functions for common tasks like parsing dates
 The Login view is the main entry point for the web-app. It includes a form for users to enter their credentials and submit them for authentication.
 
 ## QrCode:
-The QrCode view displays a QR code generated from the user's data. It includes a form for entering the data and a component for displaying the QR code.
+The QrCode view displays a QR code generated from the user's data.  
 
 ## Profile:
 The Profile view displays the user's profile information. It includes a profile card component that shows the user's name, email, and other details.
