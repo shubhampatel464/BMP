@@ -170,6 +170,12 @@ const VisitorRecordList = () => {
             sortable: true,
         },
         {
+            headerName: "Scheduled By",
+            field: "scheduled_by",
+            filter: "agTextColumnFilter",
+            sortable: true,
+        },
+        {
             headerName: "Exit Photo",
             field: "photo_exit",
             cellRenderer: function (params) {

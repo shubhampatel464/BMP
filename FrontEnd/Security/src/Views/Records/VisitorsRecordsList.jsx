@@ -75,6 +75,12 @@ const VisitorRecordList = () => {
             sortable: true,
         },
         {
+                headerName: "Scheduled By",
+                field: "scheduled_by",
+                filter: "agTextColumnFilter",
+                sortable: true,
+        },
+        {
             headerName: "Exit Date & Time",
             field: "exit_time",
             filter: "agDateColumnFilter",

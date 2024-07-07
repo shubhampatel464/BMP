@@ -4,7 +4,7 @@ import { StickyFooterMobile } from '../../Components/StickyFooterMobile';
 import { useForm } from 'react-hook-form';
 import { InputField } from '../../Components/InputField';
 import { Button } from '../../Components/Button';
-import { getRequest, postRequestWithToken } from '../../Services/Api';
+import { getRequestWithToken, postRequestWithToken } from '../../Services/Api';
 
 // sample form data : {
 //     name1 : 'Rahul',
@@ -33,7 +33,7 @@ const AddParentVisit = () => {
 
     const verifyStudent = async (studentID) => {
         try {
-            const res = await getRequest('hostelWarden/getStudentData?student_id=' + studentID, {})
+            const res = await getRequestWithToken('hostelWarden/getStudentData?student_id=' + studentID, {})
             // console.log(res)
             if (res.status == 200) {
                 return res.data.studentData

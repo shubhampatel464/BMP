@@ -183,7 +183,7 @@ const ParentRecordsList = () => {
         },
         {
             headerName: "Exit Photo1",
-            field: "photo_exit",
+            field: "exit_photo1",
             cellRenderer: function (params) {
                 return (
                     // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
@@ -196,10 +196,11 @@ const ParentRecordsList = () => {
         },
         {
             headerName: "Exit Photo2",
-            field: "exit_photo1",
+            field: "exit_photo2",
             cellRenderer: function (params) {
                 return (
                     // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
+                    params.data.exit_photo2 &&
                     <a href={`${params.data.exit_photo2}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
                         Exit Photo2
                     </a>
@@ -226,6 +227,7 @@ const ParentRecordsList = () => {
             cellRenderer: function (params) {
                 return (
                     // <button className="bg-blue3 hover:bg-blue4 text-white font-bold h-[32px] px-4 rounded-3xl my-auto " >
+                    params.data.entry_photo2 &&
                     <a href={`${params.data.entry_photo2}`} target="_blank" className="bg-blue3 hover:bg-blue4 text-white font-bold py-2 px-4 rounded-3xl my-auto " >
                         Entry Photo2
                     </a>
