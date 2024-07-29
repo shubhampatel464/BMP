@@ -23,7 +23,7 @@ const QrReader = () => {
 
     // Success
     const onScanSuccess = async (result) => {
-
+        console.log(result);
         scanner.current.stop();
         const response = await getRequestWithToken(`security/getData?uuid=${result?.data}`);
         console.log(response)
