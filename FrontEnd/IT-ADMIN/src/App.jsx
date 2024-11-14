@@ -11,6 +11,7 @@ import ResetPasssword from './Views/ResetPassword';
 import Staff from './Views/Staff';
 import AddStaff from './Views/Staff/AddStaff';
 import AddUser from './Views/OtherUsers/AddUser';
+import RegisterFace from './Views/Student/RegisterFace';
 
 
 const PrivateRoutes = () => {
@@ -40,6 +41,7 @@ function App() {
                             <Route path='/add-batch' element={<Student />} />
                             <Route path='/delete-student' element={<Student />} />
                             <Route path='/delete-batch' element={<Student />} />
+                            <Route path='/register-face' element={<RegisterFace />} />
 
                             <Route path='/registrar' element={<OtherUsers />} />
                             <Route path='/hostel-warden' element={<OtherUsers />} />
