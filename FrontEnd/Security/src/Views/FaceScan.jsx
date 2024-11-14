@@ -84,6 +84,8 @@ const FaceScan = () => {
                     navigate('/qr-reader')
                 }
 
+                
+
                 // console.log(response)
 
                 if (response.status == 200) {

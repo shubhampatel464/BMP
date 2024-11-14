@@ -6,6 +6,7 @@ import { Camera } from '@mediapipe/camera_utils';
 import { Navbar } from '../../Components/Navbar';
 import { InputField } from '../../Components/InputField';
 import { Button } from '../../Components/Button';
+import { getRequestWithLogin } from '../../Services/Api';
 
 const RegisterFace = () => {
     const [imgSrcs, setImgSrcs] = React.useState([]); // Store captured images
@@ -13,6 +14,7 @@ const RegisterFace = () => {
     const [faceCount, setFaceCount] = React.useState(0);
     const [capturing, setCapturing] = React.useState(false); // Track if capturing is ongoing
     const [uploaded, setUploaded] = React.useState(false); // Track if photos have been uploaded
+    const [studentID, setStudentID] = React.useState('');
 
     const { webcamRef, boundingBox, detected, facesDetected } = useFaceDetection({
         faceDetectionOptions: {
@@ -59,7 +61,8 @@ const RegisterFace = () => {
         }
     }, [webcamRef, imgSrcs]);
 
-    const uploadPhotos = async () => {
+    const uploadPhotos = async (e) => {
+        e.preventDefault();
         const formData = new FormData();
 
         imgSrcs.forEach((src, index) => {
@@ -74,17 +77,24 @@ const RegisterFace = () => {
             }
 
             const blob = new Blob([ab], { type: mimeString });
-            formData.append('photos', blob, `photo_${index + 1}.jpg`);
+            formData.append('images', blob, `photo_${index + 1}.jpg`);
         });
 
         try {
-            const response = await fetch('/upload', {
+
+            // const uuid = await getRequestWithLogin('student/getData');
+
+            const response = await fetch(`http://127.0.0.1:8000/register_face?uuid=${studentID}`, {
                 method: 'POST',
                 body: formData,
             });
+
+            console.log(response);
             if (response.ok) {
                 setUploaded(true); // Mark as uploaded
                 console.log('Photos uploaded successfully');
+                alert('face registered successfully');
+                window.location.reload();
             } else {
                 console.error('Failed to upload photos');
             }
@@ -104,9 +114,7 @@ const RegisterFace = () => {
     };
 
     return (
-        <div className='flex flex-col justify-center items-center'>
-            <Navbar />
-
+        <>
             <div className='mt-4'>
                 <form className='md:bg-white p-10 md:rounded-2xl md:shadow-2xl w-[900px] space-y-5 ' autoComplete='off'
                     id='loginForm' onSubmit={uploadPhotos}>
@@ -119,6 +127,8 @@ const RegisterFace = () => {
                         placeholder='Student ID'
                         label='StudentID'
                         type='text'
+                        value={studentID}
+                        onChange={(e) => setStudentID(e.target.value)}
                     />
 
 
@@ -180,7 +190,7 @@ const RegisterFace = () => {
                             )}
 
                             {imgSrcs.length === 8 && !uploaded && (
-                                <Button
+                                <Button type='submit'   
                                     onClick={uploadPhotos}
                                 >
                                     Upload Photos
@@ -193,7 +203,7 @@ const RegisterFace = () => {
                 </form>
             </div>
 
-        </div>
+        </>
 
 
 

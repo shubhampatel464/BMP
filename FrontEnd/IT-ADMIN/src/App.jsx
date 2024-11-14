@@ -41,7 +41,7 @@ function App() {
                             <Route path='/add-batch' element={<Student />} />
                             <Route path='/delete-student' element={<Student />} />
                             <Route path='/delete-batch' element={<Student />} />
-                            <Route path='/register-face' element={<RegisterFace />} />
+                            <Route path='/register-face' element={<Student />} />
 
                             <Route path='/registrar' element={<OtherUsers />} />
                             <Route path='/hostel-warden' element={<OtherUsers />} />

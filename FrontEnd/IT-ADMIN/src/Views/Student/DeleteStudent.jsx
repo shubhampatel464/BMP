@@ -18,6 +18,25 @@ const DeleteStudent = () => {
 
     register('StudentID', { required: 'Student ID is required.' })
 
+    const deleteface = async (student_id) => {
+
+        const data = new FormData()
+
+        const res = await fetch(`http://127.0.0.1:8000/delete_face/${student_id}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({})
+            }
+        )
+
+        console.log(res)
+        return res
+    }
+
+
     const onSubmit = async (data) => {
         // console.log(data)
 
@@ -32,9 +51,12 @@ const DeleteStudent = () => {
                 student_id: data.StudentID
             }
 
-            const res = await postRequestWithToken('itAdmin/deleteStudent', dataToSend);
+            const resposse = await deleteface(data.StudentID)
+            // console.log(resposse)
+            const res = await resposse.json()
+            console.log(res)
 
-            if (res.status == 200) {
+            if (resposse.ok) {
                 alert('Student deleted successfully.')
                 reset()
                 // navigate('/dashboard')
@@ -43,11 +65,11 @@ const DeleteStudent = () => {
                 alert('Student not found.')
             }
             else {
-                alert('Failed to add Student. Please try again.')
+                alert('Failed to delete Student. Please try again.')
             }
         } catch (error) {
             console.log(error)
-            alert('Failed to add Student. Please try again.')
+            alert('Failed to delete Student. Please try again.')
         }
     }
 

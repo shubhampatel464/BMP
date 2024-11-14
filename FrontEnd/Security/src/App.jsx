@@ -21,6 +21,7 @@ import OtherEntry from './Views/TodaysVisit/OtherEntry';
 import OtherTempPass from './Views/TodaysVisit/OtherTmpPass';
 import Cookies from 'js-cookie'
 import { Navigate, Outlet } from 'react-router-dom'
+import FaceDetection from './Views/FaceDetection';
 
 // react router 
 
@@ -47,6 +48,8 @@ function App() {
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path='/qr-reader' element={<QrScan />} />
                     <Route path='/face-detection' element={<FaceScan />} />
+
+                    <Route path='/student-face-detection' element={<FaceDetection />} />
 
                     {/* general visitors */}
                     <Route path='/add-visitor' element={<Visitors />} />
