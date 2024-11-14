@@ -40,6 +40,8 @@ router.get('/getStaffLogs', auth,require('../../controllers/dataTables/getStaffL
 
 router.get('/getParentLogs',auth, require('../../controllers/dataTables/getParentLogs'));
 
+router.get('/getStudentUUID',auth, require('../../controllers/security/getStudentUUID'));
+
 
 
 
